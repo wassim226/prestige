@@ -52,7 +52,7 @@ function SpaPresentation(props) {
              backgroundImage:`url('${image}')`,
              backgroundPosition: (position[0]) + "px " + (position[1]) + "px",
             }}>
-              <div className={`absolute ${show_detail ? 'flex' : 'hidden'} flex-col w-full h-full justify-center items-start bg-[#151f33a1]`}>
+              <div className={`absolute ${show_detail ? 'flex' : 'hidden'} flex-col w-full h-full justify-center items-start bg-dimSecondary`}>
                 <div className={`text-primary text-center w-full mx-auto my-8 text-xl`}>{title}</div>
                 <div className={`text-white ml-5`}>
                   {

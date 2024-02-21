@@ -11,6 +11,7 @@ import MyPagination from "./my_pagination";
 import MySlider from "./my_slider";
 import ArticlePreview from "./article_preview";
 import BlogArticale from "./blog_articale";
+import ArticaleHead from "./articale_head";
 
 export {
   Navigation,
@@ -26,4 +27,5 @@ export {
   MySlider,
   ArticlePreview,
   BlogArticale,
+  ArticaleHead,
 };

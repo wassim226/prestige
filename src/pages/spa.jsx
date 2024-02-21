@@ -1,7 +1,8 @@
 import React from 'react';
-import { MyPagination, SpaPresentation } from '../components';
-import { Typography, ImageList, ImageListItem } from '@mui/material';
+import { MyPagination, SpaPresentation, ArticaleHead } from '../components';
+import { ImageList, ImageListItem } from '@mui/material';
 import { Pool3, Pool4 } from '../assets';
+import { default_description } from '../constantes';
 
 const spas = [
   {
@@ -47,27 +48,21 @@ function Spa() {
   
   return (
     <div className='flex flex-col justify-start items-center w-[100vw]'>
-      <div className={`flex w-[100vw] h-[90vh] background-landscape spa_background`}>
-        <div className='w-full h-full bg-gradient-to-r scale-x-[-1] from-secondary from-5% via-[#151f33a1] via-45% to-transparent'>
-          <div className={`flex flex-col justify-start items-center w-[50vw] mt-10`}>
-            <Typography gutterBottom variant='h2' sx={{fontWeight: 550}} className='text-white w-[50%]'>
-              { "SPAS GAMME PRESTIGE" }
-            </Typography>
-            <Typography gutterBottom className='text-white w-[80%]'>
-              {/* { description } */}
-            </Typography>
-          </div>
-        </div>
-      </div>
+      <ArticaleHead 
+        background_class={"background-landscape spa_background"} 
+        title={"SPAS GAMME PRESTIGE"} 
+        description={default_description}
+        flip={true}
+      />
+
       <ImageList variant="woven" gap={8} cols={4} className='relative w-[80%] mt-10'>
-        
-      {
-        all_spas.map((val, index)=> 
-        <ImageListItem key={"prod_" + index} className='flex justify-center items-center'>
-          <SpaPresentation spa={val} key={"spa_wdt_" + index}/>
-        </ImageListItem>
-        )
-      }
+        {
+          all_spas.map((val, index)=> 
+          <ImageListItem key={"prod_" + index} className='flex justify-center items-center'>
+            <SpaPresentation spa={val} key={"spa_wdt_" + index}/>
+          </ImageListItem>
+          )
+        }
       </ImageList>
       <MyPagination path={"spa"} />
     </div>

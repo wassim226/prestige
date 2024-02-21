@@ -23,7 +23,7 @@ export default function TitlebarImageList() {
             alt={item.title}
             loading="lazy"
           />
-          <div className='bg-[#151f33a1] w-[90%] border-2 border-primary rounded bottom-0 mx-[5%] mb-1 absolute flex flex-col justify-start items-left'>
+          <div className='bg-dimSecondary w-[90%] border-2 border-primary rounded bottom-0 mx-[5%] mb-1 absolute flex flex-col justify-start items-left'>
             <div className='flex fle-row justify-between w-[60%] mt-5 mx-2'>
                 {
                  stars.map((val,ind)=><Star key={ind} className='text-primary'/>)

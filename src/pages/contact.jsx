@@ -29,7 +29,7 @@ function Contact() {
   
   return (
     <div className={`w-[100vw] h-[90vh] bg-cover background-image-contact`}>
-      <div className='absolute w-full h-[90vh] bg-[#151f33a1] flex flex-col justify-center items-center'>
+      <div className='absolute w-full h-[90vh] bg-dimSecondary flex flex-col justify-center items-center'>
       <ThemeProvider theme={theme}>
         <Paper className='py-20 pl-20 pr-52'>
             <Typography gutterBottom variant='h4' sx={{fontWeight: 550}} className='text-primary'>CONTACTER NOUS</Typography>
