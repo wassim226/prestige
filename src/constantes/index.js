@@ -13,6 +13,22 @@ export const landscape = [
   "Entretien des espaces",
 ];
 
+export const notifications = [
+  { id: 1, title: "Remy Sharp", desc: "Team Leader", date: "01-02-2024 14:06" },
+  {
+    id: 2,
+    title: "Kheloufi Abdelhamid",
+    desc: " body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quosblanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
+    date: "01-02-2024 14:06",
+  },
+  {
+    id: 3,
+    title: "Bencheli Abderrahmene",
+    desc: "Team Leader",
+    date: "01-02-2024 14:06",
+  },
+];
+
 export const default_description =
   " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore \
   magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";

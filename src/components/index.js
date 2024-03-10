@@ -13,6 +13,14 @@ import ArticlePreview from "./article_preview";
 import BlogArticale from "./blog_articale";
 import ArticaleHead from "./articale_head";
 
+// controle panel
+import ControleNavigation from "./controle_panel/controle_navigation";
+import MyAppBar from "./app_bar";
+import NotificationMenu from "./menus/notification";
+import SettingsMenu from "./menus/setting";
+import SearchInput from "./search_input";
+import Notification from "./controle_panel/notification";
+
 export {
   Navigation,
   MyAccordation,
@@ -28,4 +36,10 @@ export {
   ArticlePreview,
   BlogArticale,
   ArticaleHead,
+  ControleNavigation,
+  MyAppBar,
+  NotificationMenu,
+  SettingsMenu,
+  SearchInput,
+  Notification,
 };

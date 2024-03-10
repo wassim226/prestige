@@ -9,7 +9,7 @@ function MyAccordation(props) {
     <div>
         <Accordion sx={{ width: '100%', boxShadow:'none'}} disableGutters>
             <AccordionSummary
-            sx={{backgroundColor:'#242839', boxShadow:'none', width: '100%'}}
+            sx={{backgroundColor:'#182740', boxShadow:'none', width: '100%'}}
             expandIcon={<ExpandMoreIcon className={`text-dimWhite`}/>}
             id="panel1bh-header"
             >
@@ -17,7 +17,7 @@ function MyAccordation(props) {
                     {props.title}
                 </Typography>
             </AccordionSummary>
-            <AccordionDetails className={`bg-primary`}>
+            <AccordionDetails className={`bg-secondary`}>
                 {props.content}
             </AccordionDetails>
         </Accordion>
