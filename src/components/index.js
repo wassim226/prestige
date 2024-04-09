@@ -20,6 +20,7 @@ import NotificationMenu from "./menus/notification";
 import SettingsMenu from "./menus/setting";
 import SearchInput from "./search_input";
 import Notification from "./controle_panel/notification";
+import DataGridView from "./controle_panel/data_grid_view";
 
 export {
   Navigation,
@@ -42,4 +43,5 @@ export {
   SettingsMenu,
   SearchInput,
   Notification,
+  DataGridView,
 };

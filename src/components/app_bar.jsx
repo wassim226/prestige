@@ -39,7 +39,7 @@ function MyAppBar(props) {
                 setAnchorNotification(event.currentTarget);
               })}>
                 <Badge badgeContent={4} color="primary">
-                  <NotificationsOutlined className='text-primary'/>
+                  <NotificationsOutlined className='text-secondary'/>
                 </Badge>
               </IconButton>
             </Tooltip>

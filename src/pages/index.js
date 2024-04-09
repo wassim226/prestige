@@ -19,6 +19,7 @@ import MessageDetail from "./controle_panel/message_detail";
 import SpaDetail from "./controle_panel/spa_detail";
 import UserDetail from "./controle_panel/user_detail";
 import Dashboard from "./controle_panel/dashboard";
+import ControlePages from "./controle_panel/pages";
 
 export {
   Layout,
@@ -39,4 +40,5 @@ export {
   MessageDetail,
   SpaDetail,
   UserDetail,
+  ControlePages,
 };

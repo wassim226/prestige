@@ -61,18 +61,18 @@ function ControleNavigation() {
                                 <Link to="articales">{"blog"}</Link>
                             </li>
                             <li className='text-dimWhite hover:text-white'>
-                                <Link to="articales">{"pages"}</Link>
+                                <Link to="pages">{"pages"}</Link>
                             </li>
                         </ul>
                     }/>  
                 </li>
-                <li className='hover:text-white'>
+                <li className='hover:text-white mb-5'>
                     <Link to="spas" className='text-dimWhite hover:text-white p-4 text-lg'>{"Spas"}</Link>
                 </li>
-                <li className='hover:text-white'>
+                <li className='hover:text-white my-5'>
                     <Link to="message" className='text-dimWhite hover:text-white p-4 text-lg'>{"Messages"}</Link>
                 </li>
-                <li className='hover:text-white'>
+                <li className='hover:text-white my-5'>
                     <Link to="user" className='text-dimWhite hover:text-white p-4 text-lg'>{"Users"}</Link>
                 </li>
             </ul>

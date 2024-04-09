@@ -1,12 +1,10 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
+import { DataGridView } from "../../components";
 
-function ControleArticale() {
-  const ifram = useRef(null)
-  return (
-  <div className="w-full h-[85vh]">
-    <iframe ref={ifram} className='relative w-full h-full' src={`../../../build/index.html`}></iframe>
-  </div>
-  );
+function ControleArticale(props) {
+  return <div>
+    <DataGridView title={"Articales"} type={"articale"} data={[1,2,3,4]} />
+  </div>;
 }
 
 export default ControleArticale;
