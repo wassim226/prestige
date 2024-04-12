@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
 
 function SpaPresentation(props) {
-    const {image, title, details, price} = props.spa;
+    const {image, title, details, price, mode} = props.spa;
     const [position, setPosition] = useState([0,0]);
     const [isHovred, setIsHovred] = useState(false);
     const [show_detail, setShow_detail] = useState(false);
@@ -39,7 +39,7 @@ function SpaPresentation(props) {
               <img className='w-full h-full relative rounded-md' src={image}/>
             </div>
             
-            <div className={`${isHovred ? 'block' : 'hidden'}`} style={{
+            {mode != "edit" && <div className={`${isHovred ? 'block' : 'hidden'}`} style={{
                 marginBottom: "50px",
                 zIndex:2,
                 position: "absolute",
@@ -61,6 +61,7 @@ function SpaPresentation(props) {
                 </div>
               </div>
             </div>
+          }
         </div>
         <Typography sx={{marginTop: "12px", marginBottom: "12px"}} className='text-white w-full text-center mx-auto max-w-[200px]'>{price} €</Typography>
     </div>

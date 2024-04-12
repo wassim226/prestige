@@ -3,10 +3,10 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function ArticlePreview(props) {
-    const {img, title, description, id} = props;
+  const {img, title, description, id, mode} = props;
   const [hovered, setHovered] = useState(false);
   return (
-    <Link to={`../articale/${id}`}>
+    <Link to={`${mode == "edit" ? "detail/" : "../articale/"}${id}`}>
       <div className='flex flex-row rounded cursor-pointer' onMouseOut={()=>{setHovered((prev)=>false)}} onMouseOver={()=>{setHovered((prev)=>true)}}>
           <img src={img} className='w-full rounded '/>
           <div className={`absolute w-full h-full bg-dimSecondary flex flex-col justify-around items-center duration-500 ${hovered ? "scale-1" : "scale-0"}`}>

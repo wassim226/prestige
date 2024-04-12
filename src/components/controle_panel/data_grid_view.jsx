@@ -2,9 +2,33 @@ import { Add } from '@mui/icons-material';
 import {Toolbar, Tooltip, IconButton, Typography, Grid, Box, Paper} from '@mui/material';
 import React from 'react'
 import { Link } from 'react-router-dom';
+import {ArticlePreview, PageCard, SpaPresentation} from '../../components';
+import { default_description, navList } from '../../constantes';
+import { Pool3 } from '../../assets';
+
 
 function DataGridView(props) {
-    const {title, type, data} = props;
+  const {title, type, data, id} = props;
+
+  const ItemCard = (props)=>{
+    const {type, values, id} = props;
+    const spa = {
+      mode:"edit", id:id, price:'50000', image:Pool3, title:"Lorem ipsum dolor sit amet", details:default_description,
+    };
+    switch(type){
+      case "articale":
+        return (<Paper className='flex flex-col relative'>
+          <ArticlePreview mode={"edit"} id={id} className='swiper-slide' img={Pool3} title={"Lorem ipsum dolor sit amet"} description={default_description}/>
+          </Paper>);
+      case "page":
+        return (<Paper className='flex flex-col relative'>
+        <PageCard title={"Lorem ipsum dolor sit amet"} desc={default_description} page={values.page}/>
+        </Paper>
+      );
+      case "spa":
+        return (<SpaPresentation spa={spa}/>)
+    }
+  };
   return (
     <div className='flex flex-col w-full h-[85vh]'>
         <Toolbar
@@ -38,7 +62,7 @@ function DataGridView(props) {
                 data.map((val, ind)=>{
                     return (
                     <Grid key={`ele_${ind}`} item xs={3}>
-                        <Paper>xs=4</Paper>
+                      <ItemCard type={type} values={val} id={ind}/>
                     </Grid>);
                 })
             }
