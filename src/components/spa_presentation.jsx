@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
+import { useNavigate } from "react-router-dom";
 
 function SpaPresentation(props) {
     const {image, title, details, price, mode} = props.spa;
@@ -7,6 +8,7 @@ function SpaPresentation(props) {
     const [isHovred, setIsHovred] = useState(false);
     const [show_detail, setShow_detail] = useState(false);
     const [in_2nd_half, setIn2ndHalf] = useState(false);
+    const navigate = useNavigate();
     const img = useRef(null);
     useEffect(() => {
       
@@ -35,7 +37,7 @@ function SpaPresentation(props) {
     <div className='flex flex-col justify-center items-center max-w-[200px]'>
         <div  className={`relative flex flex-col justify-center items-center `} >
             
-            <div ref={img} onClick={()=>{setShow_detail((prev)=> !prev)}} onMouseOut={()=>{setIsHovred((prev)=> false)}} onMouseOver={()=>{setIsHovred((prev)=> true)}} className='w-[200px] h-[auto] cursor-pointer'>
+            <div ref={img} onClick={()=>{mode != "edit" ? setShow_detail((prev)=> !prev) : navigate("detail/1")}} onMouseOut={()=>{setIsHovred((prev)=> false)}} onMouseOver={()=>{setIsHovred((prev)=> true)}} className='w-[200px] h-[auto] cursor-pointer'>
               <img className='w-full h-full relative rounded-md' src={image}/>
             </div>
             

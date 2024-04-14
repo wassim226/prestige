@@ -1,6 +1,6 @@
 import React from 'react'
 import { DataGridView } from "../../components";
-import { navList } from '../../constantes';
+import { landscape, navList } from '../../constantes';
 
 
 function ControlePages() {

@@ -2,13 +2,13 @@ import { ArticaleModel } from "../models";
 import BaseController from "./base_controller";
 import { string, z } from "zod";
 
-export default class BlogArticaleController extends BaseController {
-  static blogArticale = [];
+export default class PageController extends BaseController {
+  static pages = [];
 
   constructor(abortController, setError) {
     super(abortController, setError);
     const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
-    this.path = "blog_articale";
+    this.path = "pages";
 
     this.schema = z.object({
       title: string().min(1, "This field can not be blank"),
@@ -20,12 +20,12 @@ export default class BlogArticaleController extends BaseController {
     });
   }
 
-  //   async getBlogArticale() {
-  //     let temp_BlogArticale = [];
+  //   async getPage() {
+  //     let temp_Page = [];
   //     let res = await this.send_request({ query_paramaters: "" });
   //     if (res) {
   //       res.results.map((claim, ind) => {
-  //         temp_BlogArticale.push(
+  //         temp_Page.push(
   //           ClaimModel(
   //             claim.id,
   //             claim.issuer,
@@ -38,9 +38,9 @@ export default class BlogArticaleController extends BaseController {
   //           )
   //         );
   //       });
-  //       BlogArticaleController.BlogArticale = temp_BlogArticale;
+  //       PageController.Page = temp_Page;
   //     }
-  //     return temp_BlogArticale;
+  //     return temp_Page;
   //   }
 
   //   async getClaim(id) {
@@ -60,7 +60,7 @@ export default class BlogArticaleController extends BaseController {
   //     }
   //   }
 
-  async createBlogArticale(json) {
+  async updatePage(json) {
     // this.path += "/";
     console.log(json);
     // let articale = await this.send_request({

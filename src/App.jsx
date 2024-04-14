@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Layout, Home, Landscape, Pool, Spa, Blog, Contact, Water, ControlePanel, Dashboard, ControleArticale, ControleSpa, ControleMessage, Users, ArticaleDetail, SpaDetail, MessageDetail, UserDetail, ControlePages } from './pages'
+import { Layout, Home, Landscape, Pool, Spa, Blog, Contact, Water, ControlePanel, Dashboard, ControleArticale, ControleSpa, ControleMessage, Users, ArticaleDetail, SpaDetail, MessageDetail, UserDetail, ControlePages, PageDetail } from './pages'
 import { BlogArticale } from './components'
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
             </Route>
             <Route path='pages'>
               <Route index element={<ControlePages/>}></Route>
-              <Route path='detail/:id' element={<ArticaleDetail/>}></Route>
+              <Route path='detail/:id' element={<PageDetail/>}></Route>
             </Route>
             <Route path='spas'>
               <Route index element={<ControleSpa/>}></Route>

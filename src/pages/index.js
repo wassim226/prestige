@@ -20,6 +20,7 @@ import SpaDetail from "./controle_panel/spa_detail";
 import UserDetail from "./controle_panel/user_detail";
 import Dashboard from "./controle_panel/dashboard";
 import ControlePages from "./controle_panel/pages";
+import PageDetail from "./controle_panel/page_detail";
 
 export {
   Layout,
@@ -41,4 +42,5 @@ export {
   SpaDetail,
   UserDetail,
   ControlePages,
+  PageDetail,
 };
