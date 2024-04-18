@@ -18,7 +18,7 @@ function DataGridView(props) {
     switch(type){
       case "articale":
         return (<Paper className='flex flex-col relative'>
-          <ArticlePreview mode={"edit"} id={id} className='swiper-slide' img={Pool3} title={"Lorem ipsum dolor sit amet"} description={default_description}/>
+          <ArticlePreview mode={"edit"} id={id} className='swiper-slide' img={Pool3} title={values.title} description={values.extPresentation}/>
           </Paper>);
       case "page":
         return (<Paper className='flex flex-col relative'>
@@ -62,7 +62,7 @@ function DataGridView(props) {
                 data.map((val, ind)=>{
                     return (
                     <Grid key={`ele_${ind}`} item xs={3}>
-                      <ItemCard type={type} values={val} id={ind}/>
+                      <ItemCard type={type} values={val} id={val.id}/>
                     </Grid>);
                 })
             }

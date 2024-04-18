@@ -3,12 +3,12 @@ import BaseController from "./base_controller";
 import { string, z } from "zod";
 
 export default class BlogArticaleController extends BaseController {
-  static blogArticale = [];
+  static BlogArticales = [];
 
   constructor(abortController, setError) {
     super(abortController, setError);
     const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
-    this.path = "blog_articale";
+    this.path = "article";
 
     this.schema = z.object({
       title: string().min(1, "This field can not be blank"),
@@ -18,30 +18,50 @@ export default class BlogArticaleController extends BaseController {
       }, "Only .jpg, .jpeg and .png are supported."),
       content: string().min(1, "This field can not be blank"),
     });
+
+    this.updateSchema = z.object({
+      id: z.any(),
+      title: string().optional(),
+      extPresentation: string().optional(),
+      presentationImg: z
+        .any()
+        .optional()
+        .refine((file) => {
+          return file.length > 0
+            ? ACCEPTED_IMAGE_TYPES.includes(file?.type)
+              ? true
+              : false
+            : true;
+        }, "Only .jpg, .jpeg and .png are supported."),
+      content: string().optional(),
+    });
+
+    this.createBlogArticale = this.createBlogArticale.bind(this);
+    this.updateBlogArticale = this.updateBlogArticale.bind(this);
   }
 
-  //   async getBlogArticale() {
-  //     let temp_BlogArticale = [];
-  //     let res = await this.send_request({ query_paramaters: "" });
-  //     if (res) {
-  //       res.results.map((claim, ind) => {
-  //         temp_BlogArticale.push(
-  //           ClaimModel(
-  //             claim.id,
-  //             claim.issuer,
-  //             claim.NIF,
-  //             claim.description,
-  //             claim.address,
-  //             claim.is_completed ? "fixed" : "unfixed",
-  //             claim.created_at.split("T")[0],
-  //             claim.phone
-  //           )
-  //         );
-  //       });
-  //       BlogArticaleController.BlogArticale = temp_BlogArticale;
-  //     }
-  //     return temp_BlogArticale;
-  //   }
+  async getBlogArticales() {
+    let temp_BlogArticale = [];
+    this.path = "article";
+    let res = await this.send_request({});
+    if (res) {
+      res.map((articale, ind) => {
+        temp_BlogArticale.push(
+          ArticaleModel(
+            articale.id,
+            articale.title,
+            articale.extPresentation,
+            articale.presentationImg,
+            articale.content,
+            articale.createdAt.split("T")[0],
+            articale.comments
+          )
+        );
+      });
+      BlogArticaleController.BlogArticales = temp_BlogArticale;
+    }
+    return temp_BlogArticale;
+  }
 
   //   async getClaim(id) {
   //     this.path += `/${id}`;
@@ -62,23 +82,73 @@ export default class BlogArticaleController extends BaseController {
 
   async createBlogArticale(json) {
     // this.path += "/";
-    console.log(json);
-    // let articale = await this.send_request({
-    //   method: "POST",
-    //   query_paramaters: "",
-    //   body: json,
-    // });
+    let img_id = await BaseController.uploadFile(json["presentationImg"]);
+    this.path = "content";
+    let content_id = await this.send_request({
+      method: "POST",
+      body: { content1: json.content },
+    });
+    if (content_id) {
+      json["presentationImg"] = img_id;
+      json["content"] = content_id.id;
+      console.log(json);
+      this.path = "article";
+      let articale = await this.send_request({
+        method: "POST",
+        body: json,
+      });
+    }
 
-    // if (articale) {
-    //   return ArticaleModel(
-    //     articale.id,
-    //     articale.title,
-    //     articale.extPresentation,
-    //     articale.presentationImg,
-    //     articale.content,
-    //     articale.createdAt,
-    //     articale.comments
-    //   );
-    // }
+    if (articale) {
+      return ArticaleModel(
+        articale.id,
+        articale.title,
+        articale.extPresentation,
+        articale.presentationImg,
+        articale.content,
+        articale.createdAt,
+        articale.comments
+      );
+    }
+  }
+
+  async updateBlogArticale(json) {
+    if (!json.presentationImg.length == 0) {
+      let img_id = await BaseController.uploadFile(json["presentationImg"]);
+      if (img_id) {
+        json["presentationImg"] = img_id;
+      }
+    } else {
+      delete json.presentationImg;
+    }
+
+    if (json.content) {
+      this.path = "content";
+      let content_id = await this.send_request({
+        method: "POST",
+        body: { content1: json.content },
+      });
+      if (content_id) {
+        json["content"] = content_id.id;
+      }
+    }
+
+    this.path = "article/" + json.id;
+    let articale = await this.send_request({
+      method: "PUT",
+      body: json,
+    });
+
+    if (articale) {
+      return ArticaleModel(
+        articale.id,
+        articale.title,
+        articale.extPresentation,
+        articale.presentationImg,
+        articale.content,
+        articale.createdAt,
+        articale.comments
+      );
+    }
   }
 }

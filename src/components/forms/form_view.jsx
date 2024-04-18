@@ -5,7 +5,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 function FormView(props) {
   const {controller, request_method, View, prev} = props;
   const formRef = useRef(null);
-  const {register, control, setValue, handleSubmit, reset, formState: {errors}} = useForm({defaultValues: prev, resolver:zodResolver(controller.schema)});
+  const {register, control, setValue, handleSubmit, reset, formState: {errors}} = useForm({resolver:zodResolver(prev ? controller.updateSchema : controller.schema)});
   
   const [error, setError] = useState(false);
 

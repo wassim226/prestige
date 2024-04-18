@@ -3,10 +3,12 @@ import { BlogArticaleController } from "../../controllers";
 import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography} from '@mui/material';
 import { Save } from "@mui/icons-material";
 import { FormView } from "../../components";
+import { useParams } from "react-router-dom";
 
 
 
 const ArticaleDetail = (props)=>{
+  const {id} = useParams();
   const [serverError, setServerError] = useState(null);
   const abortController = useRef(null);
   const controller = new BlogArticaleController(abortController, setServerError);
@@ -15,8 +17,9 @@ const ArticaleDetail = (props)=>{
     <div>
       <FormView 
         controller={controller}
-        request_method={controller.createBlogArticale}
+        request_method={id == "new" ? controller.createBlogArticale : controller.updateBlogArticale}
         View={ArticaleForm}
+        prev={id != "new" ? id : undefined}
       />
     </div>
   );
@@ -25,7 +28,7 @@ const ArticaleDetail = (props)=>{
 
 
 function ArticaleForm(props) {
-  const {formRef, handleSubmit, register, errors, setValue} = props;
+  const {formRef, handleSubmit, register, errors, setValue, prev} = props;
   const ifram = useRef(null);
   const getDataFromEditor = ()=>{
     ifram.current.contentWindow.postMessage("get", "*");
@@ -33,6 +36,7 @@ function ArticaleForm(props) {
 
   window.onmessage = function(e) {
     setValue('content', e.data, { shouldValidate: true });
+    setValue('id', prev);
     formRef.current.dispatchEvent(
       new Event("submit", { cancelable: true, bubbles: true })
     )

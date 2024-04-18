@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import { addedValues } from '../constantes';
 import { Valeur, TitlebarImageList } from '../components';
+import { Logo } from '../assets';
 
 function Home() {
 
@@ -11,7 +12,9 @@ function Home() {
         <a name="introduction">
             <div className='flex flex-row justify-between items-center w-[100vw] h-[90vh] overflow-y-clip'>
                 <div className={`flex flex-col justify-start items-center w-[50vw] `}>
-                      <Typography gutterBottom variant='h2' sx={{fontWeight: 550}} className='text-white w-[50%]'>PRESTIGE PISCINE & PAYSAGE</Typography>
+                      <img src={Logo} className=' rounded w-[40%] h-[20%]'/>
+                      {/* <div className={`w-[50vw] h-[38.33333vw] bg-cover bg-center background-image mx-10`}></div> */}
+                      {/* <Typography gutterBottom variant='h2' sx={{fontWeight: 550}} className='text-white w-[50%]'>PRESTIGE PISCINE & PAYSAGE</Typography> */}
                       <Typography gutterBottom className='text-white w-[80%]'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                       </Typography>
