@@ -1,3 +1,4 @@
+import { ACCEPTED_IMAGE_TYPES, optionalImgValidator } from "../constantes";
 import { ArticaleModel } from "../models";
 import BaseController from "./base_controller";
 import { string, z } from "zod";
@@ -7,7 +8,6 @@ export default class BlogArticaleController extends BaseController {
 
   constructor(abortController, setError) {
     super(abortController, setError);
-    const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
     this.path = "article";
 
     this.schema = z.object({
@@ -23,16 +23,7 @@ export default class BlogArticaleController extends BaseController {
       id: z.any(),
       title: string().optional(),
       extPresentation: string().optional(),
-      presentationImg: z
-        .any()
-        .optional()
-        .refine((file) => {
-          return file.length > 0
-            ? ACCEPTED_IMAGE_TYPES.includes(file?.type)
-              ? true
-              : false
-            : true;
-        }, "Only .jpg, .jpeg and .png are supported."),
+      presentationImg: optionalImgValidator,
       content: string().optional(),
     });
 
@@ -114,12 +105,12 @@ export default class BlogArticaleController extends BaseController {
 
   async updateBlogArticale(json) {
     if (!json.presentationImg.length == 0) {
-      let img_id = await BaseController.uploadFile(json["presentationImg"]);
+      let img_id = await BaseController.uploadFile(json.presentationImg);
       if (img_id) {
-        json["presentationImg"] = img_id;
+        json.presentationImg = img_id;
       }
     } else {
-      delete json.presentationImg;
+      json.presentationImg = -1;
     }
 
     if (json.content) {

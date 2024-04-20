@@ -1,3 +1,18 @@
+import { string, z } from "zod";
+
+export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
+
+export const optionalImgValidator = z
+  .any()
+  .optional()
+  .refine((file) => {
+    return file.length > 0
+      ? ACCEPTED_IMAGE_TYPES.includes(file?.type)
+        ? true
+        : false
+      : true;
+  }, "Only .jpg, .jpeg and .png are supported.");
+
 export const navList = [
   "Home",
   "Landscape",

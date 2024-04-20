@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function PageCard(props) {
-  const {title, page, desc} = props;
+  const {page} = props;
   return (
     <Link to={`detail/${page}`}>
         <div className='flex flex-col justify-center items-center h-[40vh] line-clamp-4 text-ellipsis'>

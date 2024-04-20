@@ -1,84 +1,91 @@
 import { ArticaleModel } from "../models";
 import BaseController from "./base_controller";
-import { string, z } from "zod";
 
 export default class PageController extends BaseController {
   static pages = [];
 
   constructor(abortController, setError) {
     super(abortController, setError);
-    const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
     this.path = "pages";
+    this.schema_ = null;
 
-    this.schema = z.object({
-      title: string().min(1, "This field can not be blank"),
-      extPresentation: string().min(1, "This field can not be blank"),
-      presentationImg: z.any().refine((file) => {
-        return ACCEPTED_IMAGE_TYPES.includes(file?.type);
-      }, "Only .jpg, .jpeg and .png are supported."),
-      content: string().min(1, "This field can not be blank"),
-    });
+    this.updatePage = this.updatePage.bind(this);
+    this.getPage = this.getPage.bind(this);
+    this.getPagesNames = this.getPagesNames.bind(this);
+
+    // this.schema = z.object({
+    //   title: string().min(1, "This field can not be blank"),
+    //   extPresentation: string().min(1, "This field can not be blank"),
+    //   presentationImg: z.any().refine((file) => {
+    //     return ACCEPTED_IMAGE_TYPES.includes(file?.type);
+    //   }, "Only .jpg, .jpeg and .png are supported."),
+    //   content: string().min(1, "This field can not be blank"),
+    // });
   }
 
-  //   async getPage() {
-  //     let temp_Page = [];
-  //     let res = await this.send_request({ query_paramaters: "" });
-  //     if (res) {
-  //       res.results.map((claim, ind) => {
-  //         temp_Page.push(
-  //           ClaimModel(
-  //             claim.id,
-  //             claim.issuer,
-  //             claim.NIF,
-  //             claim.description,
-  //             claim.address,
-  //             claim.is_completed ? "fixed" : "unfixed",
-  //             claim.created_at.split("T")[0],
-  //             claim.phone
-  //           )
-  //         );
-  //       });
-  //       PageController.Page = temp_Page;
-  //     }
-  //     return temp_Page;
-  //   }
+  get schema() {
+    return this.schema_;
+  }
 
-  //   async getClaim(id) {
-  //     this.path += `/${id}`;
-  //     let claim = await this.send_request({ query_paramaters: "" });
-  //     if (claim) {
-  //       return ClaimModel(
-  //         claim.id,
-  //         claim.issuer,
-  //         claim.NIF,
-  //         claim.description,
-  //         claim.address,
-  //         claim.is_completed ? "fixed" : "unfixed",
-  //         claim.created_at.split("T")[0],
-  //         claim.phone
-  //       );
-  //     }
-  //   }
+  set schema(sch) {
+    this.schema_ = sch;
+  }
+
+  async getPage(name) {
+    this.path += "/" + name;
+    let res = await this.send_request({});
+    if (res) {
+      return res;
+    }
+  }
+
+  async getPagesNames() {
+    this.path += "/names";
+    let res = await this.send_request({});
+    if (res) {
+      return res;
+    }
+  }
 
   async updatePage(json) {
-    // this.path += "/";
+    this.path += "/" + json.name;
     console.log(json);
-    // let articale = await this.send_request({
-    //   method: "POST",
-    //   query_paramaters: "",
-    //   body: json,
-    // });
 
-    // if (articale) {
-    //   return ArticaleModel(
-    //     articale.id,
-    //     articale.title,
-    //     articale.extPresentation,
-    //     articale.presentationImg,
-    //     articale.content,
-    //     articale.createdAt,
-    //     articale.comments
-    //   );
-    // }
+    if (json.presentationImg.length == undefined) {
+      let img_id = await BaseController.uploadFile(json.presentationImg);
+      if (img_id) {
+        json.presentationImg = img_id;
+      }
+    } else {
+      json.presentationImg = -1;
+    }
+
+    json = {
+      head: JSON.stringify({
+        presentationImg: json.presentationImg,
+        extPresentation: json.extPresentation,
+      }),
+      sequance1: JSON.stringify({
+        value_1: json.value_1,
+        desc_1: json.desc_1,
+        value_2: json.value_2,
+        desc_2: json.desc_2,
+        value_3: json.value_3,
+        desc_3: json.desc_3,
+        value_4: json.value_4,
+        desc_4: json.desc_4,
+      }),
+    };
+    console.log(json);
+
+    let res = await this.send_request({
+      method: "PUT",
+      body: json,
+    });
+
+    if (res) {
+      return true;
+    }
+    return false;
   }
 }

@@ -22,7 +22,7 @@ function DataGridView(props) {
           </Paper>);
       case "page":
         return (<Paper className='flex flex-col relative'>
-        <PageCard title={"Lorem ipsum dolor sit amet"} desc={default_description} page={values.page}/>
+        <PageCard page={values.page}/>
         </Paper>
       );
       case "spa":
