@@ -13,7 +13,7 @@ function DataGridView(props) {
   const ItemCard = (props)=>{
     const {type, values, id} = props;
     const spa = {
-      mode:"edit", id:id, price:'50000', image:Pool3, title:"Lorem ipsum dolor sit amet", details:default_description,
+      mode:"edit", id:id, price:values.price, image:Pool3, title: values.title, details: values.description,
     };
     switch(type){
       case "articale":

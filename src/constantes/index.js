@@ -10,7 +10,9 @@ import {
 } from "../components";
 
 export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
-
+export const requiredImgValidator = z.any().refine((file) => {
+  return ACCEPTED_IMAGE_TYPES.includes(file?.type);
+}, "Only .jpg, .jpeg and .png are supported.");
 export const optionalImgValidator = z
   .any()
   .optional()
@@ -164,7 +166,8 @@ export const getPage = (id, controller) => {
       controller.schema = z.object({
         phone: string().min(1, "This field can not be blank"),
         adress: string().min(1, "This field can not be blank"),
-        presentationImg: optionalImgValidator,
+        email: string().min(1, "This field can not be blank"),
+        password: string().min(1, "This field can not be blank"),
       });
       break;
   }

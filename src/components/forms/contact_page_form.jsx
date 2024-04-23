@@ -4,7 +4,12 @@ import { Save } from "@mui/icons-material";
 
 function ContactPageForm(props) {
     const {formRef, handleSubmit, register, errors, setValue} = props;
-  
+    const handelSave = ()=>{
+      formRef.current.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true })
+      );
+    }
+
     return (
     <div className=" w-full h-[85vh] ">
       <Toolbar
@@ -23,7 +28,7 @@ function ContactPageForm(props) {
           </Typography>
           
           <Tooltip title={`Save`}>
-            <IconButton onClick={null}>
+            <IconButton onClick={handelSave}>
               <Save className='text-secondary' />
             </IconButton>
           </Tooltip>
@@ -36,11 +41,17 @@ function ContactPageForm(props) {
         </div>
         <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
           <div className="flex flex-col justify-evenly">
+            <TextField label="Email" size="small" variant="outlined" sx={{margin: "20px 0"}}
+            {...register('email')} error={errors.email ? true : false} helperText={errors.email?.message}/>
+  
+            <TextField label="Password" size="small" variant="outlined" type='password'
+            {...register('password')} error={errors.password ? true : false} helperText={errors.password?.message}/>
+
             <TextField label="Phone" size="small" variant="outlined" sx={{margin: "20px 0"}}
-            {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
+            {...register('phone')} error={errors.phone ? true : false} helperText={errors.phone?.message}/>
   
             <TextField label="Adress" size="small" variant="outlined" multiline rows={3}
-            {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
+            {...register('adress')} error={errors.adress ? true : false} helperText={errors.adress?.message}/>
           </div>
           {/* <div className="flex flex-col justify-center">
             <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{

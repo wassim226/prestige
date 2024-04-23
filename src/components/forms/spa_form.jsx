@@ -52,7 +52,7 @@ function SpaForm(props) {
         </div>
       </div>
       <div className="flex flex-row justify-center items-center">
-        <TextField label="Details" size="small" variant="outlined" multiline rows={6} maxRows={8} sx={{width: "52.5vw", marginTop: "20px"}}
+        <TextField label="Details" size="small" variant="outlined" multiline rows={6} sx={{width: "52.5vw", marginTop: "20px"}}
           {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import { ACCEPTED_IMAGE_TYPES, optionalImgValidator } from "../constantes";
+import { optionalImgValidator, requiredImgValidator } from "../constantes";
 import { ArticaleModel } from "../models";
 import BaseController from "./base_controller";
 import { string, z } from "zod";
@@ -13,9 +13,7 @@ export default class BlogArticaleController extends BaseController {
     this.schema = z.object({
       title: string().min(1, "This field can not be blank"),
       extPresentation: string().min(1, "This field can not be blank"),
-      presentationImg: z.any().refine((file) => {
-        return ACCEPTED_IMAGE_TYPES.includes(file?.type);
-      }, "Only .jpg, .jpeg and .png are supported."),
+      presentationImg: requiredImgValidator,
       content: string().min(1, "This field can not be blank"),
     });
 

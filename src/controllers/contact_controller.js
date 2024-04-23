@@ -1,17 +1,15 @@
 import { adaptedJson } from "../constantes";
 import BaseController from "./base_controller";
 
-export default class PageController extends BaseController {
-  static pages = [];
-
+export default class ContactController extends BaseController {
   constructor(abortController, setError) {
     super(abortController, setError);
-    this.path = "pages";
+    this.path = "contact";
     this.schema_ = null;
 
     this.updatePage = this.updatePage.bind(this);
-    this.getPage = this.getPage.bind(this);
-    this.getPagesNames = this.getPagesNames.bind(this);
+    this.getContact = this.getContact.bind(this);
+    this.getContacts = this.getContacts.bind(this);
   }
 
   get schema() {
@@ -22,16 +20,16 @@ export default class PageController extends BaseController {
     this.schema_ = sch;
   }
 
-  async getPage(name) {
-    this.path = "pages/" + name;
+  async getContact(id) {
+    this.path = "contact/" + id;
     let res = await this.send_request({});
     if (res) {
       return res;
     }
   }
 
-  async getPagesNames() {
-    this.path = "pages/names";
+  async getContacts() {
+    this.path += "contact/";
     let res = await this.send_request({});
     if (res) {
       return res;
@@ -39,10 +37,7 @@ export default class PageController extends BaseController {
   }
 
   async updatePage(json) {
-    json.name = typeof json.name === "string" ? json.name : json.name.name;
-    this.path = "pages/" + json.name;
-    console.log(json);
-    json = await adaptedJson(json);
+    this.path = "contact/0"; // + json.id;
     console.log(json);
 
     let res = await this.send_request({

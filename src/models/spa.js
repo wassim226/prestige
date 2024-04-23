@@ -3,8 +3,8 @@ export default function SpaModel(
   title,
   price,
   imgsOrder,
-  description
-  // createdAt,
+  description,
+  attachSpas
 ) {
   return {
     id,
@@ -12,6 +12,6 @@ export default function SpaModel(
     price,
     imgsOrder,
     description,
-    // createdAt,
+    attachSpas,
   };
 }
