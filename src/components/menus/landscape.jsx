@@ -11,8 +11,8 @@ function LandscapeMenu(props) {
         className='max-h-[75%] sub-menu'
     >
         {landscape.map((team, ind) => (
-            <MenuItem key={team} onClick={handleCloseLandscapeMenu} className=' hover:text-primary' >
-              <Link to={"landscape/" + ind}><div className='text-dimWhite hover:text-primary'>{team}</div></Link>
+            <MenuItem key={team.name} onClick={handleCloseLandscapeMenu} className=' hover:text-primary' >
+              <Link to={"landscape/" + ind}><div className='text-dimWhite hover:text-primary'>{team.label}</div></Link>
             </MenuItem>
         ))}
     </Menu>

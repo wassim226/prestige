@@ -4,6 +4,13 @@ import { Save } from "@mui/icons-material";
 
 function SpaPageForm(props) {
     const {formRef, handleSubmit, register, errors, setValue} = props;
+
+    const handelSave = ()=>{
+      setValue('name',"spa");
+      formRef.current.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true })
+      );
+    } 
   
     return (
     <div className=" w-full h-[85vh] ">
@@ -23,7 +30,7 @@ function SpaPageForm(props) {
           </Typography>
           
           <Tooltip title={`Save`}>
-            <IconButton onClick={null}>
+            <IconButton onClick={handelSave}>
               <Save className='text-secondary' />
             </IconButton>
           </Tooltip>
@@ -39,36 +46,7 @@ function SpaPageForm(props) {
             <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
             {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
   
-            <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3} maxRows={5}
-            {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
-          </div>
-          <div className="flex flex-col justify-center">
-            <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("presentationImg", e.target.files[0])}} >
-              Upload Image
-              <input type="file" {...register('presentationImg')} className="hidden"/>
-            </Button>
-            { errors.presentationImg && 
-              <div className="flex flex-col text-red-600 justify-center items-center my-4">
-                {
-                    errors.presentationImg?.message
-                }
-              </div>
-            }
-          </div>
-        </div>
-
-        <div className='flex flex-col my-10'>
-          <Typography variant="body2" gutterBottom color={"GrayText"} sx={{width: "60vw", marginLeft: "10vw"}}>Body</Typography>
-          <Divider variant="middle" sx={{width: "60vw", marginLeft: "10vw"}}/>
-        </div>
-
-        <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
-          <div className="flex flex-col justify-evenly">
-            <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
-            {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
-  
-            <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3} maxRows={5}
+            <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3}
             {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">

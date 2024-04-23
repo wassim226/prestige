@@ -1,4 +1,13 @@
 import { string, z } from "zod";
+import BaseController from "../controllers/base_controller";
+import {
+  BlogPageForm,
+  ContactPageForm,
+  HomePageForm,
+  LandscapePageForm,
+  SpaPageForm,
+  WaterPageForm,
+} from "../components";
 
 export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 
@@ -23,9 +32,9 @@ export const navList = [
   "Contact",
 ];
 export const landscape = [
-  "3D Conception",
-  "Aménagement paysagers",
-  "Entretien des espaces",
+  { name: "conception", label: "3D Conception" },
+  { name: "amenagement", label: "Aménagement paysagers" },
+  { name: "entretien", label: "Entretien des espaces" },
 ];
 
 export const notifications = [
@@ -66,3 +75,249 @@ export const addedValues = [
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
+
+export const getPage = (id, controller) => {
+  let page = null;
+  switch (id) {
+    case "Home":
+      page = HomePageForm;
+      controller.schema = z.object({
+        name: string(),
+        extPresentation: string().min(1, "This field can not be blank"),
+        presentationImg: optionalImgValidator,
+        value_1: string().min(1, "This field can not be blank"),
+        desc_1: string().min(1, "This field can not be blank"),
+        value_2: string().min(1, "This field can not be blank"),
+        desc_2: string().min(1, "This field can not be blank"),
+        value_3: string().min(1, "This field can not be blank"),
+        desc_3: string().min(1, "This field can not be blank"),
+        value_4: string().min(1, "This field can not be blank"),
+        desc_4: string().min(1, "This field can not be blank"),
+      });
+      break;
+    case "Landscape":
+    case "Pool":
+      LandscapePageForm.defaultProps = { isPool: id == "Pool" };
+      page = LandscapePageForm;
+      controller.schema = z.object({
+        name:
+          id == "Pool"
+            ? string().min(1, "This field can not be blank")
+            : z.object({
+                name: string(),
+                label: string().min(1, "This field can not be blank"),
+              }),
+        title: string().min(1, "This field can not be blank"),
+        extPresentation: string().min(1, "This field can not be blank"),
+        presentationImg: optionalImgValidator,
+        bodyTitle: string().min(1, "This field can not be blank"),
+        bodyPresentation: string().min(1, "This field can not be blank"),
+        bodyImg: optionalImgValidator,
+        service_1: string().min(1, "This field can not be blank"),
+        service_2: string().min(1, "This field can not be blank"),
+        service_3: string().min(1, "This field can not be blank"),
+        service_4: string().min(1, "This field can not be blank"),
+      });
+      break;
+    case "Spa":
+      page = SpaPageForm;
+      controller.schema = z.object({
+        name: string().min(1, "This field can not be blank"),
+        title: string().min(1, "This field can not be blank"),
+        extPresentation: string().min(1, "This field can not be blank"),
+        presentationImg: optionalImgValidator,
+      });
+      break;
+    case "Water":
+      page = WaterPageForm;
+      controller.schema = z.object({
+        name: string().min(1, "This field can not be blank"),
+        title: string().min(1, "This field can not be blank"),
+        extPresentation: string().min(1, "This field can not be blank"),
+        presentationImg: optionalImgValidator,
+        bodyTitle: string().min(1, "This field can not be blank"),
+        bodyPresentation: string().min(1, "This field can not be blank"),
+        bodyImg: optionalImgValidator,
+        offer_1: string().min(1, "This field can not be blank"),
+        offer_2: string().min(1, "This field can not be blank"),
+        offer_3: string().min(1, "This field can not be blank"),
+        offer_4: string().min(1, "This field can not be blank"),
+        offer_5: string().min(1, "This field can not be blank"),
+        offerDesc_2: string().min(1, "This field can not be blank"),
+        offerDesc_3: string().min(1, "This field can not be blank"),
+        offerDesc_4: string().min(1, "This field can not be blank"),
+        offerDesc_1: string().min(1, "This field can not be blank"),
+        offerDesc_5: string().min(1, "This field can not be blank"),
+      });
+      break;
+    case "Blog":
+      page = BlogPageForm;
+      controller.schema = z.object({
+        name: string().min(1, "This field can not be blank"),
+        title: string().min(1, "This field can not be blank"),
+        extPresentation: string().min(1, "This field can not be blank"),
+        presentationImg: optionalImgValidator,
+      });
+      break;
+    case "Contact":
+      page = ContactPageForm;
+      controller.schema = z.object({
+        phone: string().min(1, "This field can not be blank"),
+        adress: string().min(1, "This field can not be blank"),
+        presentationImg: optionalImgValidator,
+      });
+      break;
+  }
+  return page;
+};
+
+export async function adaptedJson(json) {
+  let imgs = ["presentationImg", "bodyImg"];
+
+  switch (json.name) {
+    case "home":
+      if (json.presentationImg.length == undefined) {
+        let img_id = await BaseController.uploadFile(json.presentationImg);
+        if (img_id) {
+          json.presentationImg = img_id;
+        }
+      } else {
+        json.presentationImg = -1;
+      }
+
+      json = {
+        head: JSON.stringify({
+          presentationImg: json.presentationImg,
+          extPresentation: json.extPresentation,
+        }),
+        sequance1: JSON.stringify({
+          value_1: json.value_1,
+          desc_1: json.desc_1,
+          value_2: json.value_2,
+          desc_2: json.desc_2,
+          value_3: json.value_3,
+          desc_3: json.desc_3,
+          value_4: json.value_4,
+          desc_4: json.desc_4,
+        }),
+      };
+      break;
+    case "conception":
+    case "amenagement":
+    case "entretien":
+    case "pool":
+      await Promise.all(
+        imgs.map(async (img) => {
+          if (json[img].length == undefined) {
+            let img_id = await BaseController.uploadFile(json[img]);
+            console.log(img_id);
+            if (img_id) {
+              json[img] = img_id;
+            }
+          } else {
+            json[img] = -1;
+          }
+        })
+      );
+
+      json = {
+        head: JSON.stringify({
+          title: json.title,
+          presentationImg: json.presentationImg,
+          extPresentation: json.extPresentation,
+        }),
+        sequance1: JSON.stringify({
+          bodyTitle: json.bodyTitle,
+          bodyPresentation: json.bodyPresentation,
+          bodyImg: json.bodyImg,
+        }),
+        sequance2: JSON.stringify({
+          service_1: json.service_1,
+          service_2: json.service_2,
+          service_3: json.service_3,
+          service_4: json.service_4,
+        }),
+      };
+      break;
+    case "spa":
+      if (json.presentationImg.length == undefined) {
+        let img_id = await BaseController.uploadFile(json.presentationImg);
+        if (img_id) {
+          json.presentationImg = img_id;
+        }
+      } else {
+        json.presentationImg = -1;
+      }
+
+      json = {
+        head: JSON.stringify({
+          title: json.title,
+          presentationImg: json.presentationImg,
+          extPresentation: json.extPresentation,
+        }),
+      };
+      break;
+    case "water":
+      await Promise.all(
+        imgs.map(async (img) => {
+          if (json[img].length == undefined) {
+            let img_id = await BaseController.uploadFile(json[img]);
+            if (img_id) {
+              json[img] = img_id;
+            }
+          } else {
+            json[img] = -1;
+          }
+        })
+      );
+
+      json = {
+        head: JSON.stringify({
+          title: json.title,
+          presentationImg: json.presentationImg,
+          extPresentation: json.extPresentation,
+        }),
+        sequance1: JSON.stringify({
+          bodyTitle: json.bodyTitle,
+          bodyPresentation: json.bodyPresentation,
+          bodyImg: json.bodyImg,
+        }),
+        sequance2: JSON.stringify({
+          offer_1: json.offer_1,
+          offer_2: json.offer_2,
+          offer_3: json.offer_3,
+          offer_4: json.offer_4,
+          offer_5: json.offer_5,
+          offerDesc_2: json.offerDesc_2,
+          offerDesc_3: json.offerDesc_3,
+          offerDesc_4: json.offerDesc_4,
+          offerDesc_1: json.offerDesc_1,
+          offerDesc_5: json.offerDesc_5,
+        }),
+      };
+      break;
+    case "blog":
+      if (json.presentationImg.length == undefined) {
+        let img_id = await BaseController.uploadFile(json.presentationImg);
+        if (img_id) {
+          json.presentationImg = img_id;
+        }
+      } else {
+        json.presentationImg = -1;
+      }
+
+      json = {
+        head: JSON.stringify({
+          title: json.title,
+          presentationImg: json.presentationImg,
+          extPresentation: json.extPresentation,
+        }),
+      };
+      break;
+    // case "contact":
+    //   page = ContactPageForm;
+    //   break;
+  }
+
+  return json;
+}

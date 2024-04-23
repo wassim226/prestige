@@ -28,6 +28,7 @@ import FormView from "./forms/form_view";
 import HomePageForm from "./forms/home_page_form";
 import LandscapePageForm from "./forms/landscape_page_form";
 import SpaPageForm from "./forms/spa_page_form";
+import WaterPageForm from "./forms/water_page_form";
 import BlogPageForm from "./forms/blog_page_form";
 import ContactPageForm from "./forms/contact_page_form";
 import SpaForm from "./forms/spa_form";
@@ -64,4 +65,5 @@ export {
   AsynchronousSelect,
   BlogPageForm,
   ContactPageForm,
+  WaterPageForm,
 };

@@ -104,7 +104,7 @@ export default class BlogArticaleController extends BaseController {
   }
 
   async updateBlogArticale(json) {
-    if (!json.presentationImg.length == 0) {
+    if (json.presentationImg.length == undefined) {
       let img_id = await BaseController.uploadFile(json.presentationImg);
       if (img_id) {
         json.presentationImg = img_id;

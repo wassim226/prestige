@@ -8,6 +8,15 @@ import AsynchronousSelect from '../asynchrone_select';
 function LandscapePageForm(props) {
     const {formRef, handleSubmit, register, errors, control, setValue, isPool} = props;
     const [isLoading, setIsLoading] = useState(true);
+
+    const handelSave = ()=>{
+      if(isPool){
+        setValue('name',"pool");
+      }
+      formRef.current.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true })
+      );
+    } 
   
     return (
     <div className=" w-full h-[85vh] ">
@@ -23,11 +32,11 @@ function LandscapePageForm(props) {
             id="tableTitle"
             component="div"
           >
-            {"Landscape page content"}
+            {(isPool ? "Pool" : "Landscape") +" page content"}
           </Typography>
           
           <Tooltip title={`Save`}>
-            <IconButton onClick={null}>
+            <IconButton onClick={handelSave}>
               <Save className='text-secondary' />
             </IconButton>
           </Tooltip>
@@ -42,7 +51,7 @@ function LandscapePageForm(props) {
         <div className='flex flex-col justify-items-center w-full'>
           <div className='flex flex-col justify-items-center mx-auto w-[50%]'>
             <Controller
-            {...register('page')}
+            {...register('name')}
             control={control}
             render={({
             field: { value, onChange, onBlur, ref },
@@ -55,8 +64,8 @@ function LandscapePageForm(props) {
                 variant:"outlined", size:"small", margin:"normal", fullWidth: true,
                 loading: isLoading,
                 options: landscape,
-                isOptionEqualToValue: (option, value) => option === value,
-                getOptionLabel: (option) => option,
+                isOptionEqualToValue: (option, value) => option.label === value.label,
+                getOptionLabel: (option) => option.label,
                 onChange:( _event, item ) => {
                   onChange(item);
                 },
@@ -64,8 +73,8 @@ function LandscapePageForm(props) {
 
                fieldProps = {{
                 label: "Pages",
-                error: errors.page ? true : false,
-                helperText: errors.page?.message,
+                error: errors.name ? true : false,
+                helperText: errors.name?.message,
                 onBlur: onBlur,
                 inputRef: ref,
                }} 
@@ -113,21 +122,21 @@ function LandscapePageForm(props) {
         <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
           <div className="flex flex-col justify-evenly">
             <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
-            {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
+            {...register('bodyTitle')} error={errors.bodyTitle ? true : false} helperText={errors.bodyTitle?.message}/>
   
             <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3}
-            {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
+            {...register('bodyPresentation')} error={errors.bodyPresentation ? true : false} helperText={errors.bodyPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
             <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("presentationImg", e.target.files[0])}} >
+              setValue("bodyImg", e.target.files[0])}} >
               Upload Image
-              <input type="file" {...register('presentationImg')} className="hidden"/>
+              <input type="file" {...register('bodyImg')} className="hidden"/>
             </Button>
-            { errors.presentationImg && 
+            { errors.bodyImg && 
               <div className="flex flex-col text-red-600 justify-center items-center my-4">
                 {
-                    errors.presentationImg?.message
+                    errors.bodyImg?.message
                 }
               </div>
             }
@@ -142,22 +151,16 @@ function LandscapePageForm(props) {
         </div>
 
         <div className='flex flex-col'>
-          <div className='flex flex-col justify-center items-center '>
-            <TextField label="Service 01" size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}} />
-            <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
-          </div>
-          <div className='flex flex-col justify-center items-center '>
-            <TextField label="Service 02" size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}} />
-            <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
-          </div>
-          <div className='flex flex-col justify-center items-center '>
-            <TextField label="Service 03" size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}} />
-            <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
-          </div>
-          <div className='flex flex-col justify-center items-center '>
-            <TextField label="Service 04" size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}} />
-            <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
-          </div>
+          {Array(4).fill().map((_,i) =>{
+            let ind = i + 1;
+            return (
+              <div key={"ser" + i} className='flex flex-col justify-center items-center '>
+                <TextField label={`Service 0${ind}`} size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}}
+                {...register("service_" + ind)} error={errors["service_" + ind] ? true : false} helperText={errors["service_" + ind]?.message}/>
+                <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
+              </div>
+            );
+          })}
         </div>
 
       </form>

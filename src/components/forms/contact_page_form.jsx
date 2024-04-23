@@ -39,7 +39,7 @@ function ContactPageForm(props) {
             <TextField label="Phone" size="small" variant="outlined" sx={{margin: "20px 0"}}
             {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
   
-            <TextField label="Adress" size="small" variant="outlined" multiline rows={3} maxRows={5}
+            <TextField label="Adress" size="small" variant="outlined" multiline rows={3}
             {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
           </div>
           {/* <div className="flex flex-col justify-center">
