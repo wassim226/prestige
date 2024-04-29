@@ -26,6 +26,7 @@ export default class BlogArticaleController extends BaseController {
     });
 
     this.createBlogArticale = this.createBlogArticale.bind(this);
+    this.getElement = this.getElement.bind(this);
     this.updateBlogArticale = this.updateBlogArticale.bind(this);
   }
 
@@ -52,25 +53,15 @@ export default class BlogArticaleController extends BaseController {
     return temp_BlogArticale;
   }
 
-  //   async getClaim(id) {
-  //     this.path += `/${id}`;
-  //     let claim = await this.send_request({ query_paramaters: "" });
-  //     if (claim) {
-  //       return ClaimModel(
-  //         claim.id,
-  //         claim.issuer,
-  //         claim.NIF,
-  //         claim.description,
-  //         claim.address,
-  //         claim.is_completed ? "fixed" : "unfixed",
-  //         claim.created_at.split("T")[0],
-  //         claim.phone
-  //       );
-  //     }
-  //   }
+  async getElement(id) {
+    this.path = `article/${id}`;
+    let articale = await this.send_request({ query_paramaters: "" });
+    if (articale) {
+      return articale;
+    }
+  }
 
   async createBlogArticale(json) {
-    // this.path += "/";
     let img_id = await BaseController.uploadFile(json["presentationImg"]);
     this.path = "content";
     let content_id = await this.send_request({

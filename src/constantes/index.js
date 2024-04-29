@@ -324,3 +324,18 @@ export async function adaptedJson(json) {
 
   return json;
 }
+
+export const getParsedData = (json, type) => {
+  switch (type) {
+    case "BlogArticaleController":
+      break;
+    case "ContactController":
+      break;
+    case "PageController":
+      break;
+    case "SpaController":
+      break;
+  }
+
+  return json;
+};

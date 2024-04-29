@@ -1,4 +1,8 @@
-import { adaptedJson, requiredImgValidator } from "../constantes";
+import {
+  adaptedJson,
+  optionalImgValidator,
+  requiredImgValidator,
+} from "../constantes";
 import BaseController from "./base_controller";
 import { string, z } from "zod";
 import { SpaModel } from "../models";
@@ -12,16 +16,25 @@ export default class SpaController extends BaseController {
     this.schema = z.object({
       title: string().min(1, "This field can not be blank"),
       description: string().min(1, "This field can not be blank"),
-      price: z.number(),
+      price: z.string().min(1, "This field can not be blank"),
       presentationImg: requiredImgValidator,
     });
 
+    this.updateSchema = z.object({
+      id: z.any(),
+      title: string().optional(),
+      description: string().optional(),
+      price: z.any().optional(),
+      presentationImg: optionalImgValidator,
+    });
+
+    this.createSpa = this.createSpa.bind(this);
     this.updateSpa = this.updateSpa.bind(this);
-    this.getSpa = this.getSpa.bind(this);
+    this.getElement = this.getElement.bind(this);
     this.getSpas = this.getSpas.bind(this);
   }
 
-  async getSpa(id) {
+  async getElement(id) {
     this.path = "spa/" + id;
     let res = await this.send_request({});
     if (res) {
@@ -39,41 +52,37 @@ export default class SpaController extends BaseController {
   }
 
   async createSpa(json) {
-    // this.path += "/";
-    // let img_id = await BaseController.uploadFile(json["presentationImg"]);
-    // this.path = "content";
-    // let content_id = await this.send_request({
-    //   method: "POST",
-    //   body: { content1: json.content },
-    // });
-    // if (content_id) {
-    //   json["presentationImg"] = img_id;
-    //   json["content"] = content_id.id;
-    //   console.log(json);
-    //   this.path = "article";
-    //   let articale = await this.send_request({
-    //     method: "POST",
-    //     body: json,
-    //   });
-    // }
-    // if (articale) {
-    //   return ArticaleModel(
-    //     articale.id,
-    //     articale.title,
-    //     articale.extPresentation,
-    //     articale.presentationImg,
-    //     articale.content,
-    //     articale.createdAt,
-    //     articale.comments
-    //   );
-    // }
+    this.path = "spa/";
+    let img_id = await BaseController.uploadFile(json["presentationImg"]);
+
+    if (img_id) {
+      json["presentationImg"] = img_id;
+      let spa = await this.send_request({
+        method: "POST",
+        body: json,
+      });
+      if (spa) {
+        return SpaModel(
+          spa.id,
+          spa.title,
+          spa.price,
+          spa.presentationImg,
+          spa.description
+        );
+      }
+    }
   }
 
   async updateSpa(json) {
     this.path = "spa/" + json.id;
-    console.log(json);
-    json = await adaptedJson(json);
-    console.log(json);
+    if (json.presentationImg.length == undefined) {
+      let img_id = await BaseController.uploadFile(json.presentationImg);
+      if (img_id) {
+        json.presentationImg = img_id;
+      }
+    } else {
+      json.presentationImg = -1;
+    }
 
     let res = await this.send_request({
       method: "PUT",

@@ -2,16 +2,14 @@ export default function SpaModel(
   id,
   title,
   price,
-  imgsOrder,
-  description,
-  attachSpas
+  presentationImg,
+  description
 ) {
   return {
     id,
     title,
     price,
-    imgsOrder,
+    presentationImg,
     description,
-    attachSpas,
   };
 }

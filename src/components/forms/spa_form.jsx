@@ -4,6 +4,13 @@ import { Save } from "@mui/icons-material";
 
 function SpaForm(props) {
   const {formRef, handleSubmit, register, errors, setValue, prev} = props;
+
+  const handelSave = ()=>{
+    formRef.current.dispatchEvent(
+      new Event("submit", { cancelable: true, bubbles: true })
+    );
+  } 
+
   return (
     <div className=" w-full h-[85vh] ">
         <Toolbar
@@ -22,7 +29,7 @@ function SpaForm(props) {
         </Typography>
         
         <Tooltip title={`Save`}>
-          <IconButton onClick={null}>
+          <IconButton onClick={handelSave}>
             <Save className='text-secondary' />
           </IconButton>
         </Tooltip>
@@ -34,7 +41,7 @@ function SpaForm(props) {
           {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
 
           <TextField label="Price" size="small" variant="outlined" type={"number"}
-          {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
+          {...register('price')} error={errors.price ? true : false} helperText={errors.price?.message}/>
         </div>
         <div className="flex flex-col justify-center">
           <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
@@ -53,7 +60,7 @@ function SpaForm(props) {
       </div>
       <div className="flex flex-row justify-center items-center">
         <TextField label="Details" size="small" variant="outlined" multiline rows={6} sx={{width: "52.5vw", marginTop: "20px"}}
-          {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
+          {...register('description')} error={errors.description ? true : false} helperText={errors.description?.message}/>
       </div>
     </form>
     </div>

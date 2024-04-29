@@ -10,7 +10,7 @@ export default class PageController extends BaseController {
     this.schema_ = null;
 
     this.updatePage = this.updatePage.bind(this);
-    this.getPage = this.getPage.bind(this);
+    this.getElement = this.getElement.bind(this);
     this.getPagesNames = this.getPagesNames.bind(this);
   }
 
@@ -22,7 +22,7 @@ export default class PageController extends BaseController {
     this.schema_ = sch;
   }
 
-  async getPage(name) {
+  async getElement(name) {
     this.path = "pages/" + name;
     let res = await this.send_request({});
     if (res) {

@@ -8,7 +8,7 @@ export default class ContactController extends BaseController {
     this.schema_ = null;
 
     this.updatePage = this.updatePage.bind(this);
-    this.getContact = this.getContact.bind(this);
+    this.getElement = this.getElement.bind(this);
     this.getContacts = this.getContacts.bind(this);
   }
 
@@ -20,7 +20,7 @@ export default class ContactController extends BaseController {
     this.schema_ = sch;
   }
 
-  async getContact(id) {
+  async getElement(id) {
     this.path = "contact/" + id;
     let res = await this.send_request({});
     if (res) {
