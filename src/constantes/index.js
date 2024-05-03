@@ -83,25 +83,25 @@ export const getPage = (id, controller) => {
   switch (id) {
     case "Home":
       page = HomePageForm;
-      controller.schema = z.object({
+      controller.updateSchema = z.object({
         name: string(),
-        extPresentation: string().min(1, "This field can not be blank"),
+        extPresentation: string().optional(),
         presentationImg: optionalImgValidator,
-        value_1: string().min(1, "This field can not be blank"),
-        desc_1: string().min(1, "This field can not be blank"),
-        value_2: string().min(1, "This field can not be blank"),
-        desc_2: string().min(1, "This field can not be blank"),
-        value_3: string().min(1, "This field can not be blank"),
-        desc_3: string().min(1, "This field can not be blank"),
-        value_4: string().min(1, "This field can not be blank"),
-        desc_4: string().min(1, "This field can not be blank"),
+        value_1: string().optional(),
+        desc_1: string().optional(),
+        value_2: string().optional(),
+        desc_2: string().optional(),
+        value_3: string().optional(),
+        desc_3: string().optional(),
+        value_4: string().optional(),
+        desc_4: string().optional(),
       });
       break;
     case "Landscape":
     case "Pool":
       LandscapePageForm.defaultProps = { isPool: id == "Pool" };
       page = LandscapePageForm;
-      controller.schema = z.object({
+      controller.updateSchema = z.object({
         name:
           id == "Pool"
             ? string().min(1, "This field can not be blank")
@@ -123,7 +123,7 @@ export const getPage = (id, controller) => {
       break;
     case "Spa":
       page = SpaPageForm;
-      controller.schema = z.object({
+      controller.updateSchema = z.object({
         name: string().min(1, "This field can not be blank"),
         title: string().min(1, "This field can not be blank"),
         extPresentation: string().min(1, "This field can not be blank"),
@@ -132,7 +132,7 @@ export const getPage = (id, controller) => {
       break;
     case "Water":
       page = WaterPageForm;
-      controller.schema = z.object({
+      controller.updateSchema = z.object({
         name: string().min(1, "This field can not be blank"),
         title: string().min(1, "This field can not be blank"),
         extPresentation: string().min(1, "This field can not be blank"),
@@ -154,7 +154,7 @@ export const getPage = (id, controller) => {
       break;
     case "Blog":
       page = BlogPageForm;
-      controller.schema = z.object({
+      controller.updateSchema = z.object({
         name: string().min(1, "This field can not be blank"),
         title: string().min(1, "This field can not be blank"),
         extPresentation: string().min(1, "This field can not be blank"),
@@ -163,7 +163,7 @@ export const getPage = (id, controller) => {
       break;
     case "Contact":
       page = ContactPageForm;
-      controller.schema = z.object({
+      controller.updateSchema = z.object({
         phone: string().min(1, "This field can not be blank"),
         adress: string().min(1, "This field can not be blank"),
         email: string().min(1, "This field can not be blank"),
@@ -325,17 +325,18 @@ export async function adaptedJson(json) {
   return json;
 }
 
-export const getParsedData = (json, type) => {
-  switch (type) {
-    case "BlogArticaleController":
-      break;
-    case "ContactController":
-      break;
-    case "PageController":
-      break;
-    case "SpaController":
-      break;
-  }
+export const getParsedData = (json) => {
+  console.log(json);
+  json = {
+    ...JSON.parse(json.head),
+    ...JSON.parse(json.sequance1),
+    ...JSON.parse(json.sequance2),
+    ...JSON.parse(json.sequance3),
+    ...JSON.parse(json.sequance4),
+    ...JSON.parse(json.sequance5),
+    ...JSON.parse(json.sequance6),
+  };
+  console.log(json);
 
   return json;
 };

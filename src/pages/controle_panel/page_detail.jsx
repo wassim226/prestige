@@ -12,7 +12,7 @@ function PageDetail() {
 
   return (
     <div>
-      <FormView View={getPage(id, controller)} controller={controller}
+      <FormView View={getPage(id, controller)} controller={controller} prev={id}
       request_method={controller.updatePage}/>
     </div>
   )

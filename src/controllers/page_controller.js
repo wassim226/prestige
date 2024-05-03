@@ -1,4 +1,4 @@
-import { adaptedJson } from "../constantes";
+import { adaptedJson, getParsedData } from "../constantes";
 import BaseController from "./base_controller";
 
 export default class PageController extends BaseController {
@@ -14,11 +14,11 @@ export default class PageController extends BaseController {
     this.getPagesNames = this.getPagesNames.bind(this);
   }
 
-  get schema() {
+  get updateSchema() {
     return this.schema_;
   }
 
-  set schema(sch) {
+  set updateSchema(sch) {
     this.schema_ = sch;
   }
 
@@ -26,7 +26,7 @@ export default class PageController extends BaseController {
     this.path = "pages/" + name;
     let res = await this.send_request({});
     if (res) {
-      return res;
+      return getParsedData(res);
     }
   }
 

@@ -2,10 +2,10 @@ import {useState, useRef, useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { Skeleton } from '@mui/material';
-import { getParsedData } from '../../constantes';
 
 function FormView(props) {
-  const {controller, prev} = props;
+  const {controller} = props;
+  const prev = props.prev == "Landscape" ? "conception" : props.prev.toLowerCase();
   const [data, setData] = useState("new");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +14,6 @@ function FormView(props) {
       const getData = async ()=>{
         console.log(prev);
         let prev_data = await controller.getElement(prev);
-        prev_data = getParsedData(prev_data, typeof controller);
         setData(()=> prev_data);
         setIsLoading(()=>false);
       }
@@ -45,7 +44,8 @@ function FormView(props) {
 function FormViewer(props){
   const {controller, request_method, View, data} = props;
   const formRef = useRef(null);
-  const {register, control, setValue, handleSubmit, reset, formState: {errors}} = useForm({defaultValues:data, resolver:zodResolver(data == "new" ? controller.schema : controller.updateSchema)});
+  console.log(data);
+  const {register, control, setValue, handleSubmit, reset, formState: {errors}, watch} = useForm({defaultValues:data, resolver:zodResolver(data == "new" ? controller.schema : controller.updateSchema)});
   
   const [error, setError] = useState(false);
 
@@ -59,10 +59,12 @@ function FormViewer(props){
         <View 
             formRef={formRef}
             setValue={setValue}
+            controller = {controller}
             control={control}
             prev={data}
             register={register} handleSubmit={handleSubmit(handelRequest)} reset={reset} 
             errors={errors}
+            watch={watch}
         />
     </div>
   )

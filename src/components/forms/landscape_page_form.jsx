@@ -1,13 +1,25 @@
-import {useState} from 'react';
-import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography} from '@mui/material';
+import {useState } from 'react';
+import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography, Skeleton} from '@mui/material';
 import { Save } from "@mui/icons-material";
 import {Controller} from "react-hook-form";
 import { landscape } from '../../constantes';
 import AsynchronousSelect from '../asynchrone_select';
 
 function LandscapePageForm(props) {
-    const {formRef, handleSubmit, register, errors, control, setValue, isPool} = props;
+    const {formRef, handleSubmit, register, errors, control, setValue, isPool, controller} = props;
+
     const [isLoading, setIsLoading] = useState(true);
+
+    const getData = async (name)=>{
+      let prev_data = await controller.getElement(name);
+      if(prev_data){
+        console.log(prev_data);
+        Object.keys(prev_data).map((key)=>{
+          setValue(key, prev_data[key]);
+        });
+      }
+      setIsLoading(()=>false);
+    }
 
     const handelSave = ()=>{
       if(isPool){
@@ -68,6 +80,10 @@ function LandscapePageForm(props) {
                 getOptionLabel: (option) => option.label,
                 onChange:( _event, item ) => {
                   onChange(item);
+                  setIsLoading(()=>true);
+                  if(item){
+                    getData(item.name);
+                  }
                 },
               }}  
 
@@ -86,6 +102,14 @@ function LandscapePageForm(props) {
           </div>
         </div></>
         }
+        {
+          isLoading 
+          ? <div className='flex flex-col  mt-20 mx-5'>
+              <Skeleton variant="rectangular" height={60} className='mb-5'/>
+              <Skeleton variant="rectangular" height={"60vh"}/>
+            </div>
+          :
+        <div>
         <div className='flex flex-col my-10'>
           <Typography variant="body2" gutterBottom color={"GrayText"} sx={{width: "60vw", marginLeft: "10vw"}}>Head</Typography>
           <Divider variant="middle" sx={{width: "60vw", marginLeft: "10vw"}}/>
@@ -93,9 +117,16 @@ function LandscapePageForm(props) {
         <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
           <div className="flex flex-col justify-evenly">
             <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
-            {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}/>
+            {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}
+            InputLabelProps={{
+              shrink: true
+            }}
+            />
   
             <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3}
+            InputLabelProps={{
+              shrink: true
+            }}
             {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
@@ -122,9 +153,15 @@ function LandscapePageForm(props) {
         <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
           <div className="flex flex-col justify-evenly">
             <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
+            InputLabelProps={{
+              shrink: true
+            }}
             {...register('bodyTitle')} error={errors.bodyTitle ? true : false} helperText={errors.bodyTitle?.message}/>
   
             <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3}
+            InputLabelProps={{
+              shrink: true
+            }}
             {...register('bodyPresentation')} error={errors.bodyPresentation ? true : false} helperText={errors.bodyPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
@@ -156,13 +193,17 @@ function LandscapePageForm(props) {
             return (
               <div key={"ser" + i} className='flex flex-col justify-center items-center '>
                 <TextField label={`Service 0${ind}`} size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}}
+                InputLabelProps={{
+                  shrink: true
+                }}
                 {...register("service_" + ind)} error={errors["service_" + ind] ? true : false} helperText={errors["service_" + ind]?.message}/>
                 <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
               </div>
             );
           })}
         </div>
-
+        </div>
+      }
       </form>
     </div>
     );
