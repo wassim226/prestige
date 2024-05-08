@@ -1,6 +1,6 @@
-import {useRef, useState} from "react";
+import {useRef, useState, useEffect} from "react";
 import { BlogArticaleController } from "../../controllers";
-import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography} from '@mui/material';
+import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography, Skeleton} from '@mui/material';
 import { Save } from "@mui/icons-material";
 import { FormView } from "../../components";
 import { useParams } from "react-router-dom";
@@ -33,14 +33,29 @@ function ArticaleForm(props) {
   const getDataFromEditor = ()=>{
     ifram.current.contentWindow.postMessage("get", "*");
   }
-
+  const setEditorData = ()=>{
+    let data = {content:JSON.parse(prev.contentNavigation.content1)};
+    ifram.current.contentWindow.postMessage(JSON.stringify(data), "*");
+  }
+  
+  useEffect(() => {
+    if(prev && ifram.current){
+      ifram.current.addEventListener("load", function() {
+        setEditorData();
+      });
+    }
+  }, []);
+  
   window.onmessage = function(e) {
-    setValue('content', e.data, { shouldValidate: true });
-    setValue('id', prev);
-    formRef.current.dispatchEvent(
-      new Event("submit", { cancelable: true, bubbles: true })
-    )
-    console.log(errors)
+    if(e.data == "updated"){
+    }else{
+      setValue('content', e.data, { shouldValidate: true });
+      setValue('id', prev);
+      formRef.current.dispatchEvent(
+        new Event("submit", { cancelable: true, bubbles: true })
+      )
+      console.log(errors)
+    }
   };
 
   return (
@@ -97,7 +112,7 @@ function ArticaleForm(props) {
     <Divider variant="middle" sx={{width: "50vw", marginLeft: "18vw", marginTop: "30px", marginBottom: "10px"}}/>
     <iframe ref={ifram} className='relative w-full h-full' src={`../../../build/index.html`}></iframe>
   </div>
-  );
+);
 }
 
 export default ArticaleDetail;

@@ -112,8 +112,11 @@ export default class BlogArticaleController extends BaseController {
         json["content"] = content_id.id;
       }
     }
-
+    if (typeof json.id == "object") {
+      json.id = json.id.id;
+    }
     this.path = "article/" + json.id;
+
     let articale = await this.send_request({
       method: "PUT",
       body: json,
