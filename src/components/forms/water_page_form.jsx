@@ -1,9 +1,10 @@
 import React from 'react';
 import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography} from '@mui/material';
 import { Save } from "@mui/icons-material";
+import UploadImage from '../controle_panel/upload_image';
 
 function WaterPageForm(props) {
-    const {formRef, handleSubmit, register, errors, setValue} = props;
+    const {formRef, handleSubmit, register, errors, setValue, prev} = props;
     const handelSave = ()=>{
       setValue('name',"water");
       formRef.current.dispatchEvent(
@@ -49,11 +50,7 @@ function WaterPageForm(props) {
             {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
-            <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("presentationImg", e.target.files[0])}} >
-              Upload Image
-              <input type="file" {...register('presentationImg')} className="hidden"/>
-            </Button>
+            <UploadImage setValue={setValue} dataKey={"presentationImg"} register={register} prev={prev}/>
             { errors.presentationImg && 
               <div className="flex flex-col text-red-600 justify-center items-center my-4">
                 {
@@ -78,11 +75,7 @@ function WaterPageForm(props) {
             {...register('bodyPresentation')} error={errors.bodyPresentation ? true : false} helperText={errors.bodyPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
-            <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("bodyImg", e.target.files[0])}} >
-              Upload Image
-              <input type="file" {...register('bodyImg')} className="hidden"/>
-            </Button>
+            <UploadImage setValue={setValue} dataKey={"bodyImg"} register={register} prev={prev}/>
             { errors.bodyImg && 
               <div className="flex flex-col text-red-600 justify-center items-center my-4">
                 {

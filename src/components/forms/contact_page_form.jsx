@@ -1,9 +1,10 @@
 import React from 'react';
 import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography} from '@mui/material';
 import { Save } from "@mui/icons-material";
+import UploadImage from '../controle_panel/upload_image';
 
 function ContactPageForm(props) {
-    const {formRef, handleSubmit, register, errors, setValue} = props;
+    const {formRef, handleSubmit, register, errors, setValue, prev} = props;
     const handelSave = ()=>{
       formRef.current.dispatchEvent(
         new Event("submit", { cancelable: true, bubbles: true })
@@ -53,12 +54,9 @@ function ContactPageForm(props) {
             <TextField label="Adress" size="small" variant="outlined" multiline rows={3}
             {...register('adress')} error={errors.adress ? true : false} helperText={errors.adress?.message}/>
           </div>
-          {/* <div className="flex flex-col justify-center">
-            <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("presentationImg", e.target.files[0])}} >
-              Upload Background Image
-              <input type="file" {...register('presentationImg')} className="hidden"/>
-            </Button>
+          {/* 
+          <div className="flex flex-col justify-center">
+          <UploadImage setValue={setValue} dataKey={"presentationImg"} register={register} prev={prev}/>
             { errors.presentationImg && 
               <div className="flex flex-col text-red-600 justify-center items-center my-4">
                 {

@@ -24,6 +24,7 @@ import Notification from "./controle_panel/notification";
 import DataGridView from "./controle_panel/data_grid_view";
 import PageCard from "./controle_panel/page_card";
 import DataTable from "./controle_panel/data_table";
+import UploadImage from "./controle_panel/upload_image";
 import FormView from "./forms/form_view";
 import HomePageForm from "./forms/home_page_form";
 import LandscapePageForm from "./forms/landscape_page_form";
@@ -66,4 +67,5 @@ export {
   BlogPageForm,
   ContactPageForm,
   WaterPageForm,
+  UploadImage,
 };

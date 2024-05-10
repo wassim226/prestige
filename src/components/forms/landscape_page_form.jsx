@@ -4,9 +4,10 @@ import { Save } from "@mui/icons-material";
 import {Controller} from "react-hook-form";
 import { landscape } from '../../constantes';
 import AsynchronousSelect from '../asynchrone_select';
+import UploadImage from '../controle_panel/upload_image';
 
 function LandscapePageForm(props) {
-    const {formRef, handleSubmit, register, errors, control, setValue, isPool, controller} = props;
+    const {formRef, handleSubmit, register, errors, control, setValue, isPool, controller, prev} = props;
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -130,11 +131,7 @@ function LandscapePageForm(props) {
             {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
-            <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("presentationImg", e.target.files[0])}} >
-              Upload Image
-              <input type="file" {...register('presentationImg')} className="hidden"/>
-            </Button>
+            <UploadImage setValue={setValue} dataKey={"presentationImg"} register={register} prev={prev}/>
             { errors.presentationImg && 
               <div className="flex flex-col text-red-600 justify-center items-center my-4">
                 {
@@ -165,11 +162,7 @@ function LandscapePageForm(props) {
             {...register('bodyPresentation')} error={errors.bodyPresentation ? true : false} helperText={errors.bodyPresentation?.message}/>
           </div>
           <div className="flex flex-col justify-center">
-            <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-              setValue("bodyImg", e.target.files[0])}} >
-              Upload Image
-              <input type="file" {...register('bodyImg')} className="hidden"/>
-            </Button>
+            <UploadImage setValue={setValue} dataKey={"bodyImg"} register={register} prev={prev}/>
             { errors.bodyImg && 
               <div className="flex flex-col text-red-600 justify-center items-center my-4">
                 {

@@ -64,8 +64,6 @@ export default class BaseController {
       this.setError(() => {
         return { code: 1, message: e };
       });
-    } finally {
-      console.log("finaly block");
     }
   }
 
@@ -124,6 +122,31 @@ export default class BaseController {
         console.log("aborted");
       }
       console.error("File upload failed: ", e);
+    }
+  }
+
+  static async getFile(fileId) {
+    try {
+      const res = await fetch(`${BaseController.BASE_URL}/files/${fileId}`, {
+        // signal: this.abortController.current?.signal,
+        // headers: params.headers ?? {
+        //   Accept: "application/json",
+        //   "Content-Type": "application/json",
+        //   Authorization: "Bearer " + BaseController.#ACCESSTOKEN,
+        // },
+        method: "GET",
+      });
+
+      if (res.status == 200) {
+        return await res.blob();
+      } else {
+        throw Error("File download failed.");
+      }
+    } catch (e) {
+      if (e.name == "AbortError") {
+        console.log("aborted");
+      }
+      console.error("File download failed: ", e);
     }
   }
 }

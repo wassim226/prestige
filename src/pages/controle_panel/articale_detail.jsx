@@ -2,7 +2,7 @@ import {useRef, useState, useEffect} from "react";
 import { BlogArticaleController } from "../../controllers";
 import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography, Skeleton} from '@mui/material';
 import { Save } from "@mui/icons-material";
-import { FormView } from "../../components";
+import { FormView, UploadImage } from "../../components";
 import { useParams } from "react-router-dom";
 
 
@@ -57,7 +57,7 @@ function ArticaleForm(props) {
       console.log(errors)
     }
   };
-
+  
   return (
   <div className=" w-full h-[85vh] ">
     <Toolbar
@@ -93,13 +93,7 @@ function ArticaleForm(props) {
           
           <input type="text" readOnly className="hidden" {...register('content')}/>
         </div>
-        <div className="flex flex-col justify-center">
-          <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-            setValue("presentationImg", e.target.files[0])}} >
-            Upload Image
-            <input type="file" {...register('presentationImg')} className="hidden"/>
-          </Button>
-        </div>
+        <UploadImage setValue={setValue} dataKey={"presentationImg"} register={register} prev={prev}/>
       </div>
       { (errors.content || errors.presentationImg) && 
         <div className="flex flex-col text-red-600 justify-center items-center my-4">

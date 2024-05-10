@@ -1,6 +1,7 @@
 import {useRef, useState} from "react";
 import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography} from '@mui/material';
 import { Save } from "@mui/icons-material";
+import UploadImage from "../controle_panel/upload_image";
 
 function SpaForm(props) {
   const {formRef, handleSubmit, register, errors, setValue, prev} = props;
@@ -44,11 +45,7 @@ function SpaForm(props) {
           {...register('price')} error={errors.price ? true : false} helperText={errors.price?.message}/>
         </div>
         <div className="flex flex-col justify-center">
-          <Button variant="contained" component="label" sx={{height: "50%", margin: "auto"}} onChange={(e)=>{
-            setValue("presentationImg", e.target.files[0])}} >
-            Upload Image
-            <input type="file" {...register('presentationImg')} className="hidden"/>
-          </Button>
+        <UploadImage setValue={setValue} dataKey={"presentationImg"} register={register} prev={prev}/>
           {errors.presentationImg && 
             <div className="flex flex-col text-red-600 justify-center items-center my-4">
               {
