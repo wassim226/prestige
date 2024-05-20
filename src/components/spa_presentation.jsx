@@ -1,8 +1,7 @@
 import { Typography } from '@mui/material';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import MyImage from './my_image';
-import { Pool2 } from '../assets';
 
 function SpaPresentation(props) {
     const {presentationImg, title, description, price, mode, id} = props.spa;
@@ -12,11 +11,12 @@ function SpaPresentation(props) {
     const [in_2nd_half, setIn2ndHalf] = useState(false);
     const navigate = useNavigate();
     const img = useRef(null);
+    const [imgSrc, setImgSrc] = useState(null);
+
     useEffect(() => {
-      
       const handel_move_on_image = ((evt)=>{
-        // console.log(window.screen.availWidth, "\n", img.current.getBoundingClientRect().x);
-        console.log(img.current.getChildren[0]);
+        setImgSrc(()=> img.current.firstChild.firstChild.firstChild.src);
+
         if(img.current.getBoundingClientRect().x >= window.screen.availWidth/2){
           setIn2ndHalf((prev)=>true);
         }
@@ -34,13 +34,11 @@ function SpaPresentation(props) {
   return (
     <div className='flex flex-col justify-center items-center max-w-[200px]'>
         <div  className={`relative flex flex-col justify-center items-center `} >
-            
             <div ref={img} onClick={()=>{mode != "edit" ? setShow_detail((prev)=> !prev) : navigate(`detail/${id}`)}} onMouseOut={()=>{setIsHovred((prev)=> false)}} onMouseOver={()=>{setIsHovred((prev)=> true)}} className='w-[200px] h-[auto] cursor-pointer'>
-              {/* <img className='w-full h-full relative rounded-md' src={image}/> */}
               <MyImage id={presentationImg} className='w-full h-full relative rounded-md'/>
             </div>
             
-            {mode != "edit" && <div className={`${isHovred ? 'block' : 'hidden'}`} style={{
+            {(mode != "edit" && imgSrc != null)  && <div className={`${isHovred ? 'block' : 'hidden'} min-h-[350px]`} style={{
                 marginBottom: "50px",
                 zIndex:2,
                 position: "absolute",
@@ -50,7 +48,7 @@ function SpaPresentation(props) {
                 height:"350px",
              backgroundRepeat: "no-repeat",
              backgroundSize: "700px 700px",
-             backgroundImage:`url('${Pool2}')`,
+             backgroundImage:`url('${imgSrc}')`,
              backgroundPosition: (position[0]) + "px " + (position[1]) + "px",
             }}>
               <div className={`absolute ${show_detail ? 'flex' : 'hidden'} flex-col w-full h-full justify-center items-start bg-dimSecondary`}>

@@ -38,12 +38,7 @@ import { PageController, SpaController } from '../controllers';
 //       "Design unique, finitions alu leds",
 //     ]
 //   }
-
 // ];
-// const all_spas = [];
-// for(let i = 0; i<45; i++){
-//   all_spas.push(spas[Math.random() >= 0.5 ? 1 : 0]);
-// }
 
 function Spa() {
   const [serverError, setServerError] = useState(null);
@@ -89,7 +84,7 @@ function Spa() {
         description={data.extPresentation} //{default_description}
         // flip={true}
       />
-      <ImageList variant="woven" gap={8} cols={4} className='relative w-[80%] mt-10'>
+      <ImageList variant="woven" gap={8} cols={4} className='relative w-[80%] mt-10 mb-20'>
         {
           spaData.map((val, index)=> 
           <ImageListItem key={"prod_" + index} className='flex justify-center items-center'>
