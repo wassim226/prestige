@@ -1,5 +1,5 @@
 import React from 'react'
-import {ServiceIcon} from "../components";
+import {MyImage, ServiceIcon} from "../components";
 import {Typography } from '@mui/material';
 
 function Presentation(props) {
@@ -8,7 +8,7 @@ function Presentation(props) {
     <section className={`flex flex-col justify-center w-[100vw] my-32`}>
             <div className={`flex flex-row${ Math.random() >= 0.5 ? "-reverse" : ""} w-full items-center`}>
                 <div className={`w-[40%] mx-auto`}>
-                    <img src={image} className='rounded-md'/>
+                  <MyImage id={image} className='rounded-md'/>
                 </div>
                 <div className={`flex flex-col justify-start items-center w-[50vw]`}>
                     <Typography gutterBottom variant='h4' sx={{fontWeight: 400}} className='text-primary w-[50%]'>

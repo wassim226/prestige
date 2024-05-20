@@ -6,7 +6,7 @@ import { Navigation } from '../components';
 function Layout() {
   return (
     <div className={`flex flex-col justify-start items-center`}>
-        <div id='header' className={`flex flex-row justify-between items-center w-full h-[10vh] text-dimWhite bg-darkSecondary`}>
+        <div id='header' className={`flex flex-row justify-between items-center z-50 w-full h-[10vh] text-dimWhite bg-darkSecondary`}>
             <div className="ml-[5vw]"></div>
             <Navigation/>
         </div>

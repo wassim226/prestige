@@ -1,4 +1,4 @@
-import {useState } from 'react';
+import {useEffect, useState } from 'react';
 import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography, Skeleton} from '@mui/material';
 import { Save } from "@mui/icons-material";
 import {Controller} from "react-hook-form";
@@ -29,7 +29,14 @@ function LandscapePageForm(props) {
       formRef.current.dispatchEvent(
         new Event("submit", { cancelable: true, bubbles: true })
       );
-    } 
+    }
+
+    useEffect(() => {
+      if(isPool){
+        getData("pool");
+      }
+    }, []);
+    
   
     return (
     <div className=" w-full h-[85vh] ">

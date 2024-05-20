@@ -13,6 +13,7 @@ import ArticlePreview from "./article_preview";
 import BlogArticale from "./blog_articale";
 import ArticaleHead from "./articale_head";
 import AsynchronousSelect from "./asynchrone_select";
+import MyImage from "./my_image";
 
 // controle panel
 import ControleNavigation from "./controle_panel/controle_navigation";
@@ -68,4 +69,5 @@ export {
   ContactPageForm,
   WaterPageForm,
   UploadImage,
+  MyImage,
 };

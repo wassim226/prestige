@@ -1,9 +1,11 @@
 import { Typography } from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
 import { useNavigate } from "react-router-dom";
+import MyImage from './my_image';
+import { Pool2 } from '../assets';
 
 function SpaPresentation(props) {
-    const {image, title, details, price, mode, id} = props.spa;
+    const {presentationImg, title, description, price, mode, id} = props.spa;
     const [position, setPosition] = useState([0,0]);
     const [isHovred, setIsHovred] = useState(false);
     const [show_detail, setShow_detail] = useState(false);
@@ -14,6 +16,7 @@ function SpaPresentation(props) {
       
       const handel_move_on_image = ((evt)=>{
         // console.log(window.screen.availWidth, "\n", img.current.getBoundingClientRect().x);
+        console.log(img.current.getChildren[0]);
         if(img.current.getBoundingClientRect().x >= window.screen.availWidth/2){
           setIn2ndHalf((prev)=>true);
         }
@@ -25,12 +28,7 @@ function SpaPresentation(props) {
           evt.offsetY * (-350 / img.current.offsetHeight)
         ]);
       });
-
-    
       img.current.addEventListener("mousemove", handel_move_on_image);
-
-      return () => {
-      }
     }, []);
     
   return (
@@ -38,7 +36,8 @@ function SpaPresentation(props) {
         <div  className={`relative flex flex-col justify-center items-center `} >
             
             <div ref={img} onClick={()=>{mode != "edit" ? setShow_detail((prev)=> !prev) : navigate(`detail/${id}`)}} onMouseOut={()=>{setIsHovred((prev)=> false)}} onMouseOver={()=>{setIsHovred((prev)=> true)}} className='w-[200px] h-[auto] cursor-pointer'>
-              <img className='w-full h-full relative rounded-md' src={image}/>
+              {/* <img className='w-full h-full relative rounded-md' src={image}/> */}
+              <MyImage id={presentationImg} className='w-full h-full relative rounded-md'/>
             </div>
             
             {mode != "edit" && <div className={`${isHovred ? 'block' : 'hidden'}`} style={{
@@ -51,14 +50,14 @@ function SpaPresentation(props) {
                 height:"350px",
              backgroundRepeat: "no-repeat",
              backgroundSize: "700px 700px",
-             backgroundImage:`url('${image}')`,
+             backgroundImage:`url('${Pool2}')`,
              backgroundPosition: (position[0]) + "px " + (position[1]) + "px",
             }}>
               <div className={`absolute ${show_detail ? 'flex' : 'hidden'} flex-col w-full h-full justify-center items-start bg-dimSecondary`}>
                 <div className={`text-primary text-center w-full mx-auto my-8 text-xl`}>{title}</div>
                 <div className={`text-white ml-5`}>
                   {
-                    details.map((detail, ind)=><Typography key={"spa_dtl_" + ind}>{detail}</Typography>)
+                    description.split("\n").map((detail, ind)=><Typography key={"spa_dtl_" + ind}>{detail}</Typography>)
                   }
                 </div>
               </div>
