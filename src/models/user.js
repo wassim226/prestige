@@ -1,4 +1,4 @@
-export default function UserModel(
+export default function UserModel({
   id,
   email,
   password,
@@ -6,8 +6,8 @@ export default function UserModel(
   lastName,
   role,
   phone,
-  createdAt
-) {
+  createdAt,
+}) {
   return {
     id,
     email,

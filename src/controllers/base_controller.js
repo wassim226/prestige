@@ -40,7 +40,7 @@ export default class BaseController {
           headers: params.headers ?? {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // Authorization: "Bearer " + BaseController.#ACCESSTOKEN,
+            Authorization: "Bearer " + BaseController.#ACCESSTOKEN,
           },
           method: params.method ?? "GET",
           body: JSON.stringify(params.body),
@@ -55,7 +55,7 @@ export default class BaseController {
         return await res.json();
       }
 
-      // this.setError(()=>res.status); //{return {code : res.status, message : res.statusText}}
+      this.setError(() => res.status); //{return {code : res.status, message : res.statusText}}
     } catch (e) {
       if (e.name == "AbortError") {
         console.log("aborted");
@@ -83,17 +83,6 @@ export default class BaseController {
       console.log(e);
       return false;
     }
-  }
-
-  static async checkAuthenticated() {
-    let stored_token = window.localStorage.getItem("access");
-    if (stored_token != null) {
-      if (await this.isNotExpired(stored_token)) {
-        BaseController.#ACCESSTOKEN = stored_token;
-        return true;
-      }
-    }
-    return false;
   }
 
   static async uploadFile(file) {

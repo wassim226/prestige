@@ -6,7 +6,7 @@ import Pool4 from "./images/piscine3.jpg";
 import PureWater from "./images/water.jpg";
 import PureWater1 from "./images/water1.jpg";
 import BlogBackground from "./images/blog_background.jpeg";
-import Logo from "./images/hexagone.png";
+import Logo from "./images/logo.png";
 
 export {
   Background,

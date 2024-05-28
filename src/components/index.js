@@ -34,6 +34,8 @@ import WaterPageForm from "./forms/water_page_form";
 import BlogPageForm from "./forms/blog_page_form";
 import ContactPageForm from "./forms/contact_page_form";
 import SpaForm from "./forms/spa_form";
+import PasswordInput from "./password_input";
+import UserMenu from "./menus/user_menu";
 
 export {
   Navigation,
@@ -70,4 +72,6 @@ export {
   WaterPageForm,
   UploadImage,
   MyImage,
+  PasswordInput,
+  UserMenu,
 };

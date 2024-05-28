@@ -21,7 +21,7 @@ export default class ContactController extends BaseController {
   }
 
   async getElement(id) {
-    this.path = "contact/" + id;
+    this.path = "contact/0";
     let res = await this.send_request({});
     if (res) {
       return res;
