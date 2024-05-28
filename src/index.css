@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.background-image {
+/* .background-image {
   background-image: url("/src/assets/images/background.jpg");
   background-position-x: left;
   background-position-y: bottom;
-}
+} */
 
 .background-image-contact {
   background-image: url(/src/assets/images/background2.jpg);
   background-position-x: right;
   background-position-y: center;
 }
-
+/* 
 .background-landscape {
   background-repeat: no-repeat;
   background-size: cover;
@@ -35,15 +35,15 @@
 .spa_background {
   background-image: url(/src/assets/images/spa.jpg);
   transform: scaleX(-1);
-}
+} */
 
 .water_background {
   background-image: url(/src/assets/images/water.jpg);
 }
-
+/* 
 .blog_background {
   background-image: url(/src/assets/images/background1.jpg);
-}
+} */
 
 div.sub-menu > div:nth-child(3) > ul {
   background-color: #151f33;

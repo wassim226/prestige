@@ -1,9 +1,7 @@
-import {useState, useEffect, useRef} from 'react';
-import { MyPagination, SpaPresentation, ArticaleHead } from '../components';
-import { ImageList, ImageListItem, Skeleton } from '@mui/material';
-import { Pool3, Pool4 } from '../assets';
-import { default_description } from '../constantes';
-import { PageController, SpaController } from '../controllers';
+import { useState, useEffect, useRef } from "react";
+import { MyPagination, SpaPresentation, ArticaleHead } from "../components";
+import { ImageList, ImageListItem, Skeleton } from "@mui/material";
+import { PageController, SpaController } from "../controllers";
 
 // const spas = [
 //   {
@@ -49,55 +47,69 @@ function Spa() {
   const controller = new PageController(abortController, setServerError);
   const spaController = new SpaController(abortController, setServerError);
 
-  const getApiData = async (name)=>{
+  const getApiData = async (name) => {
     const res = await controller.getElement(name);
     const spas = await spaController.getSpas();
 
-    if(res){
-      console.log(res)
-      setData(()=> res);
+    if (res) {
+      console.log(res);
+      setData(() => res);
     }
-    if(spas){
-      console.log(spas)
-      setSpasData(()=>spas);
+    if (spas) {
+      console.log(spas);
+      setSpasData(() => spas);
     }
-    setLoading(()=>false);
-  };  
+    setLoading(() => false);
+  };
 
   useEffect(() => {
     getApiData("spa");
   }, []);
 
   return (
-    <div className='flex flex-col justify-start items-center w-[100vw]'>
-      {
-        loading 
-        ? <div className='flex flex-col my-20 mx-5 w-[80vw]'>
-            <Skeleton variant="rectangular" height={60} className='mb-5' sx={{backgroundColor: "#4FD38A"}}/>
-            <Skeleton variant="rectangular" height={"60vh"} sx={{backgroundColor: "#4FD38A"}}/>
-          </div>
-        :
+    <div className="flex flex-col justify-start items-center w-[100vw]">
+      {loading ? (
+        <div className="flex flex-col my-20 mx-5 w-[80vw]">
+          <Skeleton
+            variant="rectangular"
+            height={60}
+            className="mb-5"
+            sx={{ backgroundColor: "#4FD38A" }}
+          />
+          <Skeleton
+            variant="rectangular"
+            height={"60vh"}
+            sx={{ backgroundColor: "#4FD38A" }}
+          />
+        </div>
+      ) : (
         <>
-      <ArticaleHead 
-        background_class={data.presentationImg} //{"background-landscape spa_background"} 
-        title={data.title.toUpperCase()} //{"SPAS GAMME PRESTIGE"} 
-        description={data.extPresentation} //{default_description}
-        // flip={true}
-      />
-      <ImageList variant="woven" gap={8} cols={4} className='relative w-[80%] mt-10 mb-20'>
-        {
-          spaData.map((val, index)=> 
-          <ImageListItem key={"prod_" + index} className='flex justify-center items-center'>
-            <SpaPresentation spa={val} key={"spa_wdt_" + index}/>
-          </ImageListItem>
-          )
-        }
-      </ImageList>
-      <MyPagination path={"spa"} />
-      </>
-      }
+          <ArticaleHead
+            background_class={data.presentationImg} //{"background-landscape spa_background"}
+            title={data.title.toUpperCase()} //{"SPAS GAMME PRESTIGE"}
+            description={data.extPresentation} //{default_description}
+            // flip={true}
+          />
+          <ImageList
+            variant="woven"
+            gap={8}
+            cols={4}
+            className="relative w-[80%] mt-10 mb-20"
+          >
+            {spaData.map((val, index) => (
+              <ImageListItem
+                key={"prod_" + index}
+                className="flex justify-center items-center"
+              >
+                <SpaPresentation spa={val} key={"spa_wdt_" + index} />
+              </ImageListItem>
+            ))}
+          </ImageList>
+          <MyPagination path={"spa"} />
+        </>
+      )}
     </div>
-  ); 
+  );
 }
 
-export default Spa
+export default Spa;
