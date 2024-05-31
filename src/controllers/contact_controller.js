@@ -1,4 +1,3 @@
-import { adaptedJson } from "../constantes";
 import BaseController from "./base_controller";
 
 export default class ContactController extends BaseController {

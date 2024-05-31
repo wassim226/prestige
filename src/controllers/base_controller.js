@@ -29,9 +29,9 @@ export default class BaseController {
   async send_request(params) {
     // this.abortController.current?.abort();
     // this.abortController.current = new AbortController();
-
+    let res;
     try {
-      const res = await fetch(
+      res = await fetch(
         `${BaseController.BASE_URL}/${this.path}?${
           params.query_paramaters ?? ""
         }`,
@@ -48,19 +48,20 @@ export default class BaseController {
       );
 
       if (res.ok) {
-        // if (this.path != "token")
-        //   this.setError(() => {
-        //     return { code: null, message: null };
-        //   });
-        return await res.json();
+        let json = await res.json();
+        if (json) {
+          return json;
+        }
       }
 
       this.setError(() => res.status); //{return {code : res.status, message : res.statusText}}
     } catch (e) {
+      if (e.name == "SyntaxError" && res.ok) {
+        return res.ok;
+      }
       if (e.name == "AbortError") {
         console.log("aborted");
       }
-
       this.setError(() => {
         return { code: 1, message: e };
       });

@@ -12,6 +12,6 @@ export default function MessageModel(
     message,
     senderStName,
     senderLstName,
-    createdAt,
+    createdAt: createdAt.split("T")[0],
   };
 }

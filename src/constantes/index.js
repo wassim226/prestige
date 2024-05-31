@@ -167,7 +167,7 @@ export const getPage = (id, controller) => {
         phone: string().min(1, "This field can not be blank"),
         adress: string().min(1, "This field can not be blank"),
         email: string().min(1, "This field can not be blank"),
-        password: string().min(1, "This field can not be blank"),
+        // password: string().min(1, "This field can not be blank"),
       });
       break;
   }

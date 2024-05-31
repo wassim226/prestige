@@ -1,51 +1,84 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect, useRef } from "react";
 import { DataTable } from "../../components";
 import { MessageModel } from "../../models";
-import { default_description } from "../../constantes";
+import { MessageController } from "../../controllers";
+import { Backdrop, CircularProgress } from "@mui/material";
 
 function ControleMessage() {
-  const [rows, setRows] = useState([MessageModel(1, "wassim@test.com", default_description, "Wassim", "Benatia", "2024-04-12")]);
+  const [serverError, setServerError] = useState(null);
+  const abortController = useRef(null);
+  const message_controller = new MessageController(
+    abortController,
+    setServerError
+  );
+  const [loading, setLoading] = useState(true);
+
+  const [rows, setRows] = useState([]);
   const [filters, setFilters] = useState(false);
-  const _ = (va)=>{return va};
+  const _ = (va) => {
+    return va;
+  };
   const headCells = [
     {
-      id: 'sender',
+      id: "sender",
       string: true,
       label: _("sender"),
     },
     {
-      id: 'message',
+      id: "message",
       string: true,
       label: _("message"),
     },
-    // {
-    //   id: 'name',
-    //   label: _("Name"),
-    //   string: true,
-    // },
     {
-      id: 'createdAt',
+      id: "createdAt",
       label: _("createdAt"),
       string: true,
     },
   ];
 
-  useEffect(() => {
-    setRows(()=> [
-      MessageModel(1, "wassim@test.com", default_description, "Wassim", "Benatia", "2024-04-12")
-    ]);
-  
-  }, []);
-  
+  const getData = async () => {
+    setLoading(() => true);
+    let res = await message_controller.getMessages();
+    if (res) {
+      const data = res.map((val) =>
+        MessageModel(
+          val.id,
+          val.sender,
+          val.message1,
+          val.senderStName,
+          val.senderLstName,
+          val.createdAt
+        )
+      );
+      setRows(() => data);
+    }
+    setLoading(() => false);
+  };
 
-  return <div>
-    <DataTable
-        title={"Messages"}
-        data={{rows, headCells}}
-        filters={filters} setFilters={setFilters}
-        handelAddItem={null}
-      />
-  </div>;
+  useEffect(() => {
+    getData();
+  }, []);
+
+  return (
+    <div>
+      {loading ? (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      ) : (
+        <DataTable
+          title={"Messages"}
+          data={{ rows, headCells }}
+          filters={filters}
+          setFilters={setFilters}
+          handelAddItem={null}
+        />
+      )}
+    </div>
+  );
 }
 
 export default ControleMessage;
