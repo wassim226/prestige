@@ -46,6 +46,7 @@ function Contact() {
   const [loading, setLoading] = useState(true);
   const [loadingPost, setLoadingPost] = useState(false);
   const [data, setData] = useState(null);
+  const [WIDTH, setWidth] = useState(window.innerWidth);
   const {
     register,
     handleSubmit,
@@ -66,6 +67,11 @@ function Contact() {
 
   useEffect(() => {
     getApiData();
+    const resize = () => {
+      setWidth(() => window.innerWidth);
+    };
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
   const handelMessage = async (values) => {
@@ -92,22 +98,68 @@ function Contact() {
       <div className="absolute w-full h-[90vh] bg-dimSecondary flex flex-col justify-center items-center">
         <ThemeProvider theme={theme}>
           <form onSubmit={handleSubmit(handelMessage)}>
-            <Paper className="py-20 pl-20 pr-52">
+            <Paper className="p-5 m-10 md:m-0 md:py-20 md:pl-20 md:pr-52">
               <Typography
                 gutterBottom
                 variant="h4"
                 sx={{ fontWeight: 550 }}
-                className="text-primary"
+                className="text-primary text-center"
               >
                 CONTACTER NOUS
               </Typography>
+              <div className="flex md:hidden flex-col justify-center items-center w-full h-auto py-5">
+                <div className="flex flex-row justify-start items-center w-full h-10 pl-4">
+                  <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
+                    <Phone sx={{ fontSize: "24px" }} />
+                  </div>
+                  <Typography
+                    className="w-[60%] "
+                    sx={{ marginRight: "10px", marginTop: "10px" }}
+                  >
+                    {loading ? (
+                      <Skeleton
+                        variant="rectangular"
+                        height={20}
+                        className="mb-5"
+                        sx={{ backgroundColor: "#4FD38A" }}
+                      />
+                    ) : (
+                      data.phone
+                    )}
+                  </Typography>
+                </div>
+                <div className="flex flex-row justify-start items-center w-full h-10 mt-5 pl-4">
+                  <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
+                    <LocationOn sx={{ fontSize: "24px" }} />
+                  </div>
+                  <Typography
+                    className="w-[60%] "
+                    sx={{ marginRight: "10px", marginTop: "10px" }}
+                  >
+                    {loading ? (
+                      <Skeleton
+                        variant="rectangular"
+                        height={20}
+                        className="mb-5"
+                        sx={{ backgroundColor: "#4FD38A" }}
+                      />
+                    ) : (
+                      data.adress
+                    )}
+                  </Typography>
+                </div>
+              </div>
               <div className="flex flex-col justify-start items-left">
-                <div className="flex flex-row justify-between my-5">
+                <div className="flex flex-col w-full md:flex-row justify-center items-center md:justify-between md:my-5">
                   <TextField
                     label="Nom"
                     variant="outlined"
                     size="small"
-                    sx={{ marginRight: "20px" }}
+                    sx={{
+                      marginRight: WIDTH >= 1060 ? "20px" : "0px",
+                      marginBottom: WIDTH >= 1060 ? "0px" : "20px",
+                    }}
+                    className="w-full md:w-auto"
                     {...register("senderStName")}
                     error={errors.senderStName ? true : false}
                     helperText={errors.senderStName?.message}
@@ -117,6 +169,10 @@ function Contact() {
                     variant="outlined"
                     size="small"
                     {...register("senderLstName")}
+                    sx={{
+                      marginBottom: WIDTH >= 1060 ? "0px" : "20px",
+                    }}
+                    className="w-full md:w-auto"
                     error={errors.senderLstName ? true : false}
                     helperText={errors.senderLstName?.message}
                   />
@@ -141,57 +197,53 @@ function Contact() {
                   helperText={errors.message1?.message}
                 />
               </div>
-              <Paper className="absolute w-[20vw] h-[40vh] top-20 right-48 flex flex-col justify-center items-start">
-                <div className="flex flex-col justify-start items-start w-full mx-2 mb-5">
-                  <div className="flex flex-row justify-start items-center w-full h-10">
-                    <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
-                      <Phone sx={{ fontSize: "24px" }} />
-                    </div>
-                    <Typography
-                      className="w-[60%] "
-                      sx={{ marginRight: "10px", marginTop: "10px" }}
-                    >
-                      {loading ? (
-                        <Skeleton
-                          variant="rectangular"
-                          height={20}
-                          className="mb-5"
-                          sx={{ backgroundColor: "#4FD38A" }}
-                        />
-                      ) : (
-                        data.phone
-                      )}
-                    </Typography>
+              <Paper className="absolute w-[20vw] h-[40vh] top-20 right-48 hidden md:flex flex-col justify-center items-start">
+                <div className="flex flex-row justify-start items-center w-full h-10 mt-10 pl-4">
+                  <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
+                    <Phone sx={{ fontSize: "24px" }} />
                   </div>
+                  <Typography
+                    className="w-[60%] "
+                    sx={{ marginRight: "10px", marginTop: "10px" }}
+                  >
+                    {loading ? (
+                      <Skeleton
+                        variant="rectangular"
+                        height={20}
+                        className="mb-5"
+                        sx={{ backgroundColor: "#4FD38A" }}
+                      />
+                    ) : (
+                      data.phone
+                    )}
+                  </Typography>
                 </div>
-                <div className="flex flex-col justify-start items-start w-full mx-2">
-                  <div className="flex flex-row justify-start items-center w-full h-10">
-                    <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
-                      <LocationOn sx={{ fontSize: "24px" }} />
-                    </div>
-                    <Typography
-                      className="w-[60%] "
-                      sx={{ marginRight: "10px", marginTop: "10px" }}
-                    >
-                      {loading ? (
-                        <Skeleton
-                          variant="rectangular"
-                          height={20}
-                          className="mb-5"
-                          sx={{ backgroundColor: "#4FD38A" }}
-                        />
-                      ) : (
-                        data.adress
-                      )}
-                    </Typography>
+                <div className="flex flex-row justify-start items-center w-full h-10 mt-10 pl-4">
+                  <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
+                    <LocationOn sx={{ fontSize: "24px" }} />
                   </div>
+                  <Typography
+                    className="w-[60%] "
+                    sx={{ marginRight: "10px", marginTop: "10px" }}
+                  >
+                    {loading ? (
+                      <Skeleton
+                        variant="rectangular"
+                        height={20}
+                        className="mb-5"
+                        sx={{ backgroundColor: "#4FD38A" }}
+                      />
+                    ) : (
+                      data.adress
+                    )}
+                  </Typography>
                 </div>
               </Paper>
             </Paper>
             <div className="flex flex-row justify-center w-full items-center">
               <button
                 type="submit"
-                className="border-2 rounded mt-8 border-primary bg-transparent text-primary py-2 px-8 mr-32 hover:bg-primary hover:text-secondary"
+                className="border-2 rounded mt-8 border-primary bg-transparent text-primary py-2 px-8 md:mr-32 hover:bg-primary hover:text-secondary"
               >
                 SEND
               </button>

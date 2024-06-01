@@ -31,6 +31,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 function LoginForm(props) {
   const { open, setOpen, setAuthUser } = props;
   const [openSignup, setOpenSignup] = useState(false);
+  const [WIDTH, setWidth] = useState(window.innerWidth);
 
   // Loading agents list
   const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +75,14 @@ function LoginForm(props) {
     setOpenSignup(() => true);
   };
 
+  useEffect(() => {
+    const resize = () => {
+      setWidth(() => window.innerWidth);
+    };
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
+
   return (
     <>
       <BootstrapDialog
@@ -97,7 +106,7 @@ function LoginForm(props) {
           <DialogContent
             className="flex flex-col justify-center items-center"
             dividers
-            sx={{ width: "30vw", height: "50vh" }}
+            sx={{ width: WIDTH >= 1060 ? "30vw" : "80vw", height: "50vh" }}
           >
             <div className={`flex flex-col justify-center items-center w-full`}>
               <TextField
@@ -105,7 +114,7 @@ function LoginForm(props) {
                 variant="outlined"
                 label={"Adresse e-mail"}
                 size="small"
-                sx={{ width: "50%" }}
+                sx={{ width: WIDTH >= 1060 ? "50%" : "100%" }}
                 margin="normal"
                 {...register("email")}
                 error={errors.email ? true : false}
@@ -113,8 +122,7 @@ function LoginForm(props) {
               />
 
               <PasswordInput
-                sx={{ width: "50%" }}
-                className={``}
+                sx={{ width: WIDTH >= 1060 ? "50%" : "100%" }}
                 register={register("password")}
                 error={errors.password ? true : false}
                 helperText={errors.password?.message}

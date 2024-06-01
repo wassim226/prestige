@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { MyPagination, SpaPresentation, ArticaleHead } from "../components";
 import { ImageList, ImageListItem, Skeleton } from "@mui/material";
 import { PageController, SpaController } from "../controllers";
+import { handelResize } from "../constantes";
 
 // const spas = [
 //   {
@@ -46,6 +47,7 @@ function Spa() {
   const [spaData, setSpasData] = useState(null);
   const controller = new PageController(abortController, setServerError);
   const spaController = new SpaController(abortController, setServerError);
+  const [cols, setCols] = useState(4);
 
   const getApiData = async (name) => {
     const res = await controller.getElement(name);
@@ -64,6 +66,12 @@ function Spa() {
 
   useEffect(() => {
     getApiData("spa");
+    const handle = () => {
+      handelResize(setCols);
+    };
+    window.addEventListener("resize", handle);
+
+    return () => window.removeEventListener("resize", handle);
   }, []);
 
   return (
@@ -93,7 +101,7 @@ function Spa() {
           <ImageList
             variant="woven"
             gap={8}
-            cols={4}
+            cols={cols}
             className="relative w-[80%] mt-10 mb-20"
           >
             {spaData.map((val, index) => (

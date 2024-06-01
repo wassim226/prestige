@@ -30,6 +30,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 function SignupForm(props) {
   const { open, setOpen, setAuthUser, inCpanel } = props;
+  const [WIDTH, setWidth] = useState(window.innerWidth);
+  const [isLandscape, setIsLandscape] = useState(false);
 
   // Loading agents list
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +72,28 @@ function SignupForm(props) {
     }
   };
 
+  screen.orientation.onchange = function () {
+    // logs 'portrait' or 'landscape'
+    // console.log(screen.orientation.type.match(/\w+/)[0]);
+  };
+
+  useEffect(() => {
+    const resize = () => {
+      setWidth(() => window.innerWidth);
+    };
+    const orientationHandler = () => {
+      setIsLandscape(
+        () => screen.orientation.type.match(/\w+/)[0] === "landscape"
+      );
+    };
+    window.addEventListener("resize", resize);
+    screen.orientation.addEventListener("change", orientationHandler);
+    return () => {
+      window.removeEventListener("resize", resize);
+      screen.orientation.removeEventListener("change", orientationHandler);
+    };
+  }, []);
+
   return (
     <BootstrapDialog
       onClose={handleClose}
@@ -92,10 +116,13 @@ function SignupForm(props) {
         <DialogContent
           className="flex flex-col justify-center items-center"
           dividers
-          sx={{ width: "35vw", height: "55vh" }}
+          sx={{
+            width: WIDTH >= 1060 ? "35vw" : "80vw",
+            height: WIDTH >= 1060 ? "55vh" : isLandscape ? "100vh" : "auto",
+          }}
         >
           <div className={`flex flex-col justify-center items-center w-full`}>
-            <div className="flex flex-row ">
+            <div className="flex flex-row justify-center items-center w-full md:w-auto">
               <TextField
                 {...register("firstName")}
                 type="text"
@@ -104,13 +131,13 @@ function SignupForm(props) {
                 label={"First Name"}
                 size="small"
                 margin="normal"
-                sx={{ marginRight: 1 }}
+                sx={{ marginRight: 1, width: WIDTH < 1060 ? "100%" : "auto" }}
                 error={errors.firstName ? true : false}
                 helperText={errors.firstName?.message}
               />
               <TextField
                 {...register("lastName")}
-                sx={{ marginLeft: 1 }}
+                sx={{ marginLeft: 1, width: WIDTH < 1060 ? "100%" : "auto" }}
                 type="text"
                 fullWidth
                 variant="outlined"
