@@ -13,7 +13,6 @@ function Pool() {
   const getApiData = async (name) => {
     const res = await controller.getElement(name);
     if (res) {
-      console.log(res);
       setData(() => res);
     }
     setLoading(() => false);

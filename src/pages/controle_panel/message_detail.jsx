@@ -35,7 +35,6 @@ function MessageDetail(props) {
   useEffect(() => {
     setLoading(() => true);
     const search_msg = MessageController.MESSAGES.find((val) => val.id == id);
-    console.log("this is search : ", search_msg);
     if (search_msg) {
       setMsg(() =>
         MessageModel(

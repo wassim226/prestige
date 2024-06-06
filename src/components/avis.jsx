@@ -4,6 +4,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import { Star } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import { handelResize } from "../constantes";
+import Review from "./review";
 
 export default function TitlebarImageList() {
   const [cols, setCols] = useState(4);
@@ -17,41 +18,16 @@ export default function TitlebarImageList() {
     return () => window.removeEventListener("resize", handle);
   }, []);
 
-  let stars = [];
-  for (let i = 0; i < 5; i++) {
-    stars.push(<Star />);
-  }
   return (
-    <ImageList variant="masonry" gap={18} cols={cols} className="mt-10">
+    <ImageList
+      variant="masonry"
+      gap={18}
+      cols={cols}
+      className="mt-10 w-[90vw]"
+    >
       {itemData.map((item) => (
         <ImageListItem key={item.img} className=" cursor-pointer">
-          <img
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-          <div className="bg-dimSecondary w-[90%] border-2 border-primary rounded bottom-0 mx-[5%] mb-1 absolute flex flex-col justify-start items-left">
-            <div className="flex fle-row justify-between w-[60%] mt-5 mx-2">
-              {stars.map((val, ind) => (
-                <Star key={ind} className="text-primary" />
-              ))}
-            </div>
-            <Typography
-              sx={{ marginLeft: "0.5rem" }}
-              className="w-[80%] line-clamp-3 text-white"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut.
-            </Typography>
-            <Typography
-              sx={{ marginLeft: "0.5rem" }}
-              variant="h6"
-              className=" truncate text-white"
-            >
-              User Name
-            </Typography>
-          </div>
+          <Review item={item} />
         </ImageListItem>
       ))}
     </ImageList>

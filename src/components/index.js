@@ -36,6 +36,7 @@ import ContactPageForm from "./forms/contact_page_form";
 import SpaForm from "./forms/spa_form";
 import PasswordInput from "./password_input";
 import UserMenu from "./menus/user_menu";
+import Review from "./review";
 
 export {
   Navigation,
@@ -74,4 +75,5 @@ export {
   MyImage,
   PasswordInput,
   UserMenu,
+  Review,
 };

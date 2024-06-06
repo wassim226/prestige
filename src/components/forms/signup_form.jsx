@@ -56,10 +56,8 @@ function SignupForm(props) {
   };
 
   const handelSignup = async (values) => {
-    console.log(values);
     setIsLoading(() => true);
     const controller = new UserController(abortController, setServerError);
-    console.log(values);
     let result = await controller.signup(values);
     setIsLoading(() => false);
 
@@ -72,10 +70,10 @@ function SignupForm(props) {
     }
   };
 
-  screen.orientation.onchange = function () {
-    // logs 'portrait' or 'landscape'
-    // console.log(screen.orientation.type.match(/\w+/)[0]);
-  };
+  // screen.orientation.onchange = function () {
+  //  // logs 'portrait' or 'landscape'
+  //   console.log(screen.orientation.type.match(/\w+/)[0]);
+  // };
 
   useEffect(() => {
     const resize = () => {

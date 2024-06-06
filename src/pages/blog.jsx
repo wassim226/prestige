@@ -1,7 +1,4 @@
 import { ArticlePreview, ArticaleHead } from "../components";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
 import { BlogArticaleController, PageController } from "../controllers";
 import { useState, useRef, useEffect } from "react";
 import { Skeleton } from "@mui/material";
@@ -22,12 +19,10 @@ function Blog() {
     const res = await controller.getElement(name);
     const articales = await articale_controller.getBlogArticales();
     if (res) {
-      console.log(res);
       setData(() => res);
     }
 
     if (articales) {
-      console.log(articales);
       setArticalesData(() => articales);
     }
     setLoading(() => false);
@@ -62,28 +57,21 @@ function Blog() {
           />
 
           <section
-            className={`flex flex-col justify-center items-center w-[100vw] my-20`}
+            className={`grid gap-8 md:gap-0 grid-cols-1 ${
+              articalesData.length <= 1
+                ? ""
+                : "ss:grid-cols-3 sm:grid-cols-4 md:grid-cols-5"
+            } grid-flow-row w-[90%] mx-10 my-20`}
           >
-            <div className="flex flex-row justify-center items-center w-[80%] mt-40">
-              <Swiper
-                spaceBetween={50}
-                slidesPerView={
-                  articalesData.length < 3 ? articalesData.length : 3
-                }
-              >
-                {articalesData.map((val, ind) => (
-                  <SwiperSlide key={"prevs_" + ind}>
-                    <ArticlePreview
-                      id={val.id}
-                      className="swiper-slide"
-                      img={val.presentationImg}
-                      title={val.title}
-                      description={val.extPresentation}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
+            {articalesData.map((val, ind) => (
+              <ArticlePreview
+                key={"articals_" + ind}
+                id={val.id}
+                img={val.presentationImg}
+                title={val.title}
+                description={val.extPresentation}
+              />
+            ))}
           </section>
         </>
       )}

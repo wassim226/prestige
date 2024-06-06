@@ -6,7 +6,7 @@ import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
 import { Person } from "@mui/icons-material";
 import LoginForm from "./forms/login_form";
 import { close, menu } from "../assets";
-import { desktopMenu, mobileMenu } from "../style";
+import { desktopMenu, mobileMenu } from "../constantes/style";
 
 function Navigation(props) {
   const [anchorLandscape, setAnchorElLandscape] = useState(null);

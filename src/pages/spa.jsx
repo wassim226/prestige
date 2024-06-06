@@ -54,11 +54,9 @@ function Spa() {
     const spas = await spaController.getSpas();
 
     if (res) {
-      console.log(res);
       setData(() => res);
     }
     if (spas) {
-      console.log(spas);
       setSpasData(() => spas);
     }
     setLoading(() => false);
@@ -102,7 +100,7 @@ function Spa() {
             variant="woven"
             gap={8}
             cols={cols}
-            className="relative w-[80%] mt-10 mb-20"
+            className="relative w-[80%] mt-10 mb-20 min-h-[400px]"
           >
             {spaData.map((val, index) => (
               <ImageListItem
@@ -113,7 +111,7 @@ function Spa() {
               </ImageListItem>
             ))}
           </ImageList>
-          <MyPagination path={"spa"} />
+          <MyPagination path={"spa"} pagesCount={1} />
         </>
       )}
     </div>

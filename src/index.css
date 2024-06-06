@@ -2,51 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .background-image {
-  background-image: url("/src/assets/images/background.jpg");
-  background-position-x: left;
-  background-position-y: bottom;
-} */
-
 .background-image-contact {
   background-image: url(/src/assets/images/background2.jpg);
   background-position-x: right;
   background-position-y: center;
 }
-/* 
-.background-landscape {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position-x: right;
-  background-position-y: center;
-}
-.conception0 {
-  background-image: url(/src/assets/images/landscape0.jpg);
-}
-.conception1 {
-  background-image: url(/src/assets/images/landscape1.jpg);
-}
-.conception2 {
-  background-image: url(/src/assets/images/landscape2.jpg);
-}
-.conception3 {
-  background-image: url(/src/assets/images/piscine0.jpg);
-}
-.spa_background {
-  background-image: url(/src/assets/images/spa.jpg);
-  transform: scaleX(-1);
-} */
 
 .water_background {
   background-image: url(/src/assets/images/water.jpg);
 }
-/* 
-.blog_background {
-  background-image: url(/src/assets/images/background1.jpg);
-} */
 
 div.sub-menu > div:nth-child(3) > ul {
   background-color: #151f33;
+}
+.slick-next:before,
+.slick-prev:before {
+  @apply text-primary;
+}
+.slick-dots li button:before,
+.slick-dots li.slick-active button:before {
+  @apply text-primary;
 }
 /*:root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

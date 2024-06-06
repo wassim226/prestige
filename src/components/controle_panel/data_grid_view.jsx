@@ -11,8 +11,6 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArticlePreview, PageCard, SpaPresentation } from "../../components";
-import { default_description, navList } from "../../constantes";
-import { PureWater } from "../../assets";
 import UserPresentation from "./user_presentation";
 import SignupForm from "../forms/signup_form";
 
@@ -26,7 +24,7 @@ function DataGridView(props) {
       mode: "edit",
       id: id,
       price: values.price,
-      image: PureWater,
+      presentationImg: values.presentationImg,
       title: values.title,
       details: values.description,
     };
@@ -38,7 +36,7 @@ function DataGridView(props) {
               mode={"edit"}
               id={id}
               className="swiper-slide"
-              img={PureWater}
+              img={values.presentationImg}
               title={values.title}
               description={values.extPresentation}
             />

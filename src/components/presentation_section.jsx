@@ -19,12 +19,20 @@ function Presentation(props) {
             gutterBottom
             variant="h4"
             sx={{ fontWeight: 400 }}
-            className="text-primary w-[50%]"
+            className="text-primary w-[50%] text-center"
           >
             {title}
           </Typography>
           <Typography gutterBottom className="text-white w-[80%]">
-            {description}
+            {description.split("(*)").length <= 1 ? (
+              description
+            ) : (
+              <ul className={" list-disc"}>
+                {description.split("(*)").map((val) => (
+                  <li className="my-5">{val}</li>
+                ))}
+              </ul>
+            )}
           </Typography>
         </div>
       </div>

@@ -1,44 +1,61 @@
-import {useEffect, useState } from 'react';
-import {Button, TextField, Divider, Toolbar, Tooltip, IconButton, Typography, Skeleton} from '@mui/material';
+import { useEffect, useState } from "react";
+import {
+  Button,
+  TextField,
+  Divider,
+  Toolbar,
+  Tooltip,
+  IconButton,
+  Typography,
+  Skeleton,
+} from "@mui/material";
 import { Save } from "@mui/icons-material";
-import {Controller} from "react-hook-form";
-import { landscape } from '../../constantes';
-import AsynchronousSelect from '../asynchrone_select';
-import UploadImage from '../controle_panel/upload_image';
+import { Controller } from "react-hook-form";
+import { landscape } from "../../constantes";
+import AsynchronousSelect from "../asynchrone_select";
+import UploadImage from "../controle_panel/upload_image";
 
 function LandscapePageForm(props) {
-    const {formRef, handleSubmit, register, errors, control, setValue, isPool, controller, prev} = props;
+  const {
+    formRef,
+    handleSubmit,
+    register,
+    errors,
+    control,
+    setValue,
+    isPool,
+    controller,
+    prev,
+  } = props;
 
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const getData = async (name)=>{
-      let prev_data = await controller.getElement(name);
-      if(prev_data){
-        console.log(prev_data);
-        Object.keys(prev_data).map((key)=>{
-          setValue(key, prev_data[key]);
-        });
-      }
-      setIsLoading(()=>false);
+  const getData = async (name) => {
+    let prev_data = await controller.getElement(name);
+    if (prev_data) {
+      Object.keys(prev_data).map((key) => {
+        setValue(key, prev_data[key]);
+      });
     }
+    setIsLoading(() => false);
+  };
 
-    const handelSave = ()=>{
-      if(isPool){
-        setValue('name',"pool");
-      }
-      formRef.current.dispatchEvent(
-        new Event("submit", { cancelable: true, bubbles: true })
-      );
+  const handelSave = () => {
+    if (isPool) {
+      setValue("name", "pool");
     }
+    formRef.current.dispatchEvent(
+      new Event("submit", { cancelable: true, bubbles: true })
+    );
+  };
 
-    useEffect(() => {
-      if(isPool){
-        getData("pool");
-      }
-    }, []);
-    
-  
-    return (
+  useEffect(() => {
+    if (isPool) {
+      getData("pool");
+    }
+  }, []);
+
+  return (
     <div className=" w-full h-[85vh] ">
       <Toolbar
         className="flex flex-row justify-between"
@@ -47,166 +64,250 @@ function LandscapePageForm(props) {
           pr: { xs: 1, sm: 1 },
         }}
       >
-          <Typography
-            variant="h6"
-            id="tableTitle"
-            component="div"
-          >
-            {(isPool ? "Pool" : "Landscape") +" page content"}
-          </Typography>
-          
-          <Tooltip title={`Save`}>
-            <IconButton onClick={handelSave}>
-              <Save className='text-secondary' />
-            </IconButton>
-          </Tooltip>
+        <Typography variant="h6" id="tableTitle" component="div">
+          {(isPool ? "Pool" : "Landscape") + " page content"}
+        </Typography>
+
+        <Tooltip title={`Save`}>
+          <IconButton onClick={handelSave}>
+            <Save className="text-secondary" />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
-  
+
       <form ref={formRef} onSubmit={handleSubmit}>
-        { !isPool && <>
-        <div className='flex flex-col my-10'>
-          <Typography variant="body2" gutterBottom color={"GrayText"} sx={{width: "60vw", marginLeft: "10vw"}}>Page</Typography>
-          <Divider variant="middle" sx={{width: "60vw", marginLeft: "10vw"}}/>
-        </div>
-        <div className='flex flex-col justify-items-center w-full'>
-          <div className='flex flex-col justify-items-center mx-auto w-[50%]'>
-            <Controller
-            {...register('name')}
-            control={control}
-            render={({
-            field: { value, onChange, onBlur, ref },
-            }) => {
-            
-            return (
-              <AsynchronousSelect
-               value = {value}
-               autoProps = {{
-                variant:"outlined", size:"small", margin:"normal", fullWidth: true,
-                loading: isLoading,
-                options: landscape,
-                isOptionEqualToValue: (option, value) => option.label === value.label,
-                getOptionLabel: (option) => option.label,
-                onChange:( _event, item ) => {
-                  onChange(item);
-                  setIsLoading(()=>true);
-                  if(item){
-                    getData(item.name);
-                  }
-                },
-              }}  
-
-               fieldProps = {{
-                label: "Pages",
-                error: errors.name ? true : false,
-                helperText: errors.name?.message,
-                onBlur: onBlur,
-                inputRef: ref,
-               }} 
-
+        {!isPool && (
+          <>
+            <div className="flex flex-col my-10">
+              <Typography
+                variant="body2"
+                gutterBottom
+                color={"GrayText"}
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              >
+                Page
+              </Typography>
+              <Divider
+                variant="middle"
+                sx={{ width: "60vw", marginLeft: "10vw" }}
               />
-            );
-            }}
-          />
-          </div>
-        </div></>
-        }
-        {
-          isLoading 
-          ? <div className='flex flex-col  mt-20 mx-5'>
-              <Skeleton variant="rectangular" height={60} className='mb-5'/>
-              <Skeleton variant="rectangular" height={"60vh"}/>
             </div>
-          :
-        <div>
-        <div className='flex flex-col my-10'>
-          <Typography variant="body2" gutterBottom color={"GrayText"} sx={{width: "60vw", marginLeft: "10vw"}}>Head</Typography>
-          <Divider variant="middle" sx={{width: "60vw", marginLeft: "10vw"}}/>
-        </div>
-        <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
-          <div className="flex flex-col justify-evenly">
-            <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
-            {...register('title')} error={errors.title ? true : false} helperText={errors.title?.message}
-            InputLabelProps={{
-              shrink: true
-            }}
-            />
-  
-            <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3}
-            InputLabelProps={{
-              shrink: true
-            }}
-            {...register('extPresentation')} error={errors.extPresentation ? true : false} helperText={errors.extPresentation?.message}/>
-          </div>
-          <div className="flex flex-col justify-center">
-            <UploadImage setValue={setValue} dataKey={"presentationImg"} register={register} prev={prev}/>
-            { errors.presentationImg && 
-              <div className="flex flex-col text-red-600 justify-center items-center my-4">
-                {
-                    errors.presentationImg?.message
-                }
+            <div className="flex flex-col justify-items-center w-full">
+              <div className="flex flex-col justify-items-center mx-auto w-[50%]">
+                <Controller
+                  {...register("name")}
+                  control={control}
+                  render={({ field: { value, onChange, onBlur, ref } }) => {
+                    return (
+                      <AsynchronousSelect
+                        value={value}
+                        autoProps={{
+                          variant: "outlined",
+                          size: "small",
+                          margin: "normal",
+                          fullWidth: true,
+                          loading: isLoading,
+                          options: landscape,
+                          isOptionEqualToValue: (option, value) =>
+                            option.label === value.label,
+                          getOptionLabel: (option) => option.label,
+                          onChange: (_event, item) => {
+                            onChange(item);
+                            setIsLoading(() => true);
+                            if (item) {
+                              getData(item.name);
+                            }
+                          },
+                        }}
+                        fieldProps={{
+                          label: "Pages",
+                          error: errors.name ? true : false,
+                          helperText: errors.name?.message,
+                          onBlur: onBlur,
+                          inputRef: ref,
+                        }}
+                      />
+                    );
+                  }}
+                />
               </div>
-            }
+            </div>
+          </>
+        )}
+        {isLoading ? (
+          <div className="flex flex-col  mt-20 mx-5">
+            <Skeleton variant="rectangular" height={60} className="mb-5" />
+            <Skeleton variant="rectangular" height={"60vh"} />
           </div>
-        </div>
+        ) : (
+          <div>
+            <div className="flex flex-col my-10">
+              <Typography
+                variant="body2"
+                gutterBottom
+                color={"GrayText"}
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              >
+                Head
+              </Typography>
+              <Divider
+                variant="middle"
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              />
+            </div>
+            <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
+              <div className="flex flex-col justify-evenly">
+                <TextField
+                  label="Title"
+                  size="small"
+                  variant="outlined"
+                  sx={{ margin: "20px 0" }}
+                  {...register("title")}
+                  error={errors.title ? true : false}
+                  helperText={errors.title?.message}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
 
-        <div className='flex flex-col my-10'>
-          <Typography variant="body2" gutterBottom color={"GrayText"} sx={{width: "60vw", marginLeft: "10vw"}}>Body</Typography>
-          <Divider variant="middle" sx={{width: "60vw", marginLeft: "10vw"}}/>
-        </div>
-
-        <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
-          <div className="flex flex-col justify-evenly">
-            <TextField label="Title" size="small" variant="outlined" sx={{margin: "20px 0"}}
-            InputLabelProps={{
-              shrink: true
-            }}
-            {...register('bodyTitle')} error={errors.bodyTitle ? true : false} helperText={errors.bodyTitle?.message}/>
-  
-            <TextField label="Presentation text" size="small" variant="outlined" multiline rows={3}
-            InputLabelProps={{
-              shrink: true
-            }}
-            {...register('bodyPresentation')} error={errors.bodyPresentation ? true : false} helperText={errors.bodyPresentation?.message}/>
-          </div>
-          <div className="flex flex-col justify-center">
-            <UploadImage setValue={setValue} dataKey={"bodyImg"} register={register} prev={prev}/>
-            { errors.bodyImg && 
-              <div className="flex flex-col text-red-600 justify-center items-center my-4">
-                {
-                    errors.bodyImg?.message
-                }
+                <TextField
+                  label="Presentation text"
+                  size="small"
+                  variant="outlined"
+                  multiline
+                  rows={3}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  {...register("extPresentation")}
+                  error={errors.extPresentation ? true : false}
+                  helperText={errors.extPresentation?.message}
+                />
               </div>
-            }
-          </div>
-        </div>
-
-        <div className='flex flex-col my-10'>
-          <Typography variant="body2" gutterBottom color={"GrayText"} sx={{width: "60vw", marginLeft: "10vw"}}>
-            Services
-          </Typography>
-          <Divider variant="middle" sx={{width: "60vw", marginLeft: "10vw"}}/>
-        </div>
-
-        <div className='flex flex-col'>
-          {Array(4).fill().map((_,i) =>{
-            let ind = i + 1;
-            return (
-              <div key={"ser" + i} className='flex flex-col justify-center items-center '>
-                <TextField label={`Service 0${ind}`} size="small" variant="outlined" sx={{margin: "20px 0", width: "50vw"}}
-                InputLabelProps={{
-                  shrink: true
-                }}
-                {...register("service_" + ind)} error={errors["service_" + ind] ? true : false} helperText={errors["service_" + ind]?.message}/>
-                <Divider variant="middle" sx={{width: "40vw", marginTop: "20px"}}/>
+              <div className="flex flex-col justify-center">
+                <UploadImage
+                  setValue={setValue}
+                  dataKey={"presentationImg"}
+                  register={register}
+                  prev={prev}
+                />
+                {errors.presentationImg && (
+                  <div className="flex flex-col text-red-600 justify-center items-center my-4">
+                    {errors.presentationImg?.message}
+                  </div>
+                )}
               </div>
-            );
-          })}
-        </div>
-        </div>
-      }
+            </div>
+
+            <div className="flex flex-col my-10">
+              <Typography
+                variant="body2"
+                gutterBottom
+                color={"GrayText"}
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              >
+                Body
+              </Typography>
+              <Divider
+                variant="middle"
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              />
+            </div>
+
+            <div className="flex flex-row w-full h-[35%] justify-evenly mt-10">
+              <div className="flex flex-col justify-evenly">
+                <TextField
+                  label="Title"
+                  size="small"
+                  variant="outlined"
+                  sx={{ margin: "20px 0" }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  {...register("bodyTitle")}
+                  error={errors.bodyTitle ? true : false}
+                  helperText={errors.bodyTitle?.message}
+                />
+
+                <TextField
+                  label="Presentation text"
+                  size="small"
+                  variant="outlined"
+                  multiline
+                  rows={3}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  {...register("bodyPresentation")}
+                  error={errors.bodyPresentation ? true : false}
+                  helperText={errors.bodyPresentation?.message}
+                />
+              </div>
+              <div className="flex flex-col justify-center">
+                <UploadImage
+                  setValue={setValue}
+                  dataKey={"bodyImg"}
+                  register={register}
+                  prev={prev}
+                />
+                {errors.bodyImg && (
+                  <div className="flex flex-col text-red-600 justify-center items-center my-4">
+                    {errors.bodyImg?.message}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col my-10">
+              <Typography
+                variant="body2"
+                gutterBottom
+                color={"GrayText"}
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              >
+                Services
+              </Typography>
+              <Divider
+                variant="middle"
+                sx={{ width: "60vw", marginLeft: "10vw" }}
+              />
+            </div>
+
+            <div className="flex flex-col">
+              {Array(4)
+                .fill()
+                .map((_, i) => {
+                  let ind = i + 1;
+                  return (
+                    <div
+                      key={"ser" + i}
+                      className="flex flex-col justify-center items-center "
+                    >
+                      <TextField
+                        label={`Service 0${ind}`}
+                        size="small"
+                        variant="outlined"
+                        sx={{ margin: "20px 0", width: "50vw" }}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        {...register("service_" + ind)}
+                        error={errors["service_" + ind] ? true : false}
+                        helperText={errors["service_" + ind]?.message}
+                      />
+                      <Divider
+                        variant="middle"
+                        sx={{ width: "40vw", marginTop: "20px" }}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
       </form>
     </div>
-    );
+  );
 }
 
 export default LandscapePageForm;

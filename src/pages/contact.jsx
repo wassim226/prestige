@@ -59,7 +59,6 @@ function Contact() {
   const getApiData = async () => {
     const res = await controller.getElement("0");
     if (res) {
-      console.log(res);
       setData(() => res);
     }
     setLoading(() => false);

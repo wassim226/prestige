@@ -17,7 +17,6 @@ function Landscape(props) {
   const getApiData = async (name) => {
     const res = await controller.getElement(name);
     if (res) {
-      console.log(res);
       setData(() => res);
     }
     setLoading(() => false);
@@ -25,7 +24,7 @@ function Landscape(props) {
 
   useEffect(() => {
     getApiData(landscape[ind].name);
-  }, []);
+  }, [ind]);
 
   return (
     <div>

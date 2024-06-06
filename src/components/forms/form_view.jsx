@@ -41,7 +41,6 @@ function FormView(props) {
 function FormViewer(props) {
   const { controller, request_method, View, data } = props;
   const formRef = useRef(null);
-  // console.log(data);
   const {
     register,
     control,
@@ -56,8 +55,6 @@ function FormViewer(props) {
       data == "new" ? controller.schema : controller.updateSchema
     ),
   });
-
-  const [error, setError] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
