@@ -3,14 +3,30 @@ import {
   CopyrightRounded,
   Facebook,
   Instagram,
-  Twitter,
   X,
 } from "@mui/icons-material";
-import { Divider, Typography } from "@mui/material";
-import React from "react";
+import { Divider, Skeleton, Typography } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
 import Navigation from "./navigation";
+import { ContactController } from "../controllers";
 
 function Footer(props) {
+  const [serverError, setServerError] = useState(null);
+  const abortController = useRef(null);
+  const controller = new ContactController(abortController, setServerError);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+  const getApiData = async () => {
+    const res = await controller.getElement("0");
+    if (res) {
+      setData(() => res);
+    }
+    setLoading(() => false);
+  };
+
+  useEffect(() => {
+    getApiData();
+  }, []);
   return (
     <div
       className={`flex flex-col justify-center items-center w-full bg-darkSecondary py-14`}
@@ -25,17 +41,44 @@ function Footer(props) {
           <ul>
             <li>
               <Typography gutterBottom className="hover:text-primary">
-                Address
+                {loading ? (
+                  <Skeleton
+                    variant="rectangular"
+                    height={20}
+                    className="mb-5"
+                    sx={{ backgroundColor: "#4FD38A" }}
+                  />
+                ) : (
+                  data.adress
+                )}
               </Typography>
             </li>
             <li>
               <Typography gutterBottom className="hover:text-primary">
-                <a href="tel:0698755632">0698755632</a>
+                {loading ? (
+                  <Skeleton
+                    variant="rectangular"
+                    height={20}
+                    className="mb-5"
+                    sx={{ backgroundColor: "#4FD38A" }}
+                  />
+                ) : (
+                  <a href={`tel:${data.phone}`}>{data.phone}</a>
+                )}
               </Typography>
             </li>
             <li>
               <Typography gutterBottom className="hover:text-primary">
-                <a href="mailto:email@mail.com">email@mail.com</a>
+                {loading ? (
+                  <Skeleton
+                    variant="rectangular"
+                    height={20}
+                    className="mb-5"
+                    sx={{ backgroundColor: "#4FD38A" }}
+                  />
+                ) : (
+                  <a href={`mailto:${data.email}`}>{data.email}</a>
+                )}
               </Typography>
             </li>
           </ul>
