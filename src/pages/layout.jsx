@@ -1,11 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Navigation } from "../components";
+import { Footer, Navigation } from "../components";
 import { Logo } from "../assets";
 
 function Layout(props) {
   return (
-    <div className={`flex flex-col justify-start items-center`}>
+    <div className={`flex flex-col justify-start items-center `}>
       <div
         id="header"
         className={`flex flex-row justify-between items-center z-50 w-full h-[10vh] text-dimWhite bg-darkSecondary`}
@@ -18,12 +18,18 @@ function Layout(props) {
         </div>
         <Navigation {...props} />
       </div>
-      <div className="w-full overflow-y-auto overflow-x-clip bg-secondary">
-        <div id="body">
+      <div className="flex flex-col w-full h-min overflow-y-auto overflow-x-clip bg-secondary">
+        <div id="body" className="flex flex-col">
           <Outlet />
         </div>
+
+        <div
+          id="footer"
+          className={`hidden md:flex flex-row items-center w-full text-dimWhite`}
+        >
+          <Footer />
+        </div>
       </div>
-      {/* <div id="footer"></div> */}
     </div>
   );
 }

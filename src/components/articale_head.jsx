@@ -6,7 +6,7 @@ function ArticaleHead(props) {
 
   return (
     <div
-      className={`flex flex-col justify-start items-center md:flex-none w-full md:w-[100vw] landscape:h-[250vh] md:landscape:h-[90vh]`}
+      className={`flex flex-col relative justify-start items-center md:flex-none w-full md:w-[100vw] landscape:h-[250vh] md:landscape:h-[90vh]`}
     >
       <div
         className={`w-[98.8%] md:h-[90vh] md:absolute md:z-0 md:overflow-hidden`}
