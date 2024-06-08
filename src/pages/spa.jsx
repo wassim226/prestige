@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { MyPagination, SpaPresentation, ArticaleHead } from "../components";
 import { ImageList, ImageListItem, Skeleton } from "@mui/material";
 import { PageController, SpaController } from "../controllers";
-import { handelResize } from "../constantes";
+import { default_description, handelResize } from "../constantes";
 
 // const spas = [
 //   {
@@ -40,30 +40,11 @@ import { handelResize } from "../constantes";
 // ];
 
 function Spa() {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [spaData, setSpasData] = useState(null);
-  const controller = new PageController(abortController, setServerError);
-  const spaController = new SpaController(abortController, setServerError);
+  const [loading, setLoading] = useState(false);
+  const [spaData, setSpasData] = useState([]);
   const [cols, setCols] = useState(4);
 
-  const getApiData = async (name) => {
-    const res = await controller.getElement(name);
-    const spas = await spaController.getSpas();
-
-    if (res) {
-      setData(() => res);
-    }
-    if (spas) {
-      setSpasData(() => spas);
-    }
-    setLoading(() => false);
-  };
-
   useEffect(() => {
-    getApiData("spa");
     const handle = () => {
       handelResize(setCols);
     };
@@ -91,9 +72,9 @@ function Spa() {
       ) : (
         <>
           <ArticaleHead
-            background_class={data.presentationImg} //{"background-landscape spa_background"}
-            title={data.title.toUpperCase()} //{"SPAS GAMME PRESTIGE"}
-            description={data.extPresentation} //{default_description}
+            background_class={2} //{"background-landscape spa_background"}
+            title={"SPAS GAMME PRESTIGE"}
+            description={default_description}
             // flip={true}
           />
           <ImageList

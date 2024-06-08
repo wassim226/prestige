@@ -6,13 +6,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PageController } from "../controllers";
 import { useEffect, useRef, useState } from "react";
+import { default_description } from "../constantes";
 
 function Water() {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const controller = new PageController(abortController, setServerError);
+  const [loading, setLoading] = useState(false);
   const settings = {
     dots: true,
     infinite: true,
@@ -20,18 +17,6 @@ function Water() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-  const getApiData = async (name) => {
-    const res = await controller.getElement(name);
-    if (res) {
-      setData(() => res);
-    }
-    setLoading(() => false);
-  };
-
-  useEffect(() => {
-    getApiData("water");
-  }, []);
 
   return (
     <>
@@ -53,9 +38,9 @@ function Water() {
         ) : (
           <>
             <ArticaleHead
-              background_class={data.presentationImg} //{"background-landscape water_background"}
-              title={data.title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
-              description={data.extPresentation} //{default_description}
+              background_class={3} //{data.presentationImg}{"background-landscape water_background"}
+              title={"SÉCURISATION LA QUALITÉ DES EAUX"}
+              description={default_description}
             />
 
             <section className={`flex flex-col justify-center w-[100vw] my-32`}>
@@ -65,7 +50,7 @@ function Water() {
                 } w-full items-center`}
               >
                 <div className={`w-[40%] mx-auto`}>
-                  <MyImage id={data.bodyImg} className="rounded-md" />
+                  <MyImage id={6} className="rounded-md" />
                 </div>
                 <div
                   className={`flex flex-col justify-start items-center w-[50vw]`}
@@ -76,11 +61,11 @@ function Water() {
                     sx={{ fontWeight: 400 }}
                     className="text-primary w-[50%]"
                   >
-                    {data.bodyTitle}
-                    {/* Quelles solutions proposons-nous pour le traitement de votre eau de piscine ? */}
+                    Quelles solutions proposons-nous pour le traitement de votre
+                    eau de piscine ?
                   </Typography>
                   <Typography gutterBottom className="text-white w-[80%]">
-                    {data.bodyPresentation}
+                    {default_description}
                   </Typography>
                 </div>
               </div>
@@ -111,7 +96,8 @@ function Water() {
                       sx={{ margin: "20px", marginBottom: "30px" }}
                       className="text-white text-center"
                     >
-                      {data["offerDesc_" + ind]}
+                      {/* {data["offerDesc_" + ind]} */}
+                      {default_description}
                     </Typography>
                   </div>
                 ))}

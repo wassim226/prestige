@@ -1,30 +1,12 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Articale } from "../components";
 import { useParams } from "react-router-dom";
 import { default_description, landscape } from "../constantes";
-import { PageController } from "../controllers";
 import { Skeleton } from "@mui/material";
 
 function Landscape(props) {
   const { ind } = useParams();
-
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const controller = new PageController(abortController, setServerError);
-
-  const getApiData = async (name) => {
-    const res = await controller.getElement(name);
-    if (res) {
-      setData(() => res);
-    }
-    setLoading(() => false);
-  };
-
-  useEffect(() => {
-    getApiData(landscape[ind].name);
-  }, [ind]);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
@@ -44,19 +26,19 @@ function Landscape(props) {
         </div>
       ) : (
         <Articale
-          background_class={data.presentationImg} //`background-landscape conception${ind}`
-          title={data.title.toUpperCase()}
-          description={data.extPresentation}
+          background_class={6} //`background-landscape conception${ind}`
+          title={"Bienvenue dans le magazine de la piscine"}
+          description={default_description}
           sections={[
             {
-              image: data.bodyImg,
-              title: data.bodyTitle.toUpperCase(),
-              description: data.bodyPresentation,
+              image: 3,
+              title: "Bienvenue dans le magazine de la piscine",
+              description: default_description,
               services: [
-                data.service_1,
-                data.service_2,
-                data.service_3,
-                data.service_4,
+                "Forme libre",
+                "Couloir de nage",
+                "Plage immergée",
+                "Filtration écologique",
               ],
             },
           ]}

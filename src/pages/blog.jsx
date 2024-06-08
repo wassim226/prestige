@@ -1,36 +1,10 @@
 import { ArticlePreview, ArticaleHead } from "../components";
-import { BlogArticaleController, PageController } from "../controllers";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Skeleton } from "@mui/material";
 
 function Blog() {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [articalesData, setArticalesData] = useState(null);
-  const controller = new PageController(abortController, setServerError);
-  const articale_controller = new BlogArticaleController(
-    abortController,
-    setServerError
-  );
-
-  const getApiData = async (name) => {
-    const res = await controller.getElement(name);
-    const articales = await articale_controller.getBlogArticales();
-    if (res) {
-      setData(() => res);
-    }
-
-    if (articales) {
-      setArticalesData(() => articales);
-    }
-    setLoading(() => false);
-  };
-
-  useEffect(() => {
-    getApiData("blog");
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const [articalesData, setArticalesData] = useState([]);
 
   return (
     <div className={`flex flex-col justify-start w-[100vw]`}>
@@ -51,9 +25,9 @@ function Blog() {
       ) : (
         <>
           <ArticaleHead
-            background_class={data.presentationImg} //{"background-landscape blog_background"}
-            title={data.title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
-            description={data.extPresentation}
+            background_class={5} //{data.presentationImg} {"background-landscape blog_background"}
+            title={"SÉCURISATION LA QUALITÉ DES EAUX"}
+            description={"SÉCURISATION LA QUALITÉ DES EAUX"}
           />
 
           <section

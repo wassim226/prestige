@@ -4,26 +4,9 @@ import { Skeleton, Typography } from "@mui/material";
 import { addedValues } from "../constantes";
 import { Valeur, TitlebarImageList, MyImage } from "../components";
 import { Logo } from "../assets";
-import { PageController } from "../controllers";
 
 function Home() {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const controller = new PageController(abortController, setServerError);
-
-  const getApiData = async (name) => {
-    const res = await controller.getElement(name);
-    if (res) {
-      setData(() => res);
-    }
-    setLoading(() => false);
-  };
-
-  useEffect(() => {
-    getApiData("home");
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
@@ -52,7 +35,7 @@ function Home() {
                 className="hidden md:flex rounded w-[40%] h-[20%]"
               />
               <Typography gutterBottom className="text-white w-[80%]">
-                {data.extPresentation}
+                {/* {data.extPresentation} */}
               </Typography>
               <Link to="/contact">
                 <button className="border-2 rounded mt-8 border-primary bg-transparent text-primary py-4 px-6 hover:bg-primary hover:text-secondary">
@@ -63,7 +46,7 @@ function Home() {
             <div
               className={`w-full h-auto min-h-40 md:w-[35vw] md:h-[38.33333vw] md:mr-10`}
             >
-              <MyImage id={data.presentationImg} />
+              {/* <MyImage id={data.presentationImg} /> */}
             </div>
           </div>
           <div className="flex flex-col justify-center items-center w-[100vw] my-20 mx-10">
@@ -78,7 +61,6 @@ function Home() {
               </Typography>
             </div>
             <div className="grid grid-rows-4 sm:grid-rows-1 grid-flow-col w-full mx-10 my-20">
-              {/* flex flex-row justify-between items-center my-20 w-[80%] */}
               {Array(4)
                 .fill()
                 .map((v, i) => {
@@ -86,15 +68,15 @@ function Home() {
                   return (
                     <Valeur
                       key={"val_" + ind}
-                      title={data["value_" + ind]}
-                      body={data["desc_" + ind]}
+                      title={"value_"}
+                      body={"desc_"}
                     />
+                    // data["value_" + ind]
+                    // data["desc_" + ind]
                   );
                 })}
             </div>
           </div>
-          {/* <a name="devise"><div className='flex flex-row justify-start items-cente'></div></a> */}
-
           <div className="flex flex-col justify-start items-center slider-container">
             <div className="flex flex-row justify-center items-center w-full">
               <Typography

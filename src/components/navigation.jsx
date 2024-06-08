@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LandscapeMenu, UserMenu } from "../components";
 import { navList, landscape } from "../constantes";
-import { Avatar, Box, IconButton, Tooltip } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { Person } from "@mui/icons-material";
 import LoginForm from "./forms/login_form";
 import { close, menu } from "../assets";
@@ -10,7 +10,7 @@ import { desktopMenu, mobileMenu } from "../constantes/style";
 
 function Navigation(props) {
   const [anchorLandscape, setAnchorElLandscape] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
+  // const [anchorElUser, setAnchorElUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
   const [toggle, setToggle] = useState(true);
 
@@ -71,18 +71,19 @@ function Navigation(props) {
             <Tooltip title={"Account"}>
               <IconButton
                 onClick={(event) => {
-                  if (props.authUser == null) {
-                    setOpenLogin(() => true);
-                  } else {
-                    setAnchorElUser(event.currentTarget);
-                  }
+                  // if (props.authUser == null) {
+                  setOpenLogin(() => true);
+                  // }
+                  // else {
+                  //   setAnchorElUser(event.currentTarget);
+                  // }
                 }}
                 sx={{ p: 0 }}
               >
                 <Person className="text-dimWhite hover:text-primary" />
               </IconButton>
             </Tooltip>
-            {props.authUser != null && (
+            {/* {props.authUser != null && (
               <UserMenu
                 setAuthUser={props.setAuthUser}
                 authUser={props.authUser}
@@ -91,7 +92,7 @@ function Navigation(props) {
                   setAnchorElUser(null);
                 }}
               />
-            )}
+            )} */}
           </Box>
         )}
         <LandscapeMenu
@@ -104,7 +105,7 @@ function Navigation(props) {
         <LoginForm
           open={openLogin}
           setOpen={setOpenLogin}
-          setAuthUser={props.setAuthUser}
+          // setAuthUser={props.setAuthUser}
         />
       </div>
     </>
