@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LandscapeMenu, UserMenu } from "../components";
-import { navList, landscape } from "../constantes";
+import { navList, landscape } from "../constantes/data";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { Person } from "@mui/icons-material";
 import LoginForm from "./forms/login_form";

@@ -1,7 +1,7 @@
 import React from "react";
 import { PureWater1, PureWater } from "../assets";
 import { Typography } from "@mui/material";
-import { default_description } from "../constantes";
+import { default_description } from "../constantes/data";
 
 function BlogArticale(props) {
   const { title, img, text } = props;

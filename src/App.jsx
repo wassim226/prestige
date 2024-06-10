@@ -56,7 +56,7 @@ function App() {
         >
           <Route index element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
-          <Route path="landscape/:ind" element={<Landscape />}></Route>
+          <Route path="landscape/:name" element={<Landscape />}></Route>
           <Route path="pool" element={<Pool />}></Route>
           <Route path="spa" element={<Spa />} initialIndex={0}></Route>
           <Route path="water" element={<Water />}></Route>

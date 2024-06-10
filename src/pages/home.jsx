@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton, Typography } from "@mui/material";
-import { addedValues } from "../constantes";
+import { addedValues } from "../constantes/data";
 import { Valeur, TitlebarImageList, MyImage } from "../components";
-import { Logo } from "../assets";
+import { Logo, PureWater, image, image3, image4, image9 } from "../assets";
+import { hoverImageParent, hoverdImage } from "../constantes/style";
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -44,12 +45,16 @@ function Home() {
               </Link>
             </div>
             <div
-              className={`w-full h-auto min-h-40 md:w-[35vw] md:h-[38.33333vw] md:mr-10`}
+              className={`w-full h-auto min-h-40 md:w-[35vw] md:h-[38.33333vw] md:mr-32 md:mt-24 ${hoverImageParent}`}
             >
-              {/* <MyImage id={data.presentationImg} /> */}
+              <MyImage
+                id={image9}
+                loading="lazy"
+                className={`${hoverdImage}`}
+              />
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center w-[100vw] my-20 mx-10">
+          <div className="flex flex-col justify-center items-center w-[100vw] my-20">
             <div className="flex flex-row justify-center items-center w-full">
               <Typography
                 gutterBottom
@@ -60,21 +65,13 @@ function Home() {
                 NOS VALEUR AJOUTER
               </Typography>
             </div>
-            <div className="grid grid-rows-4 sm:grid-rows-1 grid-flow-col w-full mx-10 my-20">
-              {Array(4)
-                .fill()
-                .map((v, i) => {
-                  let ind = i + 1;
-                  return (
-                    <Valeur
-                      key={"val_" + ind}
-                      title={"value_"}
-                      body={"desc_"}
-                    />
-                    // data["value_" + ind]
-                    // data["desc_" + ind]
-                  );
-                })}
+            <div className="grid grid-rows-4 sm:grid-rows-1 grid-flow-col w-full my-20">
+              {addedValues.map((v, i) => {
+                let ind = i + 1;
+                return (
+                  <Valeur key={"val_" + ind} title={v.title} body={v.body} />
+                );
+              })}
             </div>
           </div>
           <div className="flex flex-col justify-start items-center slider-container">

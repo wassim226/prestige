@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import MyImage from "./my_image";
 
 function ArticaleHead(props) {
-  const { background_class, title, description, flip } = props;
+  const { background_class, title, description, flip, backImagePos } = props;
 
   return (
     <div
@@ -11,7 +11,10 @@ function ArticaleHead(props) {
       <div
         className={`w-[98.8%] md:h-[90vh] md:absolute md:z-0 md:overflow-hidden`}
       >
-        <MyImage id={background_class} className={`w-full h-auto`} />
+        <MyImage
+          id={background_class}
+          className={`w-full h-auto relative ${backImagePos}`}
+        />
       </div>
       <div
         className={`md:z-10 w-full h-full md:max-h-[90vh] bg-gradient-to-r ${

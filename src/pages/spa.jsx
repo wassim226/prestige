@@ -1,47 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { MyPagination, SpaPresentation, ArticaleHead } from "../components";
 import { ImageList, ImageListItem, Skeleton } from "@mui/material";
-import { PageController, SpaController } from "../controllers";
-import { default_description, handelResize } from "../constantes";
-
-// const spas = [
-//   {
-//     image: Pool3,
-//     title: "SPA MALAGA 3 PLACES",
-//     price: 6500,
-//     details: [
-//       "Dimensions : 2100 x 1700 x 900mm",
-//       "51 Jets thérapie",
-//       "Système électronique BALBOA",
-//       "Pompes LX Whirlpool 2 x 1500w",
-//       "Acrylique Aristech",
-//       "Luminothérapie",
-//       "Système audio Bluetooth",
-//       "Triple isolation",
-//       "Design unique, finitions alu leds",
-//     ]
-//   },
-//   {
-//     image: Pool4,
-//     title: "SPA NEVADA 2 PLACES",
-//     price: 8000,
-//     details: [
-//       "Dimensions : 2100 x 1700 x 900mm",
-//       "51 Jets thérapie",
-//       "Système électronique BALBOA",
-//       "Pompes LX Whirlpool 2 x 1500w",
-//       "Acrylique Aristech",
-//       "Luminothérapie",
-//       "Système audio Bluetooth",
-//       "Triple isolation",
-//       "Design unique, finitions alu leds",
-//     ]
-//   }
-// ];
+import { default_description, spas } from "../constantes/data";
+import { handelResize } from "../constantes";
+import { BackgroundImg } from "../assets";
 
 function Spa() {
   const [loading, setLoading] = useState(false);
-  const [spaData, setSpasData] = useState([]);
+  const [spaData, setSpasData] = useState(spas);
   const [cols, setCols] = useState(4);
 
   useEffect(() => {
@@ -72,7 +38,7 @@ function Spa() {
       ) : (
         <>
           <ArticaleHead
-            background_class={2} //{"background-landscape spa_background"}
+            background_class={BackgroundImg} //{"background-landscape spa_background"}
             title={"SPAS GAMME PRESTIGE"}
             description={default_description}
             // flip={true}

@@ -1,6 +1,7 @@
 import React from "react";
 import { MyImage, ServiceIcon } from "../components";
 import { Typography } from "@mui/material";
+import { hoverImageParent, hoverdImage } from "../constantes/style";
 
 function Presentation(props) {
   const { image, title, description, services } = props;
@@ -11,8 +12,8 @@ function Presentation(props) {
           Math.random() >= 0.5 ? "-reverse" : ""
         } w-full items-center`}
       >
-        <div className={`w-[40%] mx-auto`}>
-          <MyImage id={image} className="rounded-md" />
+        <div className={`w-[40%] mx-auto ${hoverImageParent}`}>
+          <MyImage id={image} className={`rounded-md ${hoverdImage}`} />
         </div>
         <div className={`flex flex-col justify-start items-center w-[50vw]`}>
           <Typography

@@ -1,18 +1,19 @@
-import React from 'react'
+import React from "react";
 import { DataGridView } from "../../components";
-import { landscape, navList } from '../../constantes';
-
+import { navList } from "../../constantes/data";
 
 function ControlePages() {
   return (
     <div>
-        <DataGridView title={"Pages"} type={"page"} data={
-          navList.map((val, ind)=>{
-            return {page: val};
-          })
-        } />
+      <DataGridView
+        title={"Pages"}
+        type={"page"}
+        data={navList.map((val, ind) => {
+          return { page: val };
+        })}
+      />
     </div>
-  )
+  );
 }
 
-export default ControlePages
+export default ControlePages;

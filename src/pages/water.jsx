@@ -1,12 +1,13 @@
 import { Skeleton, Typography } from "@mui/material";
-import { PureWater1, PureWater } from "../assets";
+import { PureWater1, PureWater, Clean, Clean1, greenPool1 } from "../assets";
 import { MySlider, ArticaleHead, MyImage } from "../components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PageController } from "../controllers";
 import { useEffect, useRef, useState } from "react";
-import { default_description } from "../constantes";
+import { default_description } from "../constantes/data";
+import { hoverImageParent, hoverdImage } from "../constantes/style";
 
 function Water() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +39,7 @@ function Water() {
         ) : (
           <>
             <ArticaleHead
-              background_class={3} //{data.presentationImg}{"background-landscape water_background"}
+              background_class={Clean1}
               title={"SÉCURISATION LA QUALITÉ DES EAUX"}
               description={default_description}
             />
@@ -49,8 +50,8 @@ function Water() {
                   Math.random() >= 0.5 ? "-reverse" : ""
                 } w-full items-center`}
               >
-                <div className={`w-[40%] mx-auto`}>
-                  <MyImage id={6} className="rounded-md" />
+                <div className={`w-[40%] mx-auto ${hoverImageParent}`}>
+                  <MyImage id={Clean} className={`rounded-md ${hoverdImage}`} />
                 </div>
                 <div
                   className={`flex flex-col justify-start items-center w-[50vw]`}
@@ -120,7 +121,7 @@ function Water() {
                   {Array.from(Array(3)).map((val, ind) => (
                     <MySlider
                       key={"prevs_" + ind}
-                      prev_img={PureWater}
+                      prev_img={greenPool1}
                       new_img={PureWater1}
                     />
                   ))}

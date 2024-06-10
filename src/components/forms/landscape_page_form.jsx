@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Save } from "@mui/icons-material";
 import { Controller } from "react-hook-form";
-import { landscape } from "../../constantes";
+import { landscape } from "../../constantes/data";
 import AsynchronousSelect from "../asynchrone_select";
 import UploadImage from "../controle_panel/upload_image";
 

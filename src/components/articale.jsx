@@ -2,10 +2,12 @@ import React from "react";
 import { ArticaleHead, Presentation } from "../components";
 
 function Articale(props) {
-  const { background_class, title, description, sections } = props;
+  const { background_class, title, description, sections, backImagePos } =
+    props;
   return (
     <div className={`flex flex-col justify-start w-[100vw]`}>
       <ArticaleHead
+        backImagePos={backImagePos}
         background_class={background_class}
         title={title}
         description={description}

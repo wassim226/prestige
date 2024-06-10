@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MyImage from "./my_image";
 
 function SpaPresentation(props) {
-  const { presentationImg, title, description, price, mode, id } = props.spa;
+  const { presentationImg, title, details, price, mode, id } = props.spa;
   const [position, setPosition] = useState([0, 0]);
   const [isHovred, setIsHovred] = useState(false);
   const [show_detail, setShow_detail] = useState(false);
@@ -85,7 +85,7 @@ function SpaPresentation(props) {
                 {title}
               </div>
               <div className={`text-white ml-5`}>
-                {description.split("\n").map((detail, ind) => (
+                {details.map((detail, ind) => (
                   <Typography key={"spa_dtl_" + ind}>{detail}</Typography>
                 ))}
               </div>

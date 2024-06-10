@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Articale } from "../components";
 import { useParams } from "react-router-dom";
-import { default_description, landscape } from "../constantes";
+import {
+  default_description,
+  landscape,
+  landscapeData,
+} from "../constantes/data";
 import { Skeleton } from "@mui/material";
 
 function Landscape(props) {
-  const { ind } = useParams();
+  const { name } = useParams();
   const [loading, setLoading] = useState(false);
 
   return (
@@ -26,22 +30,11 @@ function Landscape(props) {
         </div>
       ) : (
         <Articale
-          background_class={6} //`background-landscape conception${ind}`
-          title={"Bienvenue dans le magazine de la piscine"}
-          description={default_description}
-          sections={[
-            {
-              image: 3,
-              title: "Bienvenue dans le magazine de la piscine",
-              description: default_description,
-              services: [
-                "Forme libre",
-                "Couloir de nage",
-                "Plage immergée",
-                "Filtration écologique",
-              ],
-            },
-          ]}
+          background_class={landscapeData[name].background}
+          backImagePos={landscapeData[name].backImagePos}
+          title={landscapeData[name].title}
+          description={landscapeData[name].description}
+          sections={landscapeData[name].sections}
         />
       )}
     </div>

@@ -27,21 +27,6 @@ export const optionalImgValidator = z
       : true;
   }, "Only .jpg, .jpeg and .png are supported.");
 
-export const navList = [
-  "Home",
-  "Landscape",
-  "Pool",
-  "Spa",
-  "Water",
-  "Blog",
-  "Contact",
-];
-export const landscape = [
-  { name: "conception", label: "3D Conception" },
-  { name: "amenagement", label: "Aménagement paysagers" },
-  { name: "entretien", label: "Entretien des espaces" },
-];
-
 export const notifications = [
   { id: 1, title: "Remy Sharp", desc: "Team Leader", date: "01-02-2024 14:06" },
   {
@@ -55,29 +40,6 @@ export const notifications = [
     title: "Bencheli Abderrahmene",
     desc: "Team Leader",
     date: "01-02-2024 14:06",
-  },
-];
-
-export const default_description =
-  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore \
-  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-
-export const addedValues = [
-  {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  },
-  {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
 
