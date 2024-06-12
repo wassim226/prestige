@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton, Typography } from "@mui/material";
-import { addedValues } from "../constantes/data";
+import { addedValues, default_description } from "../constantes/data";
 import { Valeur, TitlebarImageList, MyImage } from "../components";
 import { Logo, image9 } from "../assets";
 import { hoverImageParent, hoverdImage } from "../constantes/style";
@@ -29,14 +29,17 @@ function Home() {
         <div className={`flex flex-col justify-start w-[100vw]`}>
           <div className="flex flex-col-reverse md:flex-row justify-end md:justify-between items-center w-[100vw] xs:landscape:h-[250vh] md:landscape:h-[90vh] portrait:h-[90vh] overflow-y-clip">
             <div
-              className={`flex flex-col justify-start items-center mt-14 md:w-[50vw] md:mt-0`}
+              className={`flex flex-col justify-start items-center my-40 md:w-[50vw] md:mt-0`}
             >
-              <img
-                src={Logo}
-                className="hidden md:flex rounded w-[40%] h-[20%]"
-              />
+              <Typography
+                gutterBottom
+                variant="h2"
+                className="text-white w-[80%]"
+              >
+                PRESTIGE
+              </Typography>
               <Typography gutterBottom className="text-white w-[80%]">
-                {/* {data.extPresentation} */}
+                {default_description}
               </Typography>
               <Link to="/contact">
                 <button className="border-2 rounded mt-8 border-primary bg-transparent text-primary py-4 px-6 hover:bg-primary hover:text-secondary">
