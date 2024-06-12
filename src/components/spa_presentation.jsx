@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MyImage from "./my_image";
 

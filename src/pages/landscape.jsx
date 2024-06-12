@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Articale } from "../components";
 import { useParams } from "react-router-dom";
-import {
-  default_description,
-  landscape,
-  landscapeData,
-} from "../constantes/data";
+import { landscapeData } from "../constantes/data";
 import { Skeleton } from "@mui/material";
 
 function Landscape(props) {

@@ -1,11 +1,10 @@
 import { Skeleton, Typography } from "@mui/material";
-import { PureWater1, PureWater, Clean, Clean1, greenPool1 } from "../assets";
+import { PureWater1, Clean, Clean1, greenPool1 } from "../assets";
 import { MySlider, ArticaleHead, MyImage } from "../components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { PageController } from "../controllers";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { default_description } from "../constantes/data";
 import { hoverImageParent, hoverdImage } from "../constantes/style";
 

@@ -1,6 +1,9 @@
 import {
   PureWater,
   PureWater1,
+  SpaImage,
+  SpaImage2,
+  SpaImage3,
   image,
   image1,
   image4,
@@ -51,7 +54,7 @@ export const addedValues = [
 
 export const spas = [
   {
-    presentationImg: PureWater,
+    presentationImg: SpaImage3,
     title: "SPA MALAGA 3 PLACES",
     price: 6500,
     details: [
@@ -67,7 +70,7 @@ export const spas = [
     ],
   },
   {
-    presentationImg: PureWater1,
+    presentationImg: SpaImage,
     title: "SPA NEVADA 2 PLACES",
     price: 8000,
     details: [

@@ -1,5 +1,5 @@
 import { Diamond } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useState } from "react";
 
 function Valeur(props) {

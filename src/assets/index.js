@@ -24,6 +24,11 @@ import BackyardPool1 from "./Pimg/pool/BackyardPool1.webp";
 import BackyardPool2 from "./Pimg/pool/BackyardPool2.webp";
 import BackyardPool3 from "./Pimg/pool/BackyardPool3.jpg";
 
+import SpaImage1 from "./Pimg/spa/SpaImage1.jpg";
+import SpaImage from "./Pimg/spa/SpaImage.webp";
+import SpaImage2 from "./Pimg/spa/SpaImage2.jpg";
+import SpaImage3 from "./Pimg/spa/SpaImage3.jpg";
+
 export {
   menu,
   close,
@@ -48,4 +53,8 @@ export {
   Clean,
   Clean1,
   greenPool1,
+  SpaImage1,
+  SpaImage,
+  SpaImage2,
+  SpaImage3,
 };

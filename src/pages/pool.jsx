@@ -1,16 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Articale } from "../components";
 import { Skeleton } from "@mui/material";
-import { PageController } from "../controllers";
 import { default_description } from "../constantes/data";
-import {
-  BackyardPool,
-  BackyardPool1,
-  BackyardPool2,
-  BackyardPool3,
-  PureWater,
-  PureWater1,
-} from "../assets";
+import { BackyardPool2, BackyardPool3 } from "../assets";
 
 function Pool() {
   const [loading, setLoading] = useState(false);

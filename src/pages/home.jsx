@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton, Typography } from "@mui/material";
 import { addedValues } from "../constantes/data";
 import { Valeur, TitlebarImageList, MyImage } from "../components";
-import { Logo, PureWater, image, image3, image4, image9 } from "../assets";
+import { Logo, image9 } from "../assets";
 import { hoverImageParent, hoverdImage } from "../constantes/style";
 
 function Home() {

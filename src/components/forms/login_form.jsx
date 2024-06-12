@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import {
   Dialog,
   TextField,
-  DialogTitle,
   DialogContent,
   DialogActions,
   IconButton,
@@ -14,9 +13,8 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import { PasswordInput } from "../";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserController } from "../../controllers";
 import SignupForm from "./signup_form";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -29,15 +27,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function LoginForm(props) {
-  const { open, setOpen, setAuthUser } = props;
+  const { open, setOpen } = props;
   const [openSignup, setOpenSignup] = useState(false);
   const [WIDTH, setWidth] = useState(window.innerWidth);
 
   // Loading agents list
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [serverError, setServerError] = useState({ code: null, message: null });
-  const abortController = useRef(null);
 
   //post team form
   const formRef = useRef(null);
@@ -47,27 +43,11 @@ function LoginForm(props) {
     reset,
     formState: { errors },
     control,
-  } = useForm({ resolver: zodResolver(UserController.schema) });
+  } = useForm({ resolver: zodResolver() });
 
   const handleClose = () => {
     reset();
     setOpen(false);
-  };
-
-  const handelLogin = async (values) => {
-    setIsLoading(() => true);
-    const controller = new UserController(abortController, setServerError);
-
-    let result = await controller.login(values);
-    setIsLoading(() => false);
-
-    if (result) {
-      setError(() => false);
-      setAuthUser(() => result);
-      handleClose();
-    } else {
-      setError(() => true);
-    }
   };
 
   const handelSignup = () => {
@@ -102,7 +82,7 @@ function LoginForm(props) {
         >
           <CloseIcon />
         </IconButton>
-        <form ref={formRef} onSubmit={handleSubmit(handelLogin)}>
+        <form ref={formRef}>
           <DialogContent
             className="flex flex-col justify-center items-center"
             dividers

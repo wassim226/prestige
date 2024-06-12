@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LandscapeMenu, UserMenu } from "../components";
+import { LandscapeMenu } from "../components";
 import { navList, landscape } from "../constantes/data";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { Person } from "@mui/icons-material";
@@ -10,7 +10,6 @@ import { desktopMenu, mobileMenu } from "../constantes/style";
 
 function Navigation(props) {
   const [anchorLandscape, setAnchorElLandscape] = useState(null);
-  // const [anchorElUser, setAnchorElUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
   const [toggle, setToggle] = useState(true);
 
@@ -83,16 +82,6 @@ function Navigation(props) {
                 <Person className="text-dimWhite hover:text-primary" />
               </IconButton>
             </Tooltip>
-            {/* {props.authUser != null && (
-              <UserMenu
-                setAuthUser={props.setAuthUser}
-                authUser={props.authUser}
-                anchorElUser={anchorElUser}
-                handleCloseUserMenu={() => {
-                  setAnchorElUser(null);
-                }}
-              />
-            )} */}
           </Box>
         )}
         <LandscapeMenu
@@ -102,11 +91,7 @@ function Navigation(props) {
           }}
           landscape={landscape}
         />
-        <LoginForm
-          open={openLogin}
-          setOpen={setOpenLogin}
-          // setAuthUser={props.setAuthUser}
-        />
+        <LoginForm open={openLogin} setOpen={setOpenLogin} />
       </div>
     </>
   );

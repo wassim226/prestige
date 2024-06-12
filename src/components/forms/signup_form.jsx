@@ -3,21 +3,18 @@ import { styled } from "@mui/material/styles";
 import {
   Dialog,
   TextField,
-  DialogTitle,
   DialogContent,
   DialogActions,
   IconButton,
   Typography,
   Divider,
-  ToggleButton,
   Switch,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { PasswordInput } from "..";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserController } from "../../controllers";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -36,8 +33,6 @@ function SignupForm(props) {
   // Loading agents list
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [serverError, setServerError] = useState({ code: null, message: null });
-  const abortController = useRef(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
   //post team form
@@ -48,32 +43,12 @@ function SignupForm(props) {
     reset,
     setValue,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(UserController.signupSchema) });
+  } = useForm({ resolver: zodResolver() });
 
   const handleClose = () => {
     reset();
     setOpen(false);
   };
-
-  const handelSignup = async (values) => {
-    setIsLoading(() => true);
-    const controller = new UserController(abortController, setServerError);
-    let result = await controller.signup(values);
-    setIsLoading(() => false);
-
-    if (result) {
-      setError(() => false);
-      if (setAuthUser) setAuthUser(() => result);
-      handleClose();
-    } else {
-      setError(() => true);
-    }
-  };
-
-  // screen.orientation.onchange = function () {
-  //  // logs 'portrait' or 'landscape'
-  //   console.log(screen.orientation.type.match(/\w+/)[0]);
-  // };
 
   useEffect(() => {
     const resize = () => {
@@ -110,7 +85,7 @@ function SignupForm(props) {
       >
         <CloseIcon />
       </IconButton>
-      <form ref={formRef} onSubmit={handleSubmit(handelSignup)}>
+      <form ref={formRef}>
         <DialogContent
           className="flex flex-col justify-center items-center"
           dividers
