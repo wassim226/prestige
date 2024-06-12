@@ -30,7 +30,7 @@ function Footer(props) {
             </li>
             <li>
               <Typography gutterBottom className="hover:text-primary">
-                <a href="tel:0698755632">0698755632</a>
+                <a href="tel:+16105579289">+16105579289</a>
               </Typography>
             </li>
             <li>

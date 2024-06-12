@@ -101,7 +101,7 @@ function Contact() {
                       />
                     ) : (
                       // data.phone
-                      <a href="tel:0698755632">0698755632</a>
+                      <a href="tel:+16105579289">+16105579289</a>
                     )}
                   </Typography>
                 </div>
@@ -193,7 +193,7 @@ function Contact() {
                       />
                     ) : (
                       // data.phone
-                      <a href="tel:0698755632">0698755632</a>
+                      <a href="tel:+16105579289">+16105579289</a>
                     )}
                   </Typography>
                 </div>
