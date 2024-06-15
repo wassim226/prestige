@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Skeleton } from "@mui/material";
+import { standard } from "../constantes/data";
 
 function MyImage(props) {
   const { id } = props;
@@ -15,7 +16,16 @@ function MyImage(props) {
         />
       ) : (
         <div>
-          <img src={id} className={props.className} />
+          {id ? (
+            <img src={id} className={props.className} />
+          ) : (
+            <img
+              src={standard}
+              width="1024"
+              height="1024"
+              className={props.className}
+            />
+          )}
         </div>
       )}
     </div>

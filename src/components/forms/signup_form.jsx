@@ -9,6 +9,7 @@ import {
   Typography,
   Divider,
   Switch,
+  Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { PasswordInput } from "..";
@@ -26,28 +27,28 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function SignupForm(props) {
-  const { open, setOpen, setAuthUser, inCpanel } = props;
+  const { open, setOpen, setOpenSignin } = props;
   const [WIDTH, setWidth] = useState(window.innerWidth);
   const [isLandscape, setIsLandscape] = useState(false);
 
-  // Loading agents list
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
 
-  //post team form
   const formRef = useRef(null);
   const {
     register,
-    handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm({ resolver: zodResolver() });
 
   const handleClose = () => {
     reset();
     setOpen(false);
+  };
+
+  const handelSignin = () => {
+    handleClose();
+    setOpenSignin(() => true);
   };
 
   useEffect(() => {
@@ -90,8 +91,8 @@ function SignupForm(props) {
           className="flex flex-col justify-center items-center"
           dividers
           sx={{
-            width: WIDTH >= 1060 ? "35vw" : "80vw",
-            height: WIDTH >= 1060 ? "55vh" : isLandscape ? "100vh" : "auto",
+            width: WIDTH >= 1060 ? "35vw" : "100%",
+            height: WIDTH >= 1060 ? "55vh" : isLandscape ? "100vh" : "60vh",
           }}
         >
           <div className={`flex flex-col justify-center items-center w-full`}>
@@ -151,17 +152,16 @@ function SignupForm(props) {
                 errors.confirm?.message ?? errors.confirmPassword?.message
               }
             />
-            {inCpanel && (
-              <div className="flex flex-row justify-start items-center w-full">
-                <Typography className=" pt-2">{"Admin"}</Typography>
-                <Switch
-                  label={"Admin"}
-                  checked={isAdmin}
-                  onChange={() => setIsAdmin((prev) => !prev)}
-                  inputProps={{ "aria-label": "controlled" }}
-                />
-              </div>
-            )}
+            <Divider className="w-[50%] my-1" sx={{ margin: "40px 0px" }} />
+            <Box>
+              <Typography
+                variant="body2"
+                className=" cursor-pointer"
+                onClick={() => handelSignin()}
+              >
+                Already have an account? Sign in
+              </Typography>
+            </Box>
             {error && (
               <>
                 <Divider className="w-[50%] my-1" sx={{ margin: "40px 0px" }} />
@@ -181,9 +181,6 @@ function SignupForm(props) {
               type="submit"
               disabled={isLoading}
               className={`bg-primary text-white px-20 py-2 rounded-sm`}
-              onMouseDown={() => {
-                setValue("role", inCpanel && isAdmin ? "admin" : "customer");
-              }}
             >
               Signup
             </button>
