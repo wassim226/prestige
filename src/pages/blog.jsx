@@ -2,10 +2,11 @@ import { ArticlePreview, ArticaleHead } from "../components";
 import { useState } from "react";
 import { Skeleton } from "@mui/material";
 import { image3 } from "../assets";
+import { blogArticales } from "../constantes/data";
 
 function Blog() {
   const [loading, setLoading] = useState(false);
-  const [articalesData, setArticalesData] = useState([]);
+  const [articalesData, setArticalesData] = useState(blogArticales);
 
   return (
     <div className={`flex flex-col justify-start w-[100vw]`}>
@@ -26,16 +27,16 @@ function Blog() {
       ) : (
         <>
           <ArticaleHead
-            background_class={image3} //{data.presentationImg} {"background-landscape blog_background"}
+            background_class={image3}
             title={"SÉCURISATION LA QUALITÉ DES EAUX"}
             description={"SÉCURISATION LA QUALITÉ DES EAUX"}
           />
 
           <section
-            className={`grid gap-8 md:gap-0 grid-cols-1 ${
+            className={` ${
               articalesData.length <= 1
-                ? ""
-                : "ss:grid-cols-3 sm:grid-cols-4 md:grid-cols-5"
+                ? "flex flex-row justify-center items-center"
+                : "grid gap-8 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
             } grid-flow-row w-[90%] mx-10 my-20`}
           >
             {articalesData.map((val, ind) => (

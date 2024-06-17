@@ -95,7 +95,9 @@ function SignupForm(props) {
             height: WIDTH >= 1060 ? "55vh" : isLandscape ? "100vh" : "60vh",
           }}
         >
-          <div className={`flex flex-col justify-center items-center w-full`}>
+          <div
+            className={`flex flex-col justify-center items-center w-full md:mt-20`}
+          >
             <div className="flex flex-row justify-center items-center w-full md:w-auto">
               <TextField
                 {...register("firstName")}

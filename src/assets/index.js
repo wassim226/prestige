@@ -6,11 +6,11 @@ import menu from "./menu.svg";
 import Logo from "./images/logo.png";
 
 import image from "./Pimg/image.webp";
-import image1 from "./Pimg/image1.jpg";
-import image2 from "./Pimg/image2.jpeg";
+import image1 from "./Pimg/image1.webp";
+import image2 from "./Pimg/image2.webp";
 import image3 from "./Pimg/image3.jpeg";
 import image4 from "./Pimg/image4.jpeg";
-import image5 from "./Pimg/image5.jpg";
+import image5 from "./Pimg/image5.webp";
 import image6 from "./Pimg/image6.jpg";
 import image7 from "./Pimg/image7.jpg";
 import image8 from "./Pimg/image8.jpg";
@@ -19,9 +19,8 @@ import Clean from "./Pimg/Clean.jpg";
 import Clean1 from "./Pimg/Clean1.jpg";
 import greenPool1 from "./Pimg/greenPool1.jpg";
 
-import BackyardPool from "./Pimg/pool/BackyardPool.jpg";
 import BackyardPool1 from "./Pimg/pool/BackyardPool1.webp";
-import BackyardPool2 from "./Pimg/pool/BackyardPool2.webp";
+import BackyardPool2 from "./Pimg/pool/BackyardPool1.jpg";
 import BackyardPool3 from "./Pimg/pool/BackyardPool3.jpg";
 
 import SpaImage1 from "./Pimg/spa/SpaImage1.jpg";
@@ -46,7 +45,6 @@ export {
   image7,
   image8,
   image9,
-  BackyardPool,
   BackyardPool1,
   BackyardPool2,
   BackyardPool3,
