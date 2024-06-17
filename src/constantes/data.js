@@ -6,6 +6,8 @@ import {
   SpaImage3,
   image,
   image1,
+  image2,
+  image3,
   image4,
   image5,
   image6,
@@ -147,3 +149,24 @@ export const landscapeData = {
     ],
   },
 };
+
+export const blogArticales = [
+  {
+    id: 0,
+    presentationImg: image1,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    extPresentation: default_description,
+  },
+  {
+    id: 0,
+    presentationImg: image2,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    extPresentation: default_description,
+  },
+  {
+    id: 0,
+    presentationImg: image3,
+    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    extPresentation: default_description,
+  },
+];

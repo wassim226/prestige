@@ -9,7 +9,7 @@ function ArticlePreview(props) {
   return (
     <Link to={`${mode == "edit" ? "detail/" : "../articale/"}${id}`}>
       <div
-        className="flex flex-row relative rounded cursor-pointer"
+        className="flex flex-row max-w-[35vw] relative rounded cursor-pointer"
         onMouseOut={() => {
           setHovered((prev) => false);
         }}
@@ -25,7 +25,7 @@ function ArticlePreview(props) {
             hovered ? "scale-1" : "scale-0"
           }`}
         >
-          <Typography variant="h6" className="text-white">
+          <Typography variant="h6" className="text-white text-center">
             {title}
           </Typography>
           <Typography
