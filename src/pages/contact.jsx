@@ -100,7 +100,6 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      // data.phone
                       <a href="tel:+16105579289">+16105579289</a>
                     )}
                   </Typography>
@@ -121,7 +120,6 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      // data.adress
                       "Address"
                     )}
                   </Typography>

@@ -1,8 +1,8 @@
 import { ArticlePreview, ArticaleHead } from "../components";
 import { useState } from "react";
 import { Skeleton } from "@mui/material";
-import { image3 } from "../assets";
 import { blogArticales } from "../constantes/data";
+import { defaultImage } from "../constantes";
 
 function Blog() {
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ function Blog() {
       ) : (
         <>
           <ArticaleHead
-            background_class={image3}
+            background_class={defaultImage}
             title={"SÉCURISATION LA QUALITÉ DES EAUX"}
             description={"SÉCURISATION LA QUALITÉ DES EAUX"}
           />

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Articale } from "../components";
 import { Skeleton } from "@mui/material";
 import { default_description } from "../constantes/data";
-import { BackyardPool2, BackyardPool3 } from "../assets";
+import { defaultImage } from "../constantes";
 
 function Pool() {
   const [loading, setLoading] = useState(false);
@@ -25,13 +25,13 @@ function Pool() {
         </div>
       ) : (
         <Articale
-          background_class={BackyardPool2}
+          background_class={defaultImage}
           backImagePos={"md:top-[-30vh]"}
           title={"Bienvenue dans le magazine de la piscine"}
           description={default_description}
           sections={[
             {
-              image: BackyardPool3,
+              image: defaultImage,
               title: "Bienvenue dans le magazine de la piscine",
               description: default_description,
               services: [

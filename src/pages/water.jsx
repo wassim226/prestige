@@ -1,12 +1,12 @@
 import { Skeleton, Typography } from "@mui/material";
-import { PureWater1, Clean, Clean1, greenPool1 } from "../assets";
 import { MySlider, ArticaleHead, MyImage } from "../components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
-import { default_description } from "../constantes/data";
+import { default_description, standard } from "../constantes/data";
 import { hoverImageParent, hoverdImage } from "../constantes/style";
+import { defaultImage } from "../constantes";
 
 function Water() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ function Water() {
         ) : (
           <>
             <ArticaleHead
-              background_class={Clean1}
+              background_class={defaultImage}
               title={"SÉCURISATION LA QUALITÉ DES EAUX"}
               description={default_description}
             />
@@ -50,7 +50,10 @@ function Water() {
                 } w-full items-center`}
               >
                 <div className={`w-[40%] mx-auto ${hoverImageParent}`}>
-                  <MyImage id={Clean} className={`rounded-md ${hoverdImage}`} />
+                  <MyImage
+                    id={defaultImage}
+                    className={`rounded-md ${hoverdImage}`}
+                  />
                 </div>
                 <div
                   className={`flex flex-col justify-start items-center w-[50vw]`}
@@ -120,8 +123,8 @@ function Water() {
                   {Array.from(Array(3)).map((val, ind) => (
                     <MySlider
                       key={"prevs_" + ind}
-                      prev_img={greenPool1}
-                      new_img={PureWater1}
+                      prev_img={standard}
+                      new_img={standard}
                     />
                   ))}
                 </Slider>

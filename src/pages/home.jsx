@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Skeleton, Typography } from "@mui/material";
 import { addedValues, default_description } from "../constantes/data";
 import { Valeur, TitlebarImageList, MyImage } from "../components";
-import { Logo, image9 } from "../assets";
 import { hoverImageParent, hoverdImage } from "../constantes/style";
+import { defaultImage } from "../constantes";
 
 function Home() {
   const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ function Home() {
               className={`w-full h-auto min-h-40 md:w-[35vw] md:h-[38.33333vw] md:mr-32 md:mt-24 ${hoverImageParent}`}
             >
               <MyImage
-                id={image9}
+                id={defaultImage}
                 loading="lazy"
                 className={`${hoverdImage}`}
               />

@@ -1,14 +1,13 @@
 import React from "react";
-import { PureWater1, PureWater } from "../assets";
 import { Typography } from "@mui/material";
-import { default_description } from "../constantes/data";
+import { default_description, standard } from "../constantes/data";
 
 function BlogArticale(props) {
   const { title, img, text } = props;
   return (
     <div className="flex flex-col justify-start items-center">
       <div className="flex flex-row justify-center items-center w-[65vw] h-[80vh] my-5">
-        <img className="w-full h-full" src={PureWater1} />
+        <img className="w-full h-full" src={standard} />
       </div>
       <section className="flex flex-col justify-start items-center mx-32">
         <Typography
@@ -44,7 +43,7 @@ function BlogArticale(props) {
             {default_description}
           </Typography>
           <div className="rounded h-[40%] w-[50%]">
-            <img className="w-full h-full rounded" src={PureWater} />
+            <img className="w-full h-full rounded" src={standard} />
           </div>
         </div>
       </section>

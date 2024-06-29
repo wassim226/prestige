@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { MyPagination, SpaPresentation, ArticaleHead } from "../components";
 import { ImageList, ImageListItem, Skeleton } from "@mui/material";
 import { default_description, spas } from "../constantes/data";
-import { handelResize } from "../constantes";
-import { BackgroundImg, SpaImage, SpaImage1 } from "../assets";
+import { defaultImage, handelResize } from "../constantes";
 
 function Spa() {
   const [loading, setLoading] = useState(false);
@@ -38,14 +37,12 @@ function Spa() {
       ) : (
         <>
           <ArticaleHead
-            background_class={SpaImage1}
+            background_class={defaultImage}
             backImagePos={"md:top-[-30vh]"}
             title={"SPAS GAMME PRESTIGE"}
             description={default_description}
-            // flip={true}
           />
           <ImageList
-            // variant="woven"
             gap={8}
             cols={cols}
             className="relative w-[80%] mt-10 mb-20 min-h-[500px]"

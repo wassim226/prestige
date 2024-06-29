@@ -1,6 +1,8 @@
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config.js";
 
+export const defaultImage = null;
+
 export const handelResize = (setCols) => {
   const fullConfig = resolveConfig(tailwindConfig);
   setCols(() => {

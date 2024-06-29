@@ -15,7 +15,6 @@ import ArticaleHead from "./articale_head";
 import MyImage from "./my_image";
 import Footer from "./footer";
 
-// controle panel
 import PasswordInput from "./password_input";
 import Review from "./review";
 

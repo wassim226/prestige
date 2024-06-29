@@ -70,12 +70,7 @@ function Navigation(props) {
             <Tooltip title={"Account"}>
               <IconButton
                 onClick={(event) => {
-                  // if (props.authUser == null) {
                   setOpenLogin(() => true);
-                  // }
-                  // else {
-                  //   setAnchorElUser(event.currentTarget);
-                  // }
                 }}
                 sx={{ p: 0 }}
               >
