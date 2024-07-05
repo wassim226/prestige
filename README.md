@@ -21,6 +21,17 @@ This template is created with:
   - [Material UI components](https://mui.com/material-ui/all-components/)
   - [Mui style customization](https://mui.com/material-ui/customization/theming/)
 
+## Sources
+
+The used images in preview version of this template are free on this sites:
+
+- [Homeworlddesign](https://homeworlddesign.com/)
+- [Freepik](https://www.freepik.com/)
+- [Arkaenergy](https://www.arkaenergy.com/learn/modern-landscape-design /)
+- [Vecteezy](https://www.vecteezy.com/)
+- [Alibaba](https://www.alibaba.com/)
+- [Houzz](https://www.houzz.com/)
+
 ## Installation and build
 
 - To import necessary dependancies run :
