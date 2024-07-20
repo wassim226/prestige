@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Articale } from "../components";
 import { useParams } from "react-router-dom";
-import { default_description, landscape } from "../constantes";
+import { landscape } from "../constantes";
 import { PageController } from "../controllers";
 import { Skeleton } from "@mui/material";
 
@@ -43,24 +43,7 @@ function Landscape(props) {
           />
         </div>
       ) : (
-        <Articale
-          background_class={data.presentationImg} //`background-landscape conception${ind}`
-          title={data.title.toUpperCase()}
-          description={data.extPresentation}
-          sections={[
-            {
-              image: data.bodyImg,
-              title: data.bodyTitle.toUpperCase(),
-              description: data.bodyPresentation,
-              services: [
-                data.service_1,
-                data.service_2,
-                data.service_3,
-                data.service_4,
-              ],
-            },
-          ]}
-        />
+        <Articale data={data} />
       )}
     </div>
   );

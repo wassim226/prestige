@@ -40,7 +40,7 @@ function Presentation(props) {
         className={`grid grid-rows-4 sm:grid-rows-1 grid-flow-col w-full my-20`}
       >
         {services.map((val, ind) => (
-          <ServiceIcon key={"ser_" + ind} title={val} />
+          <ServiceIcon key={"ser_" + ind} title={val.description} />
         ))}
       </div>
     </section>

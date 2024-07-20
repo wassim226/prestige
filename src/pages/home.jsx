@@ -16,6 +16,7 @@ function Home() {
   const getApiData = async (name) => {
     const res = await controller.getElement(name);
     if (res) {
+      console.log(res);
       setData(() => res);
     }
     setLoading(() => false);
@@ -55,7 +56,7 @@ function Home() {
                 {/* <div className={`w-[50vw] h-[38.33333vw] bg-cover bg-center background-image mx-10`}></div> */}
                 {/* <Typography gutterBottom variant='h2' sx={{fontWeight: 550}} className='text-white w-[50%]'>PRESTIGE PISCINE & PAYSAGE</Typography> */}
                 <Typography gutterBottom className="text-white w-[80%]">
-                  {data.extPresentation}
+                  {data.artSequences[0].extPresentation}
                   {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -74,7 +75,7 @@ function Home() {
               <div
                 className={`w-full h-auto min-h-40 md:w-[35vw] md:h-[38.33333vw] md:mr-10`}
               >
-                <MyImage id={data.presentationImg} />
+                <MyImage id={data.artSequences[0].presentationImg} />
               </div>
             </div>
           </a>
@@ -92,18 +93,16 @@ function Home() {
               </div>
               <div className="grid grid-rows-4 sm:grid-rows-1 grid-flow-col w-full mx-10 my-20">
                 {/* flex flex-row justify-between items-center my-20 w-[80%] */}
-                {Array(4)
-                  .fill()
-                  .map((v, i) => {
-                    let ind = i + 1;
-                    return (
-                      <Valeur
-                        key={"val_" + ind}
-                        title={data["value_" + ind]}
-                        body={data["desc_" + ind]}
-                      />
-                    );
-                  })}
+                {data.sequences.map((v, i) => {
+                  let ind = i + 1;
+                  return (
+                    <Valeur
+                      key={"val_" + ind}
+                      title={v.name}
+                      body={v.description}
+                    />
+                  );
+                })}
               </div>
             </div>
           </a>

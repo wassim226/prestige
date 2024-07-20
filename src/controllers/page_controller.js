@@ -26,7 +26,8 @@ export default class PageController extends BaseController {
     this.path = "pages/" + name;
     let res = await this.send_request({});
     if (res) {
-      return getParsedData(res);
+      // return getParsedData(res);
+      return res;
     }
   }
 

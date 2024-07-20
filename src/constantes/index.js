@@ -177,6 +177,28 @@ export const getPage = (id, controller) => {
   return page;
 };
 
+export function parseDefaultPageData(json) {
+  let res = {
+    id: json.id,
+    name: json.name,
+    type: json.type,
+  };
+  switch (json.name) {
+    case "home":
+      res.extPresentation = json.artSequences[0].extPresentation;
+      res.presentationImg = json.artSequences[0].imgPresentation;
+      for (let i = 0; i < json.sequences.length; i++) {
+        let seq = json.sequences[i];
+        res["value_" + (i + 1)] = seq.name;
+        res["desc_" + (i + 1)] = seq.description;
+      }
+      break;
+    default:
+      res = json;
+      break;
+  }
+  return res;
+}
 export async function adaptedJson(json) {
   let imgs = ["presentationImg", "bodyImg"];
 
@@ -190,22 +212,25 @@ export async function adaptedJson(json) {
       } else {
         json.presentationImg = -1;
       }
+      let seqs = [];
+      for (let i = 1; i <= 4; i++) {
+        if (json["value_" + i] != "" && json["desc_" + i] != "") {
+          seqs.push({
+            name: json["value_" + i],
+            description: json["desc_" + i],
+          });
+        }
+      }
 
       json = {
-        head: JSON.stringify({
-          presentationImg: json.presentationImg,
-          extPresentation: json.extPresentation,
-        }),
-        sequance1: JSON.stringify({
-          value_1: json.value_1,
-          desc_1: json.desc_1,
-          value_2: json.value_2,
-          desc_2: json.desc_2,
-          value_3: json.value_3,
-          desc_3: json.desc_3,
-          value_4: json.value_4,
-          desc_4: json.desc_4,
-        }),
+        artSequences: [
+          {
+            title: "just title",
+            imgPresentation: json.presentationImg,
+            extPresentation: json.extPresentation,
+          },
+        ],
+        sequences: seqs,
       };
       break;
     case "conception":
@@ -227,22 +252,29 @@ export async function adaptedJson(json) {
       );
 
       json = {
-        head: JSON.stringify({
-          title: json.title,
-          presentationImg: json.presentationImg,
-          extPresentation: json.extPresentation,
-        }),
-        sequance1: JSON.stringify({
-          bodyTitle: json.bodyTitle,
-          bodyPresentation: json.bodyPresentation,
-          bodyImg: json.bodyImg,
-        }),
-        sequance2: JSON.stringify({
-          service_1: json.service_1,
-          service_2: json.service_2,
-          service_3: json.service_3,
-          service_4: json.service_4,
-        }),
+        artSequences: JSON.stringify([
+          {
+            title: json.title,
+            presentationImg: json.presentationImg,
+            extPresentation: json.extPresentation,
+          },
+          {
+            title: json.bodyTitle,
+            extPresentation: json.bodyPresentation,
+            presentationImg: json.bodyImg,
+          },
+        ]),
+        sequences: JSON.stringify(
+          Array(4)
+            .fill()
+            .map((v, i) => {
+              ++i;
+              return {
+                name: "service_" + i,
+                description: json["service_" + i],
+              };
+            })
+        ),
       };
       break;
     case "spa":

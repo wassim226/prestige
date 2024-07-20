@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Backdrop, CircularProgress, Skeleton } from "@mui/material";
+import { parseDefaultPageData } from "../../constantes";
 
 function FormView(props) {
   const { controller } = props;
@@ -13,8 +14,10 @@ function FormView(props) {
   useEffect(() => {
     if (prev != "new") {
       const getData = async () => {
-        console.log(prev);
         let prev_data = await controller.getElement(prev);
+
+        console.log(prev_data);
+
         setData(() => prev_data);
         setIsLoading(() => false);
       };
@@ -50,7 +53,7 @@ function FormViewer(props) {
     formState: { errors },
     watch,
   } = useForm({
-    defaultValues: data,
+    defaultValues: parseDefaultPageData(data),
     resolver: zodResolver(
       data == "new" ? controller.schema : controller.updateSchema
     ),
@@ -71,7 +74,6 @@ function FormViewer(props) {
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
           open={loading}
-          // onClick={handleClose}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
