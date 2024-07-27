@@ -1,4 +1,8 @@
-import { adaptedJson, getParsedData } from "../constantes";
+import {
+  adaptedJson,
+  getParsedData,
+  parseDefaultPageData,
+} from "../constantes";
 import BaseController from "./base_controller";
 
 export default class PageController extends BaseController {
@@ -26,8 +30,8 @@ export default class PageController extends BaseController {
     this.path = "pages/" + name;
     let res = await this.send_request({});
     if (res) {
-      // return getParsedData(res);
-      return res;
+      return parseDefaultPageData(res);
+      // return res;
     }
   }
 
@@ -43,8 +47,8 @@ export default class PageController extends BaseController {
     json.name = typeof json.name === "string" ? json.name : json.name.name;
     this.path = "pages/" + json.name;
     console.log(json);
-    json = await adaptedJson(json);
-    console.log(json);
+    // json = await adaptedJson(json);
+    // console.log(json);
 
     let res = await this.send_request({
       method: "PUT",

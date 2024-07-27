@@ -193,6 +193,23 @@ export function parseDefaultPageData(json) {
         res["desc_" + (i + 1)] = seq.description;
       }
       break;
+    case "conception":
+    case "amenagement":
+    case "entretien":
+    case "pool":
+      res.name = landscape[0];
+      res.title = json.artSequences[0].title;
+      res.extPresentation = json.artSequences[0].extPresentation;
+      res.presentationImg = json.artSequences[0].imgPresentation;
+      res.bodyTitle = json.artSequences[1].title;
+      res.bodyPresentation = json.artSequences[1].extPresentation;
+      res.bodyImg = json.artSequences[1].imgPresentation;
+      for (let i = 0; i < json.sequences.length; i++) {
+        let seq = json.sequences[i];
+        res[seq.name] = seq.description;
+      }
+      console.log(res);
+      break;
     default:
       res = json;
       break;

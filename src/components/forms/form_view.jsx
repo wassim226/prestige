@@ -50,10 +50,11 @@ function FormViewer(props) {
     setValue,
     handleSubmit,
     reset,
+    getValues,
     formState: { errors },
     watch,
   } = useForm({
-    defaultValues: parseDefaultPageData(data),
+    defaultValues: data,
     resolver: zodResolver(
       data == "new" ? controller.schema : controller.updateSchema
     ),
@@ -80,6 +81,7 @@ function FormViewer(props) {
       )}
       <View
         formRef={formRef}
+        getValues={getValues}
         setValue={setValue}
         controller={controller}
         control={control}

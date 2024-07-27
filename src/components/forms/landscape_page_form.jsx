@@ -32,12 +32,27 @@ function LandscapePageForm(props) {
 
   const getData = async (name) => {
     let prev_data = await controller.getElement(name);
+    console.log(prev_data);
     if (prev_data) {
       Object.keys(prev_data).map((key) => {
-        setValue(key, prev_data[key]);
+        if (key == "name" && name != "pool") {
+          setValue(
+            key,
+            landscape.find((val) => val.name == name)
+          );
+        } else {
+          setValue(key, prev_data[key]);
+        }
       });
     }
     setIsLoading(() => false);
+  };
+
+  const clearData = async (prev_data) => {
+    console.log(prev_data);
+    Object.keys(prev_data).map((key) => {
+      setValue(key, null);
+    });
   };
 
   const handelSave = () => {
@@ -52,6 +67,8 @@ function LandscapePageForm(props) {
   useEffect(() => {
     if (isPool) {
       getData("pool");
+    } else {
+      setIsLoading(() => false);
     }
   }, []);
 
@@ -113,9 +130,12 @@ function LandscapePageForm(props) {
                           getOptionLabel: (option) => option.label,
                           onChange: (_event, item) => {
                             onChange(item);
+                            console.log(item);
                             setIsLoading(() => true);
                             if (item) {
                               getData(item.name);
+                            } else {
+                              clearData(props.getValues());
                             }
                           },
                         }}
