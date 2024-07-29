@@ -51,9 +51,9 @@ function Blog() {
       ) : (
         <>
           <ArticaleHead
-            background_class={data.presentationImg} //{"background-landscape blog_background"}
-            title={data.title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
-            description={data.extPresentation}
+            background_class={data.artSequences[0].presentationImg} //{"background-landscape blog_background"}
+            title={data.artSequences[0].title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
+            description={data.artSequences[0].extPresentation}
           />
 
           <section

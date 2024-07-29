@@ -95,13 +95,14 @@ function Home() {
                 {/* flex flex-row justify-between items-center my-20 w-[80%] */}
                 {data.sequences.map((v, i) => {
                   let ind = i + 1;
-                  return (
-                    <Valeur
-                      key={"val_" + ind}
-                      title={v.name}
-                      body={v.description}
-                    />
-                  );
+                  if (v.name != "")
+                    return (
+                      <Valeur
+                        key={"val_" + ind}
+                        title={v.name}
+                        body={v.description}
+                      />
+                    );
                 })}
               </div>
             </div>

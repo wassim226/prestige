@@ -31,7 +31,7 @@ function LandscapePageForm(props) {
   const [isLoading, setIsLoading] = useState(true);
 
   const getData = async (name) => {
-    let prev_data = await controller.getElement(name);
+    let prev_data = await controller.getElement(name, true);
     console.log(prev_data);
     if (prev_data) {
       Object.keys(prev_data).map((key) => {

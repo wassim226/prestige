@@ -91,9 +91,9 @@ function Spa() {
       ) : (
         <>
           <ArticaleHead
-            background_class={data.presentationImg} //{"background-landscape spa_background"}
-            title={data.title.toUpperCase()} //{"SPAS GAMME PRESTIGE"}
-            description={data.extPresentation} //{default_description}
+            background_class={data.artSequences[0].presentationImg} //{"background-landscape spa_background"}
+            title={data.artSequences[0].title.toUpperCase()} //{"SPAS GAMME PRESTIGE"}
+            description={data.artSequences[0].extPresentation} //{default_description}
             // flip={true}
           />
           <ImageList

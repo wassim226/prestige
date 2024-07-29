@@ -14,7 +14,7 @@ function FormView(props) {
   useEffect(() => {
     if (prev != "new") {
       const getData = async () => {
-        let prev_data = await controller.getElement(prev);
+        let prev_data = await controller.getElement(prev, true);
 
         console.log(prev_data);
 

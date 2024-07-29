@@ -24,6 +24,7 @@ function Water() {
   const getApiData = async (name) => {
     const res = await controller.getElement(name);
     if (res) {
+      console.log(res);
       setData(() => res);
     }
     setLoading(() => false);
@@ -53,9 +54,9 @@ function Water() {
         ) : (
           <>
             <ArticaleHead
-              background_class={data.presentationImg} //{"background-landscape water_background"}
-              title={data.title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
-              description={data.extPresentation} //{default_description}
+              background_class={data.artSequences[0].presentationImg} //{"background-landscape water_background"}
+              title={data.artSequences[0].title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
+              description={data.artSequences[0].extPresentation} //{default_description}
             />
 
             <section className={`flex flex-col justify-center w-[100vw] my-32`}>
@@ -65,7 +66,10 @@ function Water() {
                 } w-full items-center`}
               >
                 <div className={`w-[40%] mx-auto`}>
-                  <MyImage id={data.bodyImg} className="rounded-md" />
+                  <MyImage
+                    id={data.artSequences[1].bodyImg}
+                    className="rounded-md"
+                  />
                 </div>
                 <div
                   className={`flex flex-col justify-start items-center w-[50vw]`}
@@ -76,11 +80,11 @@ function Water() {
                     sx={{ fontWeight: 400 }}
                     className="text-primary w-[50%]"
                   >
-                    {data.bodyTitle}
+                    {data.artSequences[1].bodyTitle}
                     {/* Quelles solutions proposons-nous pour le traitement de votre eau de piscine ? */}
                   </Typography>
                   <Typography gutterBottom className="text-white w-[80%]">
-                    {data.bodyPresentation}
+                    {data.artSequences[1].bodyPresentation}
                   </Typography>
                 </div>
               </div>
@@ -95,26 +99,30 @@ function Water() {
                 NOS OFFRES
               </Typography>
               <div className="grid gap-8 md:gap-0 grid-cols-1 ss:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 grid-flow-row w-full mx-10 my-20">
-                {Array.from(Array(5)).map((val, ind) => (
-                  <div
-                    key={"offers_" + ind}
-                    className={`flex flex-col justify-center items-center w-[50vw] ss:w-[15vw] hover:scale-110 duration-500 rounded-xl border-2 border-primary bg-darkSecondary`}
-                  >
-                    <Typography
-                      sx={{ marginTop: "12px" }}
-                      variant="h3"
-                      className="text-center text-primary"
+                {
+                  data.sequences.map((val, ind) => (
+                    <div
+                      key={"offers_" + ind}
+                      className={`flex flex-col justify-center items-center w-[50vw] ss:w-[15vw] hover:scale-110 duration-500 rounded-xl border-2 border-primary bg-darkSecondary`}
                     >
-                      {++ind}
-                    </Typography>
-                    <Typography
-                      sx={{ margin: "20px", marginBottom: "30px" }}
-                      className="text-white text-center"
-                    >
-                      {data["offerDesc_" + ind]}
-                    </Typography>
-                  </div>
-                ))}
+                      <Typography
+                        sx={{ marginTop: "12px" }}
+                        variant="h3"
+                        className="text-center text-primary"
+                      >
+                        {++ind}
+                      </Typography>
+                      <Typography
+                        sx={{ margin: "20px", marginBottom: "30px" }}
+                        className="text-white text-center"
+                      >
+                        {val.description}
+                      </Typography>
+                    </div>
+                  ))
+                  // Array.from(Array(5)).map((val, ind) => (
+                  // ))
+                }
               </div>
             </section>
             <section

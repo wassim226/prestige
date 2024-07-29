@@ -210,6 +210,25 @@ export function parseDefaultPageData(json) {
       }
       console.log(res);
       break;
+    case "spa":
+    case "blog":
+      res.title = json.artSequences[0].title;
+      res.extPresentation = json.artSequences[0].extPresentation;
+      res.presentationImg = json.artSequences[0].imgPresentation;
+      break;
+    case "water":
+      res.title = json.artSequences[0].title;
+      res.extPresentation = json.artSequences[0].extPresentation;
+      res.presentationImg = json.artSequences[0].imgPresentation;
+      res.bodyTitle = json.artSequences[1].title;
+      res.bodyPresentation = json.artSequences[1].extPresentation;
+      res.bodyImg = json.artSequences[1].imgPresentation;
+      for (let i = 0; i < json.sequences.length; i++) {
+        let seq = json.sequences[i];
+        res["offer_" + (i + 1)] = seq.name;
+        res["offerDesc_" + (i + 1)] = seq.description;
+      }
+      break;
     default:
       res = json;
       break;

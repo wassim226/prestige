@@ -39,28 +39,7 @@ function Pool() {
           />
         </div>
       ) : (
-        <Articale
-          background_class={data.presentationImg}
-          title={data.title.toUpperCase()} //{"Bienvenue dans le magazine de la piscine"}
-          description={data.extPresentation}
-          sections={[
-            {
-              image: data.bodyImg,
-              title: data.bodyTitle.toUpperCase(),
-              description: data.bodyPresentation,
-              services: [
-                data.service_1,
-                data.service_2,
-                data.service_3,
-                data.service_4,
-              ],
-              // image: Pool3,
-              // title : "Bienvenue dans le magazine de la piscine",
-              // description: default_description,
-              // services: ["Forme libre", "Couloir de nage", "Plage immergée", "Filtration écologique"]
-            },
-          ]}
-        />
+        <Articale data={data} />
       )}
     </div>
   );

@@ -26,12 +26,12 @@ export default class PageController extends BaseController {
     this.schema_ = sch;
   }
 
-  async getElement(name) {
+  async getElement(name, isContorlePanel = false) {
     this.path = "pages/" + name;
     let res = await this.send_request({});
     if (res) {
-      return parseDefaultPageData(res);
-      // return res;
+      if (isContorlePanel) return parseDefaultPageData(res);
+      return res;
     }
   }
 
