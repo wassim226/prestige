@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { PageController } from "../controllers";
 import { useEffect, useRef, useState } from "react";
+import { hoverImageParent, hoverdImage } from "../constantes/style";
 
 function Water() {
   const [serverError, setServerError] = useState(null);
@@ -54,9 +55,9 @@ function Water() {
         ) : (
           <>
             <ArticaleHead
-              background_class={data.artSequences[0].presentationImg} //{"background-landscape water_background"}
-              title={data.artSequences[0].title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
-              description={data.artSequences[0].extPresentation} //{default_description}
+              background_class={data.artSequences[0].imgPresentation}
+              title={data.artSequences[0].title.toUpperCase()}
+              description={data.artSequences[0].extPresentation}
             />
 
             <section className={`flex flex-col justify-center w-[100vw] my-32`}>
@@ -65,10 +66,10 @@ function Water() {
                   Math.random() >= 0.5 ? "-reverse" : ""
                 } w-full items-center`}
               >
-                <div className={`w-[40%] mx-auto`}>
+                <div className={`w-[40%] mx-auto ${hoverImageParent}`}>
                   <MyImage
-                    id={data.artSequences[1].bodyImg}
-                    className="rounded-md"
+                    id={data.artSequences[1].imgPresentation}
+                    className={`rounded-md ${hoverdImage}`}
                   />
                 </div>
                 <div
@@ -80,11 +81,21 @@ function Water() {
                     sx={{ fontWeight: 400 }}
                     className="text-primary w-[50%]"
                   >
-                    {data.artSequences[1].bodyTitle}
-                    {/* Quelles solutions proposons-nous pour le traitement de votre eau de piscine ? */}
+                    {data.artSequences[1].title}
                   </Typography>
                   <Typography gutterBottom className="text-white w-[80%]">
-                    {data.artSequences[1].bodyPresentation}
+                    {data.artSequences[1].extPresentation.split("(*)").length <=
+                    1 ? (
+                      data.artSequences[1].extPresentation
+                    ) : (
+                      <ul className={" list-disc"}>
+                        {data.artSequences[1].extPresentation
+                          .split("(*)")
+                          .map((val) => (
+                            <li className="my-5">{val}</li>
+                          ))}
+                      </ul>
+                    )}
                   </Typography>
                 </div>
               </div>
@@ -99,30 +110,26 @@ function Water() {
                 NOS OFFRES
               </Typography>
               <div className="grid gap-8 md:gap-0 grid-cols-1 ss:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 grid-flow-row w-full mx-10 my-20">
-                {
-                  data.sequences.map((val, ind) => (
-                    <div
-                      key={"offers_" + ind}
-                      className={`flex flex-col justify-center items-center w-[50vw] ss:w-[15vw] hover:scale-110 duration-500 rounded-xl border-2 border-primary bg-darkSecondary`}
+                {data.sequences.map((val, ind) => (
+                  <div
+                    key={"offers_" + ind}
+                    className={`flex flex-col justify-center items-center w-[50vw] ss:w-[15vw] hover:scale-110 duration-500 rounded-xl border-2 border-primary bg-darkSecondary`}
+                  >
+                    <Typography
+                      sx={{ marginTop: "12px" }}
+                      variant="h3"
+                      className="text-center text-primary"
                     >
-                      <Typography
-                        sx={{ marginTop: "12px" }}
-                        variant="h3"
-                        className="text-center text-primary"
-                      >
-                        {++ind}
-                      </Typography>
-                      <Typography
-                        sx={{ margin: "20px", marginBottom: "30px" }}
-                        className="text-white text-center"
-                      >
-                        {val.description}
-                      </Typography>
-                    </div>
-                  ))
-                  // Array.from(Array(5)).map((val, ind) => (
-                  // ))
-                }
+                      {++ind}
+                    </Typography>
+                    <Typography
+                      sx={{ margin: "20px", marginBottom: "30px" }}
+                      className="text-white text-center"
+                    >
+                      {val.description}
+                    </Typography>
+                  </div>
+                ))}
               </div>
             </section>
             <section

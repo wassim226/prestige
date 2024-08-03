@@ -47,8 +47,8 @@ export default class PageController extends BaseController {
     json.name = typeof json.name === "string" ? json.name : json.name.name;
     this.path = "pages/" + json.name;
     console.log(json);
-    // json = await adaptedJson(json);
-    // console.log(json);
+    json = await adaptedJson(json);
+    console.log(json);
 
     let res = await this.send_request({
       method: "PUT",

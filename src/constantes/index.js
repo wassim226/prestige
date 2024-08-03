@@ -8,7 +8,6 @@ import {
   SpaPageForm,
   WaterPageForm,
 } from "../components";
-
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config.js";
 
@@ -118,10 +117,10 @@ export const getPage = (id, controller) => {
         bodyTitle: string().min(1, "This field can not be blank"),
         bodyPresentation: string().min(1, "This field can not be blank"),
         bodyImg: optionalImgValidator,
-        service_1: string().min(1, "This field can not be blank"),
-        service_2: string().min(1, "This field can not be blank"),
-        service_3: string().min(1, "This field can not be blank"),
-        service_4: string().min(1, "This field can not be blank"),
+        service_1: string().optional(),
+        service_2: string().optional(),
+        service_3: string().optional(),
+        service_4: string().optional(),
       });
       break;
     case "Spa":
@@ -248,26 +247,6 @@ export async function adaptedJson(json) {
       } else {
         json.presentationImg = -1;
       }
-      let seqs = [];
-      for (let i = 1; i <= 4; i++) {
-        if (json["value_" + i] != "" && json["desc_" + i] != "") {
-          seqs.push({
-            name: json["value_" + i],
-            description: json["desc_" + i],
-          });
-        }
-      }
-
-      json = {
-        artSequences: [
-          {
-            title: "just title",
-            imgPresentation: json.presentationImg,
-            extPresentation: json.extPresentation,
-          },
-        ],
-        sequences: seqs,
-      };
       break;
     case "conception":
     case "amenagement":
@@ -286,32 +265,6 @@ export async function adaptedJson(json) {
           }
         })
       );
-
-      json = {
-        artSequences: JSON.stringify([
-          {
-            title: json.title,
-            presentationImg: json.presentationImg,
-            extPresentation: json.extPresentation,
-          },
-          {
-            title: json.bodyTitle,
-            extPresentation: json.bodyPresentation,
-            presentationImg: json.bodyImg,
-          },
-        ]),
-        sequences: JSON.stringify(
-          Array(4)
-            .fill()
-            .map((v, i) => {
-              ++i;
-              return {
-                name: "service_" + i,
-                description: json["service_" + i],
-              };
-            })
-        ),
-      };
       break;
     case "spa":
       if (json.presentationImg.length == undefined) {
@@ -322,14 +275,6 @@ export async function adaptedJson(json) {
       } else {
         json.presentationImg = -1;
       }
-
-      json = {
-        head: JSON.stringify({
-          title: json.title,
-          presentationImg: json.presentationImg,
-          extPresentation: json.extPresentation,
-        }),
-      };
       break;
     case "water":
       await Promise.all(
@@ -344,31 +289,6 @@ export async function adaptedJson(json) {
           }
         })
       );
-
-      json = {
-        head: JSON.stringify({
-          title: json.title,
-          presentationImg: json.presentationImg,
-          extPresentation: json.extPresentation,
-        }),
-        sequance1: JSON.stringify({
-          bodyTitle: json.bodyTitle,
-          bodyPresentation: json.bodyPresentation,
-          bodyImg: json.bodyImg,
-        }),
-        sequance2: JSON.stringify({
-          offer_1: json.offer_1,
-          offer_2: json.offer_2,
-          offer_3: json.offer_3,
-          offer_4: json.offer_4,
-          offer_5: json.offer_5,
-          offerDesc_2: json.offerDesc_2,
-          offerDesc_3: json.offerDesc_3,
-          offerDesc_4: json.offerDesc_4,
-          offerDesc_1: json.offerDesc_1,
-          offerDesc_5: json.offerDesc_5,
-        }),
-      };
       break;
     case "blog":
       if (json.presentationImg.length == undefined) {
@@ -379,18 +299,7 @@ export async function adaptedJson(json) {
       } else {
         json.presentationImg = -1;
       }
-
-      json = {
-        head: JSON.stringify({
-          title: json.title,
-          presentationImg: json.presentationImg,
-          extPresentation: json.extPresentation,
-        }),
-      };
       break;
-    // case "contact":
-    //   page = ContactPageForm;
-    //   break;
   }
 
   return json;

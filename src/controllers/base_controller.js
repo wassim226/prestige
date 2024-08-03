@@ -4,7 +4,7 @@ export default class BaseController {
       ? "http://api.prestige-piscine-paysage.fr"
       : "http://localhost:5171";
   static #ACCESSTOKEN = "";
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzExOTAzMjg1LCJpYXQiOjE3MDk0ODQwODUsImp0aSI6ImUxNjg1MDc0OGM2ZTQ3MzdiNWRkNTEwMTE5ODgxZWQ4IiwidXNlcl9pZCI6M30.DH3HP19HcIBJ6Oqf6QlKHX9yIb3RSGT7ejrNr5-43DU
+
   constructor(abortController, setError) {
     this.path = "";
 
@@ -27,8 +27,6 @@ export default class BaseController {
   }
 
   async send_request(params) {
-    // this.abortController.current?.abort();
-    // this.abortController.current = new AbortController();
     let res;
     try {
       res = await fetch(
@@ -54,7 +52,7 @@ export default class BaseController {
         }
       }
 
-      this.setError(() => res.status); //{return {code : res.status, message : res.statusText}}
+      this.setError(() => res.status);
     } catch (e) {
       if (e.name == "SyntaxError" && res.ok) {
         return res.ok;
@@ -92,12 +90,6 @@ export default class BaseController {
 
     try {
       const res = await fetch(`${BaseController.BASE_URL}/${"files/upload"}`, {
-        // signal: this.abortController.current?.signal,
-        // headers: params.headers ?? {
-        //   Accept: "application/json",
-        //   "Content-Type": "application/json",
-        //   Authorization: "Bearer " + BaseController.#ACCESSTOKEN,
-        // },
         method: "POST",
         body: formData,
       });
@@ -118,12 +110,6 @@ export default class BaseController {
   static async getFile(fileId) {
     try {
       const res = await fetch(`${BaseController.BASE_URL}/files/${fileId}`, {
-        // signal: this.abortController.current?.signal,
-        // headers: params.headers ?? {
-        //   Accept: "application/json",
-        //   "Content-Type": "application/json",
-        //   Authorization: "Bearer " + BaseController.#ACCESSTOKEN,
-        // },
         method: "GET",
       });
 

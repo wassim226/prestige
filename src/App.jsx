@@ -56,7 +56,7 @@ function App() {
         >
           <Route index element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
-          <Route path="landscape/:ind" element={<Landscape />}></Route>
+          <Route path="landscape/:name" element={<Landscape />}></Route>
           <Route path="pool" element={<Pool />}></Route>
           <Route path="spa" element={<Spa />} initialIndex={0}></Route>
           <Route path="water" element={<Water />}></Route>
@@ -70,7 +70,6 @@ function App() {
             <ControlePanel authUser={authUser} setAuthUser={setAuthUser} />
           }
         >
-          {/* loged ? <Layout setloged={setloged}/> : <div className={`flex justify-center items-center w-full h-[100vh] bg-primary`}><Login setloged={setloged}/></div> */}
           <Route index element={<Dashboard />}></Route>
           <Route path="articales">
             <Route index element={<ControleArticale />}></Route>

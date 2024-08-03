@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   TextField,
   Divider,
   Toolbar,
@@ -9,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Save } from "@mui/icons-material";
-import UploadImage from "../controle_panel/upload_image";
 
 function ContactPageForm(props) {
   const { formRef, handleSubmit, register, errors, setValue, prev } = props;
@@ -65,10 +63,6 @@ function ContactPageForm(props) {
               error={errors.email ? true : false}
               helperText={errors.email?.message}
             />
-
-            {/* <TextField label="Password" size="small" variant="outlined" type='password'
-            {...register('password')} error={errors.password ? true : false} helperText={errors.password?.message}/> */}
-
             <TextField
               label="Phone"
               size="small"

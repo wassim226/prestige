@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import {
   Dialog,
   TextField,
-  DialogTitle,
   DialogContent,
   DialogActions,
   IconButton,
@@ -32,14 +31,13 @@ function LoginForm(props) {
   const { open, setOpen, setAuthUser } = props;
   const [openSignup, setOpenSignup] = useState(false);
   const [WIDTH, setWidth] = useState(window.innerWidth);
+  const [isLandscape, setIsLandscape] = useState(false);
 
-  // Loading agents list
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   const [serverError, setServerError] = useState({ code: null, message: null });
   const abortController = useRef(null);
 
-  //post team form
   const formRef = useRef(null);
   const {
     register,
@@ -79,8 +77,17 @@ function LoginForm(props) {
     const resize = () => {
       setWidth(() => window.innerWidth);
     };
+    const orientationHandler = () => {
+      setIsLandscape(
+        () => screen.orientation.type.match(/\w+/)[0] === "landscape"
+      );
+    };
+    screen.orientation.addEventListener("change", orientationHandler);
     window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
+    return () => {
+      window.removeEventListener("resize", resize);
+      screen.orientation.removeEventListener("change", orientationHandler);
+    };
   }, []);
 
   return (
@@ -106,7 +113,10 @@ function LoginForm(props) {
           <DialogContent
             className="flex flex-col justify-center items-center"
             dividers
-            sx={{ width: WIDTH >= 1060 ? "30vw" : "80vw", height: "50vh" }}
+            sx={{
+              width: WIDTH >= 1060 ? "30vw" : "100%",
+              height: WIDTH >= 1060 ? "55vh" : isLandscape ? "100vh" : "60vh",
+            }}
           >
             <div className={`flex flex-col justify-center items-center w-full`}>
               <TextField
@@ -163,6 +173,7 @@ function LoginForm(props) {
       <SignupForm
         open={openSignup}
         setOpen={setOpenSignup}
+        setOpenSignin={setOpen}
         setAuthUser={props.setAuthUser}
       />
     </>

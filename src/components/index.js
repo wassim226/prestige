@@ -14,6 +14,7 @@ import BlogArticale from "./blog_articale";
 import ArticaleHead from "./articale_head";
 import AsynchronousSelect from "./asynchrone_select";
 import MyImage from "./my_image";
+import Footer from "./footer";
 
 // controle panel
 import ControleNavigation from "./controle_panel/controle_navigation";
@@ -76,4 +77,5 @@ export {
   PasswordInput,
   UserMenu,
   Review,
+  Footer,
 };

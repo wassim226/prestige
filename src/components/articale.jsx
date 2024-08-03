@@ -11,6 +11,7 @@ function Articale(props) {
             background_class={data.artSequences[0].imgPresentation}
             title={data.artSequences[0].title}
             description={data.artSequences[0].extPresentation}
+            backImagePos={"top-[-60vh]"}
           />
           <div>
             <Presentation

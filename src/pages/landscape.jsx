@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Articale } from "../components";
 import { useParams } from "react-router-dom";
-import { landscape } from "../constantes";
 import { PageController } from "../controllers";
 import { Skeleton } from "@mui/material";
 
-function Landscape(props) {
-  const { ind } = useParams();
+function Landscape() {
+  const { name } = useParams();
 
   const [serverError, setServerError] = useState(null);
   const abortController = useRef(null);
@@ -23,8 +22,8 @@ function Landscape(props) {
   };
 
   useEffect(() => {
-    getApiData(landscape[ind].name);
-  }, [ind]);
+    getApiData(name);
+  }, [name]);
 
   return (
     <div>

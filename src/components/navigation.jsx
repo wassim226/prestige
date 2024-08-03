@@ -66,32 +66,34 @@ function Navigation(props) {
             )}
           </Link>
         ))}
-        <Box sx={{ flexGrow: 0 }} className="pl-2.5 my-4 md:my-0">
-          <Tooltip title={"Account"}>
-            <IconButton
-              onClick={(event) => {
-                if (props.authUser == null) {
-                  setOpenLogin(() => true);
-                } else {
-                  setAnchorElUser(event.currentTarget);
-                }
-              }}
-              sx={{ p: 0 }}
-            >
-              <Person className="text-dimWhite hover:text-primary" />
-            </IconButton>
-          </Tooltip>
-          {props.authUser != null && (
-            <UserMenu
-              setAuthUser={props.setAuthUser}
-              authUser={props.authUser}
-              anchorElUser={anchorElUser}
-              handleCloseUserMenu={() => {
-                setAnchorElUser(null);
-              }}
-            />
-          )}
-        </Box>
+        {!props.isFooter && (
+          <Box sx={{ flexGrow: 0 }} className="pl-2.5 my-4 md:my-0">
+            <Tooltip title={"Account"}>
+              <IconButton
+                onClick={(event) => {
+                  if (props.authUser == null) {
+                    setOpenLogin(() => true);
+                  } else {
+                    setAnchorElUser(event.currentTarget);
+                  }
+                }}
+                sx={{ p: 0 }}
+              >
+                <Person className="text-dimWhite hover:text-primary" />
+              </IconButton>
+            </Tooltip>
+            {props.authUser != null && (
+              <UserMenu
+                setAuthUser={props.setAuthUser}
+                authUser={props.authUser}
+                anchorElUser={anchorElUser}
+                handleCloseUserMenu={() => {
+                  setAnchorElUser(null);
+                }}
+              />
+            )}
+          </Box>
+        )}
         <LandscapeMenu
           anchorLandscape={anchorLandscape}
           handleCloseLandscapeMenu={() => {

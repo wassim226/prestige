@@ -4,41 +4,6 @@ import { ImageList, ImageListItem, Skeleton } from "@mui/material";
 import { PageController, SpaController } from "../controllers";
 import { handelResize } from "../constantes";
 
-// const spas = [
-//   {
-//     image: Pool3,
-//     title: "SPA MALAGA 3 PLACES",
-//     price: 6500,
-//     details: [
-//       "Dimensions : 2100 x 1700 x 900mm",
-//       "51 Jets thérapie",
-//       "Système électronique BALBOA",
-//       "Pompes LX Whirlpool 2 x 1500w",
-//       "Acrylique Aristech",
-//       "Luminothérapie",
-//       "Système audio Bluetooth",
-//       "Triple isolation",
-//       "Design unique, finitions alu leds",
-//     ]
-//   },
-//   {
-//     image: Pool4,
-//     title: "SPA NEVADA 2 PLACES",
-//     price: 8000,
-//     details: [
-//       "Dimensions : 2100 x 1700 x 900mm",
-//       "51 Jets thérapie",
-//       "Système électronique BALBOA",
-//       "Pompes LX Whirlpool 2 x 1500w",
-//       "Acrylique Aristech",
-//       "Luminothérapie",
-//       "Système audio Bluetooth",
-//       "Triple isolation",
-//       "Design unique, finitions alu leds",
-//     ]
-//   }
-// ];
-
 function Spa() {
   const [serverError, setServerError] = useState(null);
   const abortController = useRef(null);
@@ -91,16 +56,17 @@ function Spa() {
       ) : (
         <>
           <ArticaleHead
-            background_class={data.artSequences[0].presentationImg} //{"background-landscape spa_background"}
-            title={data.artSequences[0].title.toUpperCase()} //{"SPAS GAMME PRESTIGE"}
-            description={data.artSequences[0].extPresentation} //{default_description}
+            background_class={data.artSequences[0].imgPresentation}
+            title={data.artSequences[0].title.toUpperCase()}
+            description={data.artSequences[0].extPresentation}
+            backImagePos={"top-[-60vh]"}
             // flip={true}
           />
           <ImageList
-            variant="woven"
+            // variant="woven"
             gap={8}
             cols={cols}
-            className="relative w-[80%] mt-10 mb-20 min-h-[400px]"
+            className="relative w-[80%] mt-10 mb-20 min-h-[500px]"
           >
             {spaData.map((val, index) => (
               <ImageListItem

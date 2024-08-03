@@ -57,7 +57,7 @@ function Contact() {
   });
 
   const getApiData = async () => {
-    const res = await controller.getElement("0");
+    const res = await controller.getElement("1");
     if (res) {
       setData(() => res);
     }
@@ -123,7 +123,7 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      data.phone
+                      <a href={`tel:${data.phone}`}>{data.phone}</a>
                     )}
                   </Typography>
                 </div>
@@ -196,8 +196,8 @@ function Contact() {
                   helperText={errors.message1?.message}
                 />
               </div>
-              <Paper className="absolute w-[20vw] h-[40vh] top-20 right-48 hidden md:flex flex-col justify-center items-start">
-                <div className="flex flex-row justify-start items-center w-full h-10 mt-10 pl-4">
+              <Paper className="absolute w-[20vw] h-auto py-10 top-[20%] right-[15%] hidden md:flex flex-col justify-center items-start  hover:shadow-2xl hover:shadow-primary">
+                <div className="flex flex-row justify-start items-center w-full h-10 pl-4">
                   <div className="flex justify-center items-center w-10 h-10 mr-3 border-primary rounded-full text-primary bg-darkSecondary">
                     <Phone sx={{ fontSize: "24px" }} />
                   </div>
@@ -213,7 +213,7 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      data.phone
+                      <a href={`tel:${data.phone}`}>{data.phone}</a>
                     )}
                   </Typography>
                 </div>

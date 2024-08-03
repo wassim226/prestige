@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ControleNavigation, MyAppBar } from "../../components";
 
 function ControlePanel(props) {
@@ -29,7 +29,6 @@ function ControlePanel(props) {
                 <Outlet />
               </div>
             </div>
-            {/* <div id="footer"></div> */}
           </div>
         </div>
       )}

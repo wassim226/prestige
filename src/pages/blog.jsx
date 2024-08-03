@@ -51,16 +51,16 @@ function Blog() {
       ) : (
         <>
           <ArticaleHead
-            background_class={data.artSequences[0].presentationImg} //{"background-landscape blog_background"}
-            title={data.artSequences[0].title.toUpperCase()} //{"SÉCURISATION LA QUALITÉ DES EAUX"}
+            background_class={data.artSequences[0].imgPresentation}
+            title={data.artSequences[0].title.toUpperCase()}
             description={data.artSequences[0].extPresentation}
           />
 
           <section
-            className={`grid gap-8 md:gap-0 grid-cols-1 ${
+            className={` ${
               articalesData.length <= 1
-                ? ""
-                : "ss:grid-cols-3 sm:grid-cols-4 md:grid-cols-5"
+                ? "flex flex-row justify-center items-center"
+                : "grid gap-8 md:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
             } grid-flow-row w-[90%] mx-10 my-20`}
           >
             {articalesData.map((val, ind) => (
