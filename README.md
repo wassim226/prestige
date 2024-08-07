@@ -2,6 +2,10 @@
 
 It's a small, simple, and elegant website for an enterprise portfolio. It describes the services offered and provides contact information for consultations or quotes.
 
+## Live
+
+This project is hosted [here].(http://prestige-piscine-paysage.fr/)
+
 ## React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
