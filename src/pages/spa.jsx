@@ -1,85 +1,43 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { MyPagination, SpaPresentation, ArticaleHead } from "../components";
-import { ImageList, ImageListItem, Skeleton } from "@mui/material";
-import { PageController, SpaController } from "../controllers";
-import { handelResize } from "../constantes";
+import { ImageList, ImageListItem } from "@mui/material";
+import { handelResize, spaData } from "../constantes";
 
 function Spa() {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
-  const [spaData, setSpasData] = useState(null);
-  const controller = new PageController(abortController, setServerError);
-  const spaController = new SpaController(abortController, setServerError);
   const [cols, setCols] = useState(4);
-
-  const getApiData = async (name) => {
-    const res = await controller.getElement(name);
-    const spas = await spaController.getSpas();
-
-    if (res) {
-      setData(() => res);
-    }
-    if (spas) {
-      setSpasData(() => spas);
-    }
-    setLoading(() => false);
+  const handle = () => {
+    handelResize(setCols);
   };
-
   useEffect(() => {
-    getApiData("spa");
-    const handle = () => {
-      handelResize(setCols);
-    };
     window.addEventListener("resize", handle);
-
     return () => window.removeEventListener("resize", handle);
   }, []);
 
   return (
     <div className="flex flex-col justify-start items-center w-[100vw]">
-      {loading ? (
-        <div className="flex flex-col my-20 mx-5 w-[80vw]">
-          <Skeleton
-            variant="rectangular"
-            height={60}
-            className="mb-5"
-            sx={{ backgroundColor: "#4FD38A" }}
-          />
-          <Skeleton
-            variant="rectangular"
-            height={"60vh"}
-            sx={{ backgroundColor: "#4FD38A" }}
-          />
-        </div>
-      ) : (
-        <>
-          <ArticaleHead
-            background_class={data.artSequences[0].imgPresentation}
-            title={data.artSequences[0].title.toUpperCase()}
-            description={data.artSequences[0].extPresentation}
-            backImagePos={"top-[-60vh]"}
-            // flip={true}
-          />
-          <ImageList
-            // variant="woven"
-            gap={8}
-            cols={cols}
-            className="relative w-[80%] mt-10 mb-20 min-h-[500px]"
+      <ArticaleHead
+        background_class={spaData.artSequences[0].imgPresentation}
+        title={spaData.artSequences[0].title.toUpperCase()}
+        description={spaData.artSequences[0].extPresentation}
+        backImagePos={"top-[-60vh]"}
+        // flip={true}
+      />
+      <ImageList
+        // variant="woven"
+        gap={8}
+        cols={cols}
+        className="relative w-[80%] mt-10 mb-20 min-h-[500px]"
+      >
+        {spaData.products.map((val, index) => (
+          <ImageListItem
+            key={"prod_" + index}
+            className="flex justify-center items-center"
           >
-            {spaData.map((val, index) => (
-              <ImageListItem
-                key={"prod_" + index}
-                className="flex justify-center items-center"
-              >
-                <SpaPresentation spa={val} key={"spa_wdt_" + index} />
-              </ImageListItem>
-            ))}
-          </ImageList>
-          <MyPagination path={"spa"} pagesCount={1} />
-        </>
-      )}
+            <SpaPresentation spa={val} key={"spa_wdt_" + index} />
+          </ImageListItem>
+        ))}
+      </ImageList>
+      <MyPagination path={"spa"} pagesCount={1} />
     </div>
   );
 }

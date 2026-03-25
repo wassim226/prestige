@@ -11,9 +11,8 @@ import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { LocationOn, Phone } from "@mui/icons-material";
-import { ContactController, MessageController } from "../controllers";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { contactData } from "../constantes";
 
 const theme = createTheme({
   palette: {
@@ -36,36 +35,17 @@ const theme = createTheme({
 });
 
 function Contact() {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const controller = new ContactController(abortController, setServerError);
-  const message_controller = new MessageController(
-    abortController,
-    setServerError
-  );
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loadingPost, setLoadingPost] = useState(false);
-  const [data, setData] = useState(null);
   const [WIDTH, setWidth] = useState(window.innerWidth);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(message_controller.schema),
-  });
-
-  const getApiData = async () => {
-    const res = await controller.getElement("1");
-    if (res) {
-      setData(() => res);
-    }
-    setLoading(() => false);
-  };
+  } = useForm();
 
   useEffect(() => {
-    getApiData();
     const resize = () => {
       setWidth(() => window.innerWidth);
     };
@@ -75,12 +55,12 @@ function Contact() {
 
   const handelMessage = async (values) => {
     setLoadingPost(() => true);
-    if (values) {
-      let res = await message_controller.postMessage(values);
-      if (res) {
-        reset();
-      }
-    }
+    // if (values) {
+    //   let res = await message_controller.postMessage(values);
+    //   if (res) {
+    //     reset();
+    //   }
+    // }
     setLoadingPost(() => false);
   };
 
@@ -123,7 +103,9 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      <a href={`tel:${data.phone}`}>{data.phone}</a>
+                      <a href={`tel:${contactData.phone}`}>
+                        {contactData.phone}
+                      </a>
                     )}
                   </Typography>
                 </div>
@@ -143,7 +125,7 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      data.adress
+                      contactData.address
                     )}
                   </Typography>
                 </div>
@@ -213,7 +195,9 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      <a href={`tel:${data.phone}`}>{data.phone}</a>
+                      <a href={`tel:${contactData.phone}`}>
+                        {contactData.phone}
+                      </a>
                     )}
                   </Typography>
                 </div>
@@ -233,7 +217,7 @@ function Contact() {
                         sx={{ backgroundColor: "#4FD38A" }}
                       />
                     ) : (
-                      data.adress
+                      contactData.address
                     )}
                   </Typography>
                 </div>

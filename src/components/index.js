@@ -10,7 +10,6 @@ import SpaPresentation from "./spa_presentation";
 import MyPagination from "./my_pagination";
 import MySlider from "./my_slider";
 import ArticlePreview from "./article_preview";
-import BlogArticale from "./blog_articale";
 import ArticaleHead from "./articale_head";
 import AsynchronousSelect from "./asynchrone_select";
 import MyImage from "./my_image";
@@ -52,7 +51,6 @@ export {
   MyPagination,
   MySlider,
   ArticlePreview,
-  BlogArticale,
   ArticaleHead,
   ControleNavigation,
   MyAppBar,

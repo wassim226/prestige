@@ -3,5 +3,6 @@ import PureWater1 from "./images/water1.jpg";
 import close from "./close.svg";
 import menu from "./menu.svg";
 import Logo from "./images/logo.png";
+import HomePresentation from "./images/background2.jpg";
 
-export { menu, close, PureWater, PureWater1, Logo };
+export { menu, close, PureWater, PureWater1, Logo, HomePresentation };

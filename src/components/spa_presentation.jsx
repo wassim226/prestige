@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import MyImage from "./my_image";
 
 function SpaPresentation(props) {
-  const { presentationImg, title, description, price, mode, id } = props.spa;
+  const { presentationImg, title, description, price } = props.spa;
   const [position, setPosition] = useState([0, 0]);
   const [isHovred, setIsHovred] = useState(false);
   const [show_detail, setShow_detail] = useState(false);
   const [in_2nd_half, setIn2ndHalf] = useState(false);
-  const navigate = useNavigate();
   const img = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -39,9 +38,7 @@ function SpaPresentation(props) {
         <div
           ref={img}
           onClick={() => {
-            mode != "edit"
-              ? setShow_detail((prev) => !prev)
-              : navigate(`detail/${id}`);
+            setShow_detail((prev) => !prev);
           }}
           onMouseOut={() => {
             setIsHovred((prev) => false);
@@ -57,7 +54,7 @@ function SpaPresentation(props) {
           />
         </div>
 
-        {mode != "edit" && imgSrc != null && (
+        {imgSrc != null && (
           <div
             className={`${isHovred ? "block" : "hidden"} min-h-[350px]`}
             style={{

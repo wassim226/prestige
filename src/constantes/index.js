@@ -10,6 +10,7 @@ import {
 } from "../components";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config.js";
+import { HomePresentation } from "../assets/index.js";
 
 export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 export const requiredImgValidator = z.any().refine((file) => {
@@ -26,15 +27,7 @@ export const optionalImgValidator = z
       : true;
   }, "Only .jpg, .jpeg and .png are supported.");
 
-export const navList = [
-  "Home",
-  "Landscape",
-  "Pool",
-  "Spa",
-  "Water",
-  "Blog",
-  "Contact",
-];
+export const navList = ["Home", "Landscape", "Pool", "Spa", "Water", "Contact"];
 export const landscape = [
   { name: "conception", label: "3D Conception" },
   { name: "amenagement", label: "Aménagement paysagers" },
@@ -79,6 +72,133 @@ export const addedValues = [
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
+
+export const landScapeData = {
+  conception: {
+    artSequences: [
+      {
+        imgPresentation: HomePresentation,
+        title: "Conception",
+        extPresentation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      {
+        imgPresentation: HomePresentation,
+        title: "Conception",
+        extPresentation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+    ],
+    sequences: [],
+  },
+  amenagement: {
+    artSequences: [
+      {
+        imgPresentation: HomePresentation,
+        title: "Amenagement",
+        extPresentation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      {
+        imgPresentation: HomePresentation,
+        title: "Amenagement",
+        extPresentation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+    ],
+    sequences: [
+      {
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      {
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      {
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+    ],
+  },
+  entretien: {
+    artSequences: [
+      {
+        imgPresentation: HomePresentation,
+        title: "Entretien",
+        extPresentation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+      {
+        imgPresentation: HomePresentation,
+        title: "Entretien",
+        extPresentation:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      },
+    ],
+    sequences: [],
+  },
+};
+
+export const poolData = {
+  artSequences: [
+    {
+      imgPresentation: HomePresentation,
+      title: "Entretien",
+      extPresentation:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      imgPresentation: HomePresentation,
+      title: "Entretien",
+      extPresentation:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+  ],
+  sequences: [],
+};
+
+export const spaData = {
+  artSequences: [
+    {
+      imgPresentation: HomePresentation,
+      title: "Spa Market",
+      extPresentation:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+  ],
+  products: [
+    {
+      presentationImg: HomePresentation,
+      title: "Spa title",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      price: 3000,
+    },
+  ],
+};
+export const waterData = {
+  artSequences: [
+    {
+      imgPresentation: HomePresentation,
+      title: "Conception",
+      extPresentation:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+    {
+      imgPresentation: HomePresentation,
+      title: "Conception",
+      extPresentation:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    },
+  ],
+  sequences: [],
+};
+
+export const contactData = {
+  phone: "+2130000 00 00 00",
+  address: "Demo address",
+};
 
 export const getPage = (id, controller) => {
   let page = null;
@@ -263,7 +383,7 @@ export async function adaptedJson(json) {
           } else {
             json[img] = -1;
           }
-        })
+        }),
       );
       break;
     case "spa":
@@ -287,7 +407,7 @@ export async function adaptedJson(json) {
           } else {
             json[img] = -1;
           }
-        })
+        }),
       );
       break;
     case "blog":

@@ -7,28 +7,12 @@ import {
   X,
 } from "@mui/icons-material";
 import { Divider, Skeleton, Typography } from "@mui/material";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Navigation from "./navigation";
-import { ContactController } from "../controllers";
 
 function Footer(props) {
-  const [serverError, setServerError] = useState(null);
-  const abortController = useRef(null);
-  const controller = new ContactController(abortController, setServerError);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
 
-  const getApiData = async () => {
-    const res = await controller.getElement("1");
-    if (res) {
-      setData(() => res);
-    }
-    setLoading(() => false);
-  };
-
-  useEffect(() => {
-    getApiData();
-  }, []);
   return (
     <div
       className={`flex flex-col justify-center items-center w-full bg-darkSecondary py-14`}
@@ -51,7 +35,7 @@ function Footer(props) {
                 />
               ) : (
                 <Typography gutterBottom className="hover:text-primary">
-                  {data.adress}
+                  Demo adress
                 </Typography>
               )}
             </li>
@@ -65,7 +49,7 @@ function Footer(props) {
                 />
               ) : (
                 <Typography gutterBottom className="hover:text-primary">
-                  <a href={`tel:${data.phone}`}>{data.phone}</a>
+                  <a href={`tel:+213000000`}>{+213000000}</a>
                 </Typography>
               )}
             </li>
@@ -79,7 +63,7 @@ function Footer(props) {
                 />
               ) : (
                 <Typography gutterBottom className="hover:text-primary">
-                  <a href={`mailto:${data.email}`}>{data.email}</a>
+                  <a href={`mailto:demo@mail.com`}>demo@mail.com</a>
                 </Typography>
               )}
             </li>
