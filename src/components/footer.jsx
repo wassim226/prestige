@@ -19,7 +19,7 @@ function Footer(props) {
     >
       <div className={`flex flex-row justify-center items-center w-full`}>
         <Typography variant="h4" gutterBottom>
-          CONTACT US
+          CONTACTER NOUS
         </Typography>
       </div>
       <div className={`flex flex-row justify-center items-center w-full`}>

@@ -228,7 +228,7 @@ function Contact() {
                 type="submit"
                 className="border-2 rounded mt-8 border-primary bg-transparent text-primary py-2 px-8 md:mr-32 hover:bg-primary hover:text-secondary"
               >
-                SEND
+                ENVOYER
               </button>
             </div>
           </form>

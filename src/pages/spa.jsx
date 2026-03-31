@@ -19,7 +19,7 @@ function Spa() {
         background_class={spaData.artSequences[0].imgPresentation}
         title={spaData.artSequences[0].title.toUpperCase()}
         description={spaData.artSequences[0].extPresentation}
-        backImagePos={"top-[-60vh]"}
+        backImagePos={"md:top-[-50vh]"}
         // flip={true}
       />
       <ImageList
@@ -31,7 +31,7 @@ function Spa() {
         {spaData.products.map((val, index) => (
           <ImageListItem
             key={"prod_" + index}
-            className="flex justify-center items-center"
+            className="flex justify-center items-center overflow-y-clip"
           >
             <SpaPresentation spa={val} key={"spa_wdt_" + index} />
           </ImageListItem>

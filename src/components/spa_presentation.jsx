@@ -34,7 +34,7 @@ function SpaPresentation(props) {
 
   return (
     <div className="flex flex-col justify-center items-center max-w-[200px]">
-      <div className={`relative flex flex-col justify-center items-center `}>
+      <div className={`relative flex flex-col justify-center items-center`}>
         <div
           ref={img}
           onClick={() => {

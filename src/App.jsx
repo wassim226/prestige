@@ -15,9 +15,9 @@ function App() {
           <Route index element={<Home />}></Route>
           <Route path="home" element={<Home />}></Route>
           <Route path="landscape/:name" element={<Landscape />}></Route>
-          <Route path="pool" element={<Pool />}></Route>
+          <Route path="piscine" element={<Pool />}></Route>
           <Route path="spa" element={<Spa />} initialIndex={0}></Route>
-          <Route path="water" element={<Water />}></Route>
+          <Route path="l'eau" element={<Water />}></Route>
           <Route path="contact" element={<Contact />}></Route>
         </Route>
       </Routes>

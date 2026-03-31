@@ -20,9 +20,12 @@ function Home() {
               src={Logo}
               className="hidden md:flex rounded w-[40%] h-[20%]"
             />
-            <Typography gutterBottom className="text-white w-[80%]">
+            <p
+              gutterBottom
+              className="text-white w-[80%] md:text-[32px] text-center font-extrasemibold"
+            >
               {default_description}
-            </Typography>
+            </p>
             <Link to="/contact">
               <button className="border-2 rounded mt-8 border-primary bg-transparent text-primary py-4 px-6 hover:bg-primary hover:text-secondary">
                 Devis gratuit
@@ -52,7 +55,7 @@ function Home() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col justify-start items-center slider-container">
+        <div className="hidden md:flex flex-col justify-start items-center slider-container">
           <div className="flex flex-row justify-center items-center w-full">
             <Typography
               gutterBottom

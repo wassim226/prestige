@@ -7,24 +7,23 @@ function Presentation(props) {
   const { image, title, description, services } = props;
   return (
     <section className={`flex flex-col justify-center w-[100vw] my-32`}>
-      <div
-        className={`flex flex-row${
-          Math.random() >= 0.5 ? "-reverse" : ""
-        } w-full items-center`}
-      >
-        <div className={`w-[40%] mx-auto ${hoverImageParent}`}>
+      <div className={`flex flex-col md:flex-row w-full items-center gap-3`}>
+        <div className={`w-[90%] md:w-[40%] mx-auto ${hoverImageParent}`}>
           <img src={image} className={`rounded-md ${hoverdImage}`} />
         </div>
-        <div className={`flex flex-col justify-start items-center w-[50vw]`}>
+        <div className={`flex flex-col justify-start items-center md:w-[50vw]`}>
           <Typography
             gutterBottom
             variant="h4"
             sx={{ fontWeight: 400 }}
-            className="text-primary w-[50%] text-center"
+            className="text-primary md:w-[50%] text-center"
           >
             {title}
           </Typography>
-          <Typography gutterBottom className="text-white w-[80%]">
+          <p
+            gutterBottom
+            className="text-white w-[80%] text-[20px] text-center"
+          >
             {description.split("(*)").length <= 1 ? (
               description
             ) : (
@@ -34,7 +33,7 @@ function Presentation(props) {
                 ))}
               </ul>
             )}
-          </Typography>
+          </p>
         </div>
       </div>
       <div

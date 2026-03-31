@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Backdrop, CircularProgress, Skeleton } from "@mui/material";
-import { parseDefaultPageData } from "../../constantes";
 
 function FormView(props) {
   const { controller } = props;
@@ -56,7 +55,7 @@ function FormViewer(props) {
   } = useForm({
     defaultValues: data,
     resolver: zodResolver(
-      data == "new" ? controller.schema : controller.updateSchema
+      data == "new" ? controller.schema : controller.updateSchema,
     ),
   });
 

@@ -32,9 +32,12 @@ function ArticaleHead(props) {
           >
             {title}
           </Typography>
-          <Typography gutterBottom className="text-white w-[80%]">
+          <p
+            gutterBottom
+            className="text-white w-[80%] md:text-[32px] text-center font-[500]"
+          >
             {description}
-          </Typography>
+          </p>
         </div>
       </div>
     </div>

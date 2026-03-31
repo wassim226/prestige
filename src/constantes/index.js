@@ -1,33 +1,32 @@
-import { string, z } from "zod";
-import BaseController from "../controllers/base_controller";
-import {
-  BlogPageForm,
-  ContactPageForm,
-  HomePageForm,
-  LandscapePageForm,
-  SpaPageForm,
-  WaterPageForm,
-} from "../components";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config.js";
-import { HomePresentation } from "../assets/index.js";
+import {
+  AmenageArt,
+  AmenagePresentation,
+  ConceptionArt,
+  ConceptionPresentation,
+  DirtyWater,
+  DirtyWater1,
+  EntretienArt,
+  EntretienPresentation,
+  PoolArt,
+  PoolPresentation,
+  PureWater,
+  PureWater1,
+  SpaArt,
+  SpaPresentation,
+  WatterArt,
+  WatterPresentation,
+} from "../assets/index.js";
 
-export const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
-export const requiredImgValidator = z.any().refine((file) => {
-  return ACCEPTED_IMAGE_TYPES.includes(file?.type);
-}, "Only .jpg, .jpeg and .png are supported.");
-export const optionalImgValidator = z
-  .any()
-  .optional()
-  .refine((file) => {
-    return file.length > 0
-      ? ACCEPTED_IMAGE_TYPES.includes(file?.type)
-        ? true
-        : false
-      : true;
-  }, "Only .jpg, .jpeg and .png are supported.");
-
-export const navList = ["Home", "Landscape", "Pool", "Spa", "Water", "Contact"];
+export const navList = [
+  "Accueil",
+  "Paysage",
+  "Piscine",
+  "Spa",
+  "L'eau",
+  "Contact",
+];
 export const landscape = [
   { name: "conception", label: "3D Conception" },
   { name: "amenagement", label: "Aménagement paysagers" },
@@ -51,25 +50,24 @@ export const notifications = [
 ];
 
 export const default_description =
-  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore \
-  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  "Chez Prestige Piscine Paysage, nous concevons, aménageons et entretenons vos espaces extérieurs avec passion et expertise. De la création paysagère à l’entretien de piscines et spas, nous vous proposons des solutions sur mesure pour un cadre de vie harmonieux, esthétique et durable.";
 
 export const addedValues = [
   {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Accompagnement",
+    body: "Accompagnement personnalisé de A à Z",
   },
   {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Expertise",
+    body: "Expertise professionnelle et savoir-faire reconnu",
   },
   {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Qualité",
+    body: "Matériaux et produits de haute qualité",
   },
   {
-    title: "A value",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "Efficacité",
+    body: "Intervention rapide avec suivi régulier",
   },
 ];
 
@@ -77,16 +75,16 @@ export const landScapeData = {
   conception: {
     artSequences: [
       {
-        imgPresentation: HomePresentation,
-        title: "Conception",
+        imgPresentation: ConceptionPresentation,
+        title: "Conception paysagère",
         extPresentation:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Nous imaginons et concevons des projets paysagers uniques adaptés à vos envies et à votre environnement. Chaque projet est étudié avec précision pour créer un espace harmonieux et durable.",
       },
       {
-        imgPresentation: HomePresentation,
-        title: "Conception",
+        imgPresentation: ConceptionArt,
+        title: "Visualiser l'Avenir de votre Jardin",
         extPresentation:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "La conception paysagère 3D est devenue un outil indispensable pour transformer une vision en réalité concrète. Contrairement aux plans traditionnels sur papier, la modélisation 3D permet une immersion totale dans le futur aménagement, offrant une clarté absolue sur chaque détail architectural et végétal.",
       },
     ],
     sequences: [],
@@ -94,46 +92,45 @@ export const landScapeData = {
   amenagement: {
     artSequences: [
       {
-        imgPresentation: HomePresentation,
-        title: "Amenagement",
+        imgPresentation: AmenagePresentation,
+        title: "Aménagement paysager",
         extPresentation:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Nous réalisons l’aménagement complet de vos espaces extérieurs : plantations, création de jardins, installation de pelouses, terrasses et éléments décoratifs pour sublimer votre cadre de vie.",
       },
       {
-        imgPresentation: HomePresentation,
-        title: "Amenagement",
+        imgPresentation: AmenageArt,
+        title: "Créer un Équilibre Durable",
         extPresentation:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "L'aménagement paysager ne se limite pas à la plantation de fleurs ; c'est l'art de façonner des espaces vivants qui équilibrent esthétique, usage et respect de l'environnement. Pour réussir son projet, il est essentiel de respecter certaines règles d'or, comme l'équilibre des formes et le choix de plantes adaptées au climat local.",
       },
     ],
     sequences: [
       {
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "les aménagements écologiques, tels que les jardins de pluie ou les terrasses végétalisées.",
+      },
+      {
+        description: "Des chemins de circulation intuitifs",
       },
       {
         description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      },
-      {
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Les systèmes d'éclairage pour valoriser l'espace la nuit.",
       },
     ],
   },
   entretien: {
     artSequences: [
       {
-        imgPresentation: HomePresentation,
-        title: "Entretien",
+        imgPresentation: EntretienPresentation,
+        title: "Entretien d’espaces verts",
         extPresentation:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Nous assurons l’entretien régulier ou ponctuel de vos espaces verts : tonte, taille, désherbage et soin des plantations pour garantir un jardin toujours propre et en bonne santé.",
       },
       {
-        imgPresentation: HomePresentation,
-        title: "Entretien",
+        imgPresentation: EntretienArt,
+        title: "Pérenniser la Beauté Naturelle",
         extPresentation:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "Un bel aménagement nécessite un entretien régulier pour rester sain et esthétique au fil des années. L'entretien doit s'adapter aux cycles saisonniers, avec des interventions spécifiques pour chaque période de l'année.",
       },
     ],
     sequences: [],
@@ -143,16 +140,15 @@ export const landScapeData = {
 export const poolData = {
   artSequences: [
     {
-      imgPresentation: HomePresentation,
-      title: "Entretien",
-      extPresentation:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      imgPresentation: PoolPresentation,
+      title: "Piscine",
+      extPresentation: "Des piscines toujours propres et prêtes à l’usage",
     },
     {
-      imgPresentation: HomePresentation,
-      title: "Entretien",
+      imgPresentation: PoolArt,
+      title: "Service",
       extPresentation:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Nous proposons des services complets pour l’entretien de votre piscine : nettoyage, traitement de l’eau, contrôle des équipements et interventions techniques. Profitez d’une eau claire et saine toute l’année sans contrainte.",
     },
   ],
   sequences: [],
@@ -161,15 +157,14 @@ export const poolData = {
 export const spaData = {
   artSequences: [
     {
-      imgPresentation: HomePresentation,
-      title: "Spa Market",
-      extPresentation:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      imgPresentation: SpaArt,
+      title: "Spa boutique",
+      extPresentation: "Détente et bien-être en toute sérénité",
     },
   ],
   products: [
     {
-      presentationImg: HomePresentation,
+      presentationImg: SpaPresentation,
       title: "Spa title",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -180,16 +175,16 @@ export const spaData = {
 export const waterData = {
   artSequences: [
     {
-      imgPresentation: HomePresentation,
-      title: "Conception",
+      imgPresentation: WatterPresentation,
+      title: "Maîtrise et qualité de l’eau",
       extPresentation:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Nous analysons et traitons l’eau de vos installations pour garantir un équilibre parfait. Grâce à notre expertise, nous vous assurons une eau saine, claire et respectueuse de votre santé et de l’environnement.",
     },
     {
-      imgPresentation: HomePresentation,
-      title: "Conception",
+      imgPresentation: WatterArt,
+      title: "Garantir une Baignade Saine",
       extPresentation:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "Pour profiter d'une piscine cristalline et sécurisée, un équilibre chimique rigoureux est indispensable. L'eau est un milieu vivant qui réagit constamment à la température, à la fréquentation et aux débris extérieurs, nécessitant une surveillance régulière.",
     },
   ],
   sequences: [],
@@ -200,246 +195,10 @@ export const contactData = {
   address: "Demo address",
 };
 
-export const getPage = (id, controller) => {
-  let page = null;
-  switch (id) {
-    case "Home":
-      page = HomePageForm;
-      controller.updateSchema = z.object({
-        name: string(),
-        extPresentation: string().optional(),
-        presentationImg: optionalImgValidator,
-        value_1: string().optional(),
-        desc_1: string().optional(),
-        value_2: string().optional(),
-        desc_2: string().optional(),
-        value_3: string().optional(),
-        desc_3: string().optional(),
-        value_4: string().optional(),
-        desc_4: string().optional(),
-      });
-      break;
-    case "Landscape":
-    case "Pool":
-      LandscapePageForm.defaultProps = { isPool: id == "Pool" };
-      page = LandscapePageForm;
-      controller.updateSchema = z.object({
-        name:
-          id == "Pool"
-            ? string().min(1, "This field can not be blank")
-            : z.object({
-                name: string(),
-                label: string().min(1, "This field can not be blank"),
-              }),
-        title: string().min(1, "This field can not be blank"),
-        extPresentation: string().min(1, "This field can not be blank"),
-        presentationImg: optionalImgValidator,
-        bodyTitle: string().min(1, "This field can not be blank"),
-        bodyPresentation: string().min(1, "This field can not be blank"),
-        bodyImg: optionalImgValidator,
-        service_1: string().optional(),
-        service_2: string().optional(),
-        service_3: string().optional(),
-        service_4: string().optional(),
-      });
-      break;
-    case "Spa":
-      page = SpaPageForm;
-      controller.updateSchema = z.object({
-        name: string().min(1, "This field can not be blank"),
-        title: string().min(1, "This field can not be blank"),
-        extPresentation: string().min(1, "This field can not be blank"),
-        presentationImg: optionalImgValidator,
-      });
-      break;
-    case "Water":
-      page = WaterPageForm;
-      controller.updateSchema = z.object({
-        name: string().min(1, "This field can not be blank"),
-        title: string().min(1, "This field can not be blank"),
-        extPresentation: string().min(1, "This field can not be blank"),
-        presentationImg: optionalImgValidator,
-        bodyTitle: string().min(1, "This field can not be blank"),
-        bodyPresentation: string().min(1, "This field can not be blank"),
-        bodyImg: optionalImgValidator,
-        offer_1: string().min(1, "This field can not be blank"),
-        offer_2: string().min(1, "This field can not be blank"),
-        offer_3: string().min(1, "This field can not be blank"),
-        offer_4: string().min(1, "This field can not be blank"),
-        offer_5: string().min(1, "This field can not be blank"),
-        offerDesc_2: string().min(1, "This field can not be blank"),
-        offerDesc_3: string().min(1, "This field can not be blank"),
-        offerDesc_4: string().min(1, "This field can not be blank"),
-        offerDesc_1: string().min(1, "This field can not be blank"),
-        offerDesc_5: string().min(1, "This field can not be blank"),
-      });
-      break;
-    case "Blog":
-      page = BlogPageForm;
-      controller.updateSchema = z.object({
-        name: string().min(1, "This field can not be blank"),
-        title: string().min(1, "This field can not be blank"),
-        extPresentation: string().min(1, "This field can not be blank"),
-        presentationImg: optionalImgValidator,
-      });
-      break;
-    case "Contact":
-      page = ContactPageForm;
-      controller.updateSchema = z.object({
-        phone: string().min(1, "This field can not be blank"),
-        adress: string().min(1, "This field can not be blank"),
-        email: string().min(1, "This field can not be blank"),
-        // password: string().min(1, "This field can not be blank"),
-      });
-      break;
-  }
-  return page;
-};
-
-export function parseDefaultPageData(json) {
-  let res = {
-    id: json.id,
-    name: json.name,
-    type: json.type,
-  };
-  switch (json.name) {
-    case "home":
-      res.extPresentation = json.artSequences[0].extPresentation;
-      res.presentationImg = json.artSequences[0].imgPresentation;
-      for (let i = 0; i < json.sequences.length; i++) {
-        let seq = json.sequences[i];
-        res["value_" + (i + 1)] = seq.name;
-        res["desc_" + (i + 1)] = seq.description;
-      }
-      break;
-    case "conception":
-    case "amenagement":
-    case "entretien":
-    case "pool":
-      res.name = landscape[0];
-      res.title = json.artSequences[0].title;
-      res.extPresentation = json.artSequences[0].extPresentation;
-      res.presentationImg = json.artSequences[0].imgPresentation;
-      res.bodyTitle = json.artSequences[1].title;
-      res.bodyPresentation = json.artSequences[1].extPresentation;
-      res.bodyImg = json.artSequences[1].imgPresentation;
-      for (let i = 0; i < json.sequences.length; i++) {
-        let seq = json.sequences[i];
-        res[seq.name] = seq.description;
-      }
-      console.log(res);
-      break;
-    case "spa":
-    case "blog":
-      res.title = json.artSequences[0].title;
-      res.extPresentation = json.artSequences[0].extPresentation;
-      res.presentationImg = json.artSequences[0].imgPresentation;
-      break;
-    case "water":
-      res.title = json.artSequences[0].title;
-      res.extPresentation = json.artSequences[0].extPresentation;
-      res.presentationImg = json.artSequences[0].imgPresentation;
-      res.bodyTitle = json.artSequences[1].title;
-      res.bodyPresentation = json.artSequences[1].extPresentation;
-      res.bodyImg = json.artSequences[1].imgPresentation;
-      for (let i = 0; i < json.sequences.length; i++) {
-        let seq = json.sequences[i];
-        res["offer_" + (i + 1)] = seq.name;
-        res["offerDesc_" + (i + 1)] = seq.description;
-      }
-      break;
-    default:
-      res = json;
-      break;
-  }
-  return res;
-}
-export async function adaptedJson(json) {
-  let imgs = ["presentationImg", "bodyImg"];
-
-  switch (json.name) {
-    case "home":
-      if (json.presentationImg.length == undefined) {
-        let img_id = await BaseController.uploadFile(json.presentationImg);
-        if (img_id) {
-          json.presentationImg = img_id;
-        }
-      } else {
-        json.presentationImg = -1;
-      }
-      break;
-    case "conception":
-    case "amenagement":
-    case "entretien":
-    case "pool":
-      await Promise.all(
-        imgs.map(async (img) => {
-          if (json[img].length == undefined) {
-            let img_id = await BaseController.uploadFile(json[img]);
-            console.log(img_id);
-            if (img_id) {
-              json[img] = img_id;
-            }
-          } else {
-            json[img] = -1;
-          }
-        }),
-      );
-      break;
-    case "spa":
-      if (json.presentationImg.length == undefined) {
-        let img_id = await BaseController.uploadFile(json.presentationImg);
-        if (img_id) {
-          json.presentationImg = img_id;
-        }
-      } else {
-        json.presentationImg = -1;
-      }
-      break;
-    case "water":
-      await Promise.all(
-        imgs.map(async (img) => {
-          if (json[img].length == undefined) {
-            let img_id = await BaseController.uploadFile(json[img]);
-            if (img_id) {
-              json[img] = img_id;
-            }
-          } else {
-            json[img] = -1;
-          }
-        }),
-      );
-      break;
-    case "blog":
-      if (json.presentationImg.length == undefined) {
-        let img_id = await BaseController.uploadFile(json.presentationImg);
-        if (img_id) {
-          json.presentationImg = img_id;
-        }
-      } else {
-        json.presentationImg = -1;
-      }
-      break;
-  }
-
-  return json;
-}
-
-export const getParsedData = (json) => {
-  console.log(json);
-  json = {
-    ...JSON.parse(json.head),
-    ...JSON.parse(json.sequance1),
-    ...JSON.parse(json.sequance2),
-    ...JSON.parse(json.sequance3),
-    ...JSON.parse(json.sequance4),
-    ...JSON.parse(json.sequance5),
-    ...JSON.parse(json.sequance6),
-  };
-  console.log(json);
-
-  return json;
-};
+export const interventions = [
+  { dirty: DirtyWater, clean: PureWater },
+  { dirty: DirtyWater1, clean: PureWater1 },
+];
 
 export const handelResize = (setCols) => {
   const fullConfig = resolveConfig(tailwindConfig);

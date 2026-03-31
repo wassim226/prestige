@@ -8,17 +8,17 @@ function MySlider(props) {
       <div className="relative w-[50%] rounded-l">
         <img src={prev_img} className="w-full h-full rounded-l" />
         <div className="flex flex-col justify-center absolute z-20 top-[0] w-full h-full opacity-0 hover:opacity-100 duration-500 bg-dimSecondary">
-          <Typography variant="body2" className="text-white text-center">
-            Previous
-          </Typography>
+          <p variant="body2" className="text-white text-center text-[20px]">
+            Avant
+          </p>
         </div>
       </div>
       <div className="relative w-[50%] rounded-r">
         <img src={new_img} className="w-full h-full rounded-r" />
         <div className="flex flex-col justify-center absolute z-20 top-[0] w-full h-full opacity-0 hover:opacity-100 duration-500 bg-dimSecondary">
-          <Typography variant="body2" className="text-white text-center">
-            New
-          </Typography>
+          <p variant="body2" className="text-white text-center text-[20px]">
+            Aprés
+          </p>
         </div>
       </div>
     </div>

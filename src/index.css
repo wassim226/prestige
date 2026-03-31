@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .background-image-contact {
-  background-image: url(/src/assets/images/background2.jpg);
+  background-image: url(/src/assets/images/2.webp);
   background-position-x: right;
   background-position-y: center;
 }
